@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
+*::selection {
+    background-color: #e50924;
+    color: white;
+}
+
 .active {
     padding-bottom: 0.5em;
     border-bottom: 2px solid red;
