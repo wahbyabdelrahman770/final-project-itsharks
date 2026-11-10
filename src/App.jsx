@@ -7,6 +7,7 @@ import Series from "./pages/series/Series";
 import Contact from "./pages/contact/Contact";
 import MoviesDeatails from "./pages/MoviesDeatils/MoviesDeatails";
 import MovieContext from "./contexts/Movie/MovieContext";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Footer />
       </div>
     </MovieContext>
   );
