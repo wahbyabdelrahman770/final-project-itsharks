@@ -2,7 +2,17 @@ import MoviesCard from "./MoviesCard";
 import { useMovie } from "../../contexts/Movie/MovieContext";
 
 export default function Movies() {
-  const { movies } = useMovie();
+  const {
+    movies,
+    filteredMovies,
+    movieLength,
+    page,
+    nextPage,
+    previousPage,
+    getMovies,
+    getTopRatingMovies,
+    getNewestMovies,
+  } = useMovie();
   return (
     <div className="min-h-screen bg-[#08090d] text-white">
       <main className="max-w-[1600px] mx-auto px-6 md:px-12">
@@ -25,7 +35,9 @@ export default function Movies() {
             </div>
 
             <div className="flex flex-col lg:items-end">
-              <span className="text-5xl font-serif font-bold">40</span>
+              <span className="text-5xl font-serif font-bold">
+                {movieLength}
+              </span>
               <span className="text-[10px] tracking-widest text-gray-400">
                 TITLES TO DISCOVER
               </span>
@@ -35,7 +47,7 @@ export default function Movies() {
 
         {/* Search & Sort */}
         <section className="flex flex-col md:flex-row justify-between items-center gap-7 py-9">
-          <div className="flex items-center gap-4 w-full md:w-[480px] border-b border-white/10 pb-4">
+          <div className="flex items-center gap-4 w-full md:w-120 border-b border-white/10 pb-4">
             <span className="text-gray-400 text-xl">⌕</span>
             <input
               type="text"
@@ -48,10 +60,24 @@ export default function Movies() {
             <span className="text-[10px] tracking-widest text-gray-400 font-medium">
               SORT BY
             </span>
-            <select className="bg-[#11131a] text-white border border-white/10 px-4 py-2 text-sm outline-none cursor-pointer rounded hover:border-white/30 transition-colors">
-              <option className="bg-[#11131a] text-white">Popularity</option>
-              <option className="bg-[#11131a] text-white">Rating</option>
-              <option className="bg-[#11131a] text-white">Newest</option>
+            <select
+              onChange={(e) => {
+                const value = e.target.value;
+                value == "popular" && getMovies();
+                value == "Rating" && getTopRatingMovies();
+                value == "Newest" && getNewestMovies();
+              }}
+              className="bg-[#11131a] text-white border border-white/10 px-4 py-2 text-sm outline-none cursor-pointer rounded hover:border-white/30 transition-colors"
+            >
+              <option value="popular" className="bg-[#11131a] text-white">
+                Popularity
+              </option>
+              <option value="Rating" className="bg-[#11131a] text-white">
+                Rating
+              </option>
+              <option value="Newest" className="bg-[#11131a] text-white">
+                Newest
+              </option>
             </select>
           </div>
         </section>
@@ -61,28 +87,52 @@ export default function Movies() {
           <button className="rounded-full bg-red-600 text-white px-6 py-2.5 text-[9px] font-bold tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer">
             ALL
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             ACTION
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             DRAMA
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
-            SCI-FI
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
+            Science Fiction
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             COMEDY
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             CRIME
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             FANTASY
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             MYSTERY
           </button>
-          <button className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer">
+          <button
+            // onClick={filteredMovies}
+            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+          >
             ROMANCE
           </button>
         </section>
@@ -107,17 +157,25 @@ export default function Movies() {
 
         {/* Pagination */}
         <section className="flex justify-center items-center gap-2 py-24">
-          <button className="flex items-center gap-3 px-3 py-3 text-xs text-gray-400">
+          <button
+            disabled={page <= 1 ? true : false}
+            onClick={previousPage}
+            className={`flex items-center gap-3 px-3 py-3 text-xs  ${page > 1 ? "hover:text-white text-gray-400 cursor-pointer" : "text-gray-600"} transition-colors`}
+          >
             ❮ PREVIOUS
           </button>
 
-          <button className="w-12 h-12 bg-red-600 text-white">1</button>
+          <div className="w-10 h-10 bg-red-600 text-white flex items-center justify-center text-sm font-medium shadow-md">
+            {page}
+          </div>
+          <div className="w-10 h-10 border border-white/10 bg-black/40 text-gray-400 flex items-center justify-center text-sm font-medium">
+            {page + 1}
+          </div>
 
-          <button className="w-12 h-12 border border-white/10 text-gray-300">
-            2
-          </button>
-
-          <button className="flex items-center gap-3 px-3 py-3 text-xs text-gray-400">
+          <button
+            onClick={nextPage}
+            className="flex items-center gap-3 px-3 py-3 text-xs text-gray-400 cursor-pointer hover:text-white transition-colors"
+          >
             NEXT ❯
           </button>
         </section>
