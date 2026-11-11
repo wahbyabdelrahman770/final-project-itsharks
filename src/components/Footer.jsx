@@ -1,4 +1,5 @@
 import { FaTicketAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -31,20 +32,25 @@ const Footer = () => {
             </h3>
 
             <div className="flex flex-col gap-4 text-xs text-slate-400">
-              <a href="#" className="hover:text-red-500 transition-colors">
+              <Link
+                href="/movies"
+                className="hover:text-red-500 transition-colors"
+              >
                 Movies
-              </a>
+              </Link>
 
-              <a href="#" className="hover:text-red-500 transition-colors">
+              <Link
+                href="/series"
+                className="hover:text-red-500 transition-colors"
+              >
                 TV Series
-              </a>
+              </Link>
 
-              <a href="#" className="hover:text-red-500 transition-colors">
+              <Link href="#" className="hover:text-red-500 transition-colors">
                 Trending
-              </a>
+              </Link>
             </div>
           </div>
-
           {/* Cinema */}
           <div className="flex flex-col gap-7">
             <h3 className="text-[11px] font-bold tracking-widest text-white">
@@ -52,17 +58,20 @@ const Footer = () => {
             </h3>
 
             <div className="flex flex-col gap-4 text-xs text-slate-400">
-              <a href="#" className="hover:text-red-500 transition-colors">
+              <Link
+                href="/contact"
+                className="hover:text-red-500 transition-colors"
+              >
                 Contact us
-              </a>
+              </Link>
 
-              <a href="#" className="hover:text-red-500 transition-colors">
+              <Link href="#" className="hover:text-red-500 transition-colors">
                 About
-              </a>
+              </Link>
 
-              <a href="#" className="hover:text-red-500 transition-colors">
+              <Link href="#" className="hover:text-red-500 transition-colors">
                 Privacy
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -73,26 +82,26 @@ const Footer = () => {
             </h3>
 
             <div className="flex items-center gap-3">
-              <a
+              <Link
                 href="#"
                 className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[10px] text-slate-400 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all"
               >
                 IG
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[10px] text-slate-400 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all"
               >
                 X
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="#"
                 className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[10px] text-slate-400 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all"
               >
                 YT
-              </a>
+              </Link>
             </div>
           </div>
         </div>
