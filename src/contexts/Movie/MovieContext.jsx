@@ -30,8 +30,6 @@ const MovieContext = ({ children }) => {
       const res = await req.json();
 
       setMovies(res.results);
-
-      console.log(res.results);
     } catch (err) {
       console.log(err.message);
     }
@@ -44,8 +42,6 @@ const MovieContext = ({ children }) => {
       const res = await req.json();
 
       setMovies(res.results);
-
-      console.log(res.results);
     } catch (err) {
       console.log(err.message);
     }
@@ -57,8 +53,6 @@ const MovieContext = ({ children }) => {
       const res = await req.json();
 
       setMovies(res.results);
-
-      console.log(res.results);
     } catch (err) {
       console.log(err.message);
     }
@@ -68,8 +62,6 @@ const MovieContext = ({ children }) => {
     const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
     const req = await fetch(apiLink, options);
     const res = await req.json();
-
-    console.log(res.genres);
 
     let genres = res.genres;
 
