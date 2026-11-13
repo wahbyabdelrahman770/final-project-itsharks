@@ -1,5 +1,7 @@
 import MoviesCard from "./MoviesCard";
 import { useMovie } from "../../contexts/Movie/MovieContext";
+import { FiSearch } from "react-icons/fi";
+import Loading from "../../components/Loading";
 
 export default function Movies() {
   const {
@@ -12,6 +14,9 @@ export default function Movies() {
     getMovies,
     getTopRatingMovies,
     getNewestMovies,
+    setInput,
+    searchResults,
+    loading,
   } = useMovie();
   return (
     <div className="min-h-screen bg-[#08090d] text-white">
@@ -47,13 +52,41 @@ export default function Movies() {
 
         {/* Search & Sort */}
         <section className="flex flex-col md:flex-row justify-between items-center gap-7 py-9">
-          <div className="flex items-center gap-4 w-full md:w-120 border-b border-white/10 pb-4">
-            <span className="text-gray-400 text-xl">⌕</span>
-            <input
-              type="text"
-              placeholder="Search movies..."
-              className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
-            />
+          <div className="relative group w-full md:w-150">
+            {/* Search Input */}
+            <div className="flex items-center gap-4 border-b border-white/10 pb-4">
+              <FiSearch className="shrink-0 text-gray-400 text-xl" />
+
+              <input
+                type="text"
+                placeholder="Search movies..."
+                onChange={(e) => setInput(e.target.value)}
+                className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
+              />
+            </div>
+
+            {/* Dropdown */}
+            <div
+              className="
+      hidden
+      group-has-[input:not(:placeholder-shown)]:block
+      absolute top-full left-0 z-50 mt-3
+      w-full max-h-[250px]
+      overflow-y-auto
+      rounded-lg border border-cyan-400/60
+      bg-[#202428] p-1
+      shadow-2xl flex flex-col
+    "
+            >
+              {searchResults.map((search) => (
+                <div
+                  key={search.id}
+                  className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                >
+                  {search.original_title}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
@@ -150,9 +183,13 @@ export default function Movies() {
 
         {/* Movies */}
         <section className="flex flex-wrap items-start gap-x-5 gap-y-12">
-          {movies.map((movie) => {
-            return <MoviesCard key={movie.id} movie={movie} />;
-          })}
+          {loading ? (
+            <Loading />
+          ) : (
+            movies.map((movie) => {
+              return <MoviesCard key={movie.id} movie={movie} />;
+            })
+          )}
         </section>
 
         {/* Pagination */}

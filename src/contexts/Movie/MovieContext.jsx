@@ -6,6 +6,9 @@ const MovieContext = ({ children }) => {
   const [moviesGenres, setMoviesGenres] = useState([]);
   const [selectedGenreId, setSelectedGenreId] = useState(null);
   const [page, setPage] = useState(1);
+  const [input, setInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const options = {
     method: "GET",
@@ -24,37 +27,46 @@ const MovieContext = ({ children }) => {
   };
 
   const getMovies = async () => {
-    const apiLink = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+    setLoading(true);
     try {
+      const apiLink = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc`;
       const req = await fetch(apiLink, options);
       const res = await req.json();
 
       setMovies(res.results);
+      setLoading(false);
     } catch (err) {
       console.log(err.message);
+      setLoading(true);
     }
   };
 
   const getTopRatingMovies = async () => {
-    const apiLink = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
+    setLoading(true);
     try {
+      const apiLink = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=${page}`;
       const req = await fetch(apiLink, options);
       const res = await req.json();
 
       setMovies(res.results);
+      setLoading(false);
     } catch (err) {
       console.log(err.message);
+      setLoading(false);
     }
   };
   const getNewestMovies = async () => {
-    const apiLink = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`;
+    setLoading(true);
     try {
+      const apiLink = `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${page}`;
       const req = await fetch(apiLink, options);
       const res = await req.json();
 
       setMovies(res.results);
+      setLoading(false);
     } catch (err) {
       console.log(err.message);
+      setLoading(false);
     }
   };
 
@@ -89,6 +101,32 @@ const MovieContext = ({ children }) => {
 
   const movieLength = movies.length;
 
+  const searchMovies = async () => {
+    const apiLink = `https://api.themoviedb.org/3/search/movie?&query=${input}&include_adult=false&language=en-US&page=${page}`;
+    try {
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+
+      setSearchResults(res.results);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const movieDetails = async (movieID) => {
+    try {
+      const apiLink = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc/${movieID}`;
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    searchMovies();
+  }, [input]);
+
   useEffect(() => {
     getMovies();
     getGenresId();
@@ -108,6 +146,10 @@ const MovieContext = ({ children }) => {
         getTopRatingMovies,
         getMovies,
         getNewestMovies,
+        setInput,
+        searchResults,
+        movieDetails,
+        loading,
       }}
     >
       {children}

@@ -6,6 +6,9 @@ const SeriesContext = ({ children }) => {
   const [series, setSeries] = useState([]);
   const [seriesGenres, setSeriesGenres] = useState([]);
   const [page, setPage] = useState(1);
+  const [input, setInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const options = {
     method: "GET",
@@ -19,17 +22,33 @@ const SeriesContext = ({ children }) => {
   const seriesLength = series.length;
 
   const getSeries = async () => {
-    const apiLink = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc`;
-    const req = await fetch(apiLink, options);
-    const res = await req.json();
-    setSeries(res.results);
+    setLoading(true);
+    try {
+      const apiLink = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+
+      setLoading(false);
+      setSeries(res.results);
+    } catch (err) {
+      console.log(err.message);
+      setLoading(false);
+    }
   };
 
   const getGenres = async () => {
-    const apiLink = "https://api.themoviedb.org/3/genre/tv/list?language=en";
-    const req = await fetch(apiLink, options);
-    const res = await req.json();
-    setSeriesGenres(res.genres);
+    setLoading(true);
+    try {
+      const apiLink = "https://api.themoviedb.org/3/genre/tv/list?language=en";
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+
+      setLoading(false);
+      setSeriesGenres(res.genres);
+    } catch (err) {
+      console.log(err.message);
+      setLoading(false);
+    }
   };
 
   const nextSeries = () => {
@@ -40,22 +59,67 @@ const SeriesContext = ({ children }) => {
   };
 
   const getRatingSeries = async () => {
-    const apiLink = `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`;
-    const req = await fetch(apiLink, options);
-    const res = await req.json();
-    setSeries(res.results);
+    setLoading(true);
+    try {
+      const apiLink = `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=${page}`;
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+      setSeries(res.results);
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+      setLoading(false);
+    }
   };
 
   const getNewestSeries = async () => {
-    const apiLink = `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${page}`;
-    const req = await fetch(apiLink, options);
-    const res = await req.json();
-    setSeries(res.results);
+    setLoading(true);
+    try {
+      const apiLink = `https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=${page}`;
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+      setSeries(res.results);
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+      setLoading(false);
+    }
   };
+
+  const searchSeries = async () => {
+    setLoading(true);
+    try {
+      const apiLink = `https://api.themoviedb.org/3/search/tv?&query=${input}&include_adult=false&language=en-US&page=${page}`;
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+
+      setSearchResults(res.results);
+      setLoading(false);
+    } catch (err) {
+      console.log(err.message);
+      setLoading(false);
+    }
+  };
+
+  const seriesDetails = async (seriesID) => {
+    try {
+      const apiLink = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc/${seriesID}`;
+      const req = await fetch(apiLink, options);
+      const res = await req.json();
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    searchSeries();
+  }, [input]);
 
   useEffect(() => {
     getSeries();
     getGenres();
+    getRatingSeries();
+    getNewestSeries();
   }, [page]);
   return (
     <seriesStore.Provider
@@ -69,6 +133,10 @@ const SeriesContext = ({ children }) => {
         getNewestSeries,
         getRatingSeries,
         getSeries,
+        setInput,
+        searchResults,
+        seriesDetails,
+        loading,
       }}
     >
       {children}

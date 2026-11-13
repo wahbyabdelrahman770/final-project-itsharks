@@ -9,6 +9,7 @@ const MoviesCard = ({
     release_date,
     vote_average,
     genre_ids,
+    id,
   },
 }) => {
   const { moviesGenres } = useMovie();
@@ -27,7 +28,7 @@ const MoviesCard = ({
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
           <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300">
             <Link
-              to=""
+              to={`/movies/${id}`}
               className="flex items-center justify-center w-full h-full"
             >
               <FaArrowRight className="text-[14px]" />
@@ -48,7 +49,6 @@ const MoviesCard = ({
             {moviesGenres.map((gen) => {
               if (gen.id == genre_ids[0]) {
                 return gen.name;
-                console.log("Hello");
               }
             })}
           </span>
