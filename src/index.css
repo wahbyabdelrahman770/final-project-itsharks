@@ -6,6 +6,15 @@
     color: white;
 }
 
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #2c2d30 #ffffff00;
+}
+
+body {
+    background-color: #090b10;
+}
+
 .active {
     padding-bottom: 0.5em;
     border-bottom: 2px solid red;
