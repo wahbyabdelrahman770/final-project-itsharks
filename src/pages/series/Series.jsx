@@ -1,5 +1,6 @@
 import { useSeries } from "../../contexts/Series/SeriesContext";
 import SeriesCard from "./SeriesCard";
+import Loading from "./../../components/Loading";
 
 const Series = () => {
   const {
@@ -11,6 +12,9 @@ const Series = () => {
     getNewestSeries,
     getRatingSeries,
     getSeries,
+    setInput,
+    searchResults,
+    loading,
   } = useSeries();
 
   return (
@@ -52,8 +56,31 @@ const Series = () => {
             <input
               type="text"
               placeholder="Search movies..."
+              onChange={(e) => setInput(e.target.value)}
               className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
             />
+            {/* Dropdown */}
+            <div
+              className="
+      hidden
+      group-has-[input:not(:placeholder-shown)]:block
+      absolute top-full left-0 z-50 mt-3
+      w-full max-h-[250px]
+      overflow-y-auto
+      rounded-lg border border-cyan-400/60
+      bg-[#202428] p-1
+      shadow-2xl flex flex-col
+    "
+            >
+              {searchResults.map((search) => (
+                <div
+                  key={search.id}
+                  className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                >
+                  {search.original_title}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
@@ -150,10 +177,13 @@ const Series = () => {
 
         {/* Movies */}
         <section className="flex flex-wrap items-start gap-x-5 gap-y-12">
-          {series.map((ser) => {
-            return <SeriesCard ser={ser} key={ser.id} />;
-          })}
-          {/* <MoviesCard /> */}
+          {loading ? (
+            <Loading />
+          ) : (
+            series.map((ser) => {
+              return <SeriesCard ser={ser} key={ser.id} />;
+            })
+          )}
         </section>
 
         {/* Pagination */}
