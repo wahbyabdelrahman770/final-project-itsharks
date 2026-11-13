@@ -1,16 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useMovie } from "../../contexts/Movie/MovieContext";
-import { useEffect } from "react";
+import Credits from "./Credits";
+import Overview from "./Overview";
+import ProductionDetails from "./ProductionDetails";
 
 const MoviesDeatails = () => {
-  const { movieID } = useParams();
-  const { movieDetails } = useMovie();
-
-  useEffect(() => {
-    movieDetails(movieID);
-  }, []);
-
-  return <div>MoviesDeatails</div>;
+	return (
+		<div className="w-full">
+			<Overview />
+			<ProductionDetails />
+			<Credits />
+		</div >
+	);
 };
 
 export default MoviesDeatails;

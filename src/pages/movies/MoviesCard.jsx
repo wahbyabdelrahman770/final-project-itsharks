@@ -1,5 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMovie } from "../../contexts/Movie/MovieContext";
 
 const MoviesCard = ({
@@ -9,12 +9,13 @@ const MoviesCard = ({
     release_date,
     vote_average,
     genre_ids,
-    id,
+    id
   },
 }) => {
   const { moviesGenres } = useMovie();
+  const navigate = useNavigate();
   return (
-    <div className="group flex flex-col gap-4 cursor-pointer w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(20%-16px)]">
+    <div onClick={() => { navigate(`/movies/${id}`); }} className="group flex flex-col gap-4 cursor-pointer w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(20%-16px)]">
       <div className="relative w-full aspect-2/3 overflow-hidden bg-[#151515]">
         <img
           src={`https://media.themoviedb.org/t/p/w440_and_h660_face/${backdrop_path}`}

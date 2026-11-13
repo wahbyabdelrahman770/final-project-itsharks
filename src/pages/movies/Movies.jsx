@@ -20,7 +20,7 @@ export default function Movies() {
   } = useMovie();
   return (
     <div className="min-h-screen bg-[#08090d] text-white">
-      <main className="max-w-[1600px] mx-auto px-6 md:px-12">
+      <main className="max-w-400 mx-auto px-6 md:px-12">
         {/* Hero */}
         <section className="relative flex flex-col justify-center gap-7 py-24 border-b border-white/10">
           <span className="text-xs font-bold tracking-[4px] text-gray-300">
