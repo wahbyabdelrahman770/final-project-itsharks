@@ -9,59 +9,61 @@ const ProductionDetails = () => {
 
     return (
         <div className="w-[94%] mx-auto mt-12 mb-4 p-12 bg-[#121722]">
-            <div className="grid grid-cols-3 justify-items-center gap-4">
+            <div className="flex flex-col md:grid md:grid-cols-[1fr_2fr] md:justify-items-center md:gap-4">
                 <section className="w-full">
                     <p className="text-[#e50924] uppercase text-[11px] font-bold tracking-[2px]">Production Details</p>
                     <h1 className="mt-6 font-serif text-4xl text-white font-semibold">Movie Information</h1>
                 </section>
 
-                <section className="w-[85%] space-y-5">
-                    <div className={divClass}>
-                        <span className={titleClass}>Release Date</span>
-                        <p className={dataClass}>{formattedDate}</p>
-                    </div>
+                <div className="w-full mt-4 md:mt-0 grid grid-cols-2">
+                    <section className="w-[90%] space-y-5">
+                        <div className={divClass}>
+                            <span className={titleClass}>Release Date</span>
+                            <p className={dataClass}>{formattedDate}</p>
+                        </div>
 
-                    <div className={divClass}>
-                        <span className={titleClass}>Director</span>
-                        <p className={dataClass}>{director}</p>
-                    </div>
+                        <div className={divClass}>
+                            <span className={titleClass}>Director</span>
+                            <p className={dataClass}>{director}</p>
+                        </div>
 
-                    <div className={divClass}>
-                        <span className={titleClass}>Revenue</span>
-                        <p className={dataClass}>{revenue}</p>
-                    </div>
+                        <div className={divClass}>
+                            <span className={titleClass}>Revenue</span>
+                            <p className={dataClass}>{revenue}</p>
+                        </div>
 
-                    <div className={divClass}>
-                        <span className={titleClass}>Countries</span>
-                        <div className="flex flex-row justify-start items-center flex-wrap gap-4">{movieDetails?.production_countries ? (movieDetails.production_countries).map(country => <p key={country.name} className={dataClass}>{country.name}</p>) : ""}</div>
-                    </div>
-                </section>
+                        <div className={divClass}>
+                            <span className={titleClass}>Countries</span>
+                            <div className="flex flex-row justify-start items-center flex-wrap gap-4">{movieDetails?.production_countries ? (movieDetails.production_countries).map(country => <p key={country.name} className={dataClass}>{country.name}</p>) : ""}</div>
+                        </div>
+                    </section>
 
-                <section className="w-[85%] space-y-5">
-                    <div className={divClass}>
-                        <span className={titleClass}>Runtime</span>
-                        <p className={dataClass}>{movieDetails.runtime} min</p>
-                    </div>
+                    <section className="w-[90%] space-y-5">
+                        <div className={divClass}>
+                            <span className={titleClass}>Runtime</span>
+                            <p className={dataClass}>{movieDetails.runtime} min</p>
+                        </div>
 
-                    <div className={divClass}>
-                        <span className={titleClass}>Budget</span>
-                        <p className={dataClass}>{budget}</p>
-                    </div>
+                        <div className={divClass}>
+                            <span className={titleClass}>Budget</span>
+                            <p className={dataClass}>{budget}</p>
+                        </div>
 
-                    <div className={divClass}>
-                        <span className={titleClass}>Status</span>
-                        <p className={dataClass}>{movieDetails?.status}</p>
-                    </div>
+                        <div className={divClass}>
+                            <span className={titleClass}>Status</span>
+                            <p className={dataClass}>{movieDetails?.status}</p>
+                        </div>
 
-                    <div className={divClass}>
-                        <span className={titleClass}>Language</span>
-                        <p className={dataClass}>{language}</p>
-                    </div>
-                </section>
+                        <div className={divClass}>
+                            <span className={titleClass}>Language</span>
+                            <p className={dataClass}>{language}</p>
+                        </div>
+                    </section>
+                </div>
             </div>
 
-            <div className="mt-16 pt-6 border-t-[0.5px] border-t-[#ffffff1a] flex flex-row items-center justify-start gap-x-7">
-                <span className={`${titleClass} w-[10%]`}>Produced By</span>
+            <div className="mt-16 pt-6 border-t-[0.5px] border-t-[#ffffff1a] flex flex-col md:flex-row items-center justify-start gap-x-7">
+                <span className={`${titleClass} w-full md:w-[10%] mb-4 md:mb-0`}>Produced By</span>
                 {/* <p className="text-[14px] font-semibold text-white uppercase">placeholder</p> */}
                 <div className="flex flex-row justify-start items-center flex-wrap gap-8">
                     {production_companies && production_companies.map(company => <p key={company.name} className="text-[14px] font-semibold text-white uppercase">{company.name}</p>)}
