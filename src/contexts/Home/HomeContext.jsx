@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const HomeContext = createContext({});
 
+// API Options
 const options = {
   method: "GET",
   headers: {
@@ -12,10 +13,7 @@ const options = {
 
 const apiNowPlaying =
   "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
-
-const apiPopularApi =
-  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
-
+// Get Hero Movies
 const getHeroMovies = async () => {
   const response = await fetch(apiNowPlaying, options);
 
@@ -24,10 +22,13 @@ const getHeroMovies = async () => {
   }
 
   const data = await response.json();
-
   return data.results.slice(0, 5);
 };
 
+// Get Popular Movies
+
+const apiPopularApi =
+  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
 const getPopularMovies = async () => {
   const response = await fetch(apiPopularApi, options);
 
@@ -36,7 +37,6 @@ const getPopularMovies = async () => {
   }
 
   const data = await response.json();
-
   return data.results.slice(0, 10);
 };
 
@@ -79,29 +79,24 @@ export function HomeProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  // Load Home Data
   const loadHomeData = async () => {
     setLoading(true);
     setError(false);
 
-    // Get Hero Movies
     try {
-      const hero = await getHeroMovies();
-      setHeroMovies(hero);
-    } catch (err) {
-      console.error("Hero Movies Error:", err);
-      setError(true);
-    }
+      const [hero, popular] = await Promise.all([
+        getHeroMovies(),
+        getPopularMovies(),
+      ]);
 
-    try {
-      const popular = await getPopularMovies();
+      setHeroMovies(hero);
       setPopularMovies(popular);
     } catch (err) {
-      console.error("Popular Movies Error:", err);
+      console.error("Home Context Error:", err);
       setError(true);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const loadGenreMovies = async (genres) => {
@@ -136,5 +131,6 @@ export function HomeProvider({ children }) {
 
 export function useHome() {
   const context = useContext(HomeContext);
+
   return context;
 }

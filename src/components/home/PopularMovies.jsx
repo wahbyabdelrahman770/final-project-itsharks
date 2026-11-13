@@ -10,23 +10,20 @@ import { useMovie } from "../../contexts/Movie/MovieContext";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
+import ErrorState from "./../ErrorState";
+import Loading from "./../Loading";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/";
 
 function PopularMovies() {
   const { popularMovies, loading } = useHome();
   const { moviesGenres } = useMovie();
-
   if (loading) {
-    return (
-      <section className="bg-[#090a0e] px-6 py-16 text-white md:px-12 lg:px-16">
-        <p className="text-gray-400">Loading Popular Movies...</p>
-      </section>
-    );
+    return <Loading />;
   }
 
   if (!popularMovies || popularMovies.length === 0) {
-    return null;
+    return <ErrorState />;
   }
 
   return (
