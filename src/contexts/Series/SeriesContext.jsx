@@ -139,6 +139,7 @@ const SeriesContext = ({ children }) => {
         searchSeries,
         seriesDetails,
         loading,
+        input,
       }}
     >
       {children}
