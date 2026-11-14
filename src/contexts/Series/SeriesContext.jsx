@@ -7,15 +7,16 @@ const SeriesContext = ({ children }) => {
   const [seriesGenres, setSeriesGenres] = useState([]);
   const [page, setPage] = useState(1);
   const [input, setInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchSeriesResults, setSearchSeriesResults] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const token = import.meta.env.VITE_TOKEN;
 
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZTNiODYwYjkyZmRmNDBjMGI0YzI4YjY1MWFlZGE3NiIsIm5iZiI6MTc5NDI1MDgwNS4wMjksInN1YiI6IjZhZjIxODM1ZmFhOTlmMjU3ZDE1NTAwNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sjgfVghvgXHkZM1jai47GIHPCtztYdObUOYYPXdtdxs",
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -93,7 +94,7 @@ const SeriesContext = ({ children }) => {
       const req = await fetch(apiLink, options);
       const res = await req.json();
 
-      setSearchResults(res.results);
+      setSearchSeriesResults(res.results);
       setLoading(false);
     } catch (err) {
       console.log(err.message);
@@ -112,14 +113,14 @@ const SeriesContext = ({ children }) => {
   };
 
   useEffect(() => {
-    searchSeries();
+    if (input.trim() !== "") {
+      searchSeries();
+    }
   }, [input]);
 
   useEffect(() => {
     getSeries();
     getGenres();
-    getRatingSeries();
-    getNewestSeries();
   }, [page]);
   return (
     <seriesStore.Provider
@@ -134,7 +135,8 @@ const SeriesContext = ({ children }) => {
         getRatingSeries,
         getSeries,
         setInput,
-        searchResults,
+        searchSeriesResults,
+        searchSeries,
         seriesDetails,
         loading,
       }}

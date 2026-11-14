@@ -17,41 +17,44 @@ import SeriesDetails from "./pages/SeriesDetails/SeriesDetails";
 import Footer from "./components/Footer";
 
 import { HomeProvider } from "./contexts/Home/HomeContext";
+import NavContext from "./contexts/Navbar/Navbar";
 
 const App = () => {
   return (
-    <HomeProvider>
-      <MovieContext>
-        <SeriesContext>
-          <Nav />
+    <NavContext>
+      <HomeProvider>
+        <MovieContext>
+          <SeriesContext>
+            <Nav />
 
-          <Routes>
-            <Route path="/" element={<Home />} />
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-            <Route path="/movies" element={<Movies />} />
+              <Route path="/movies" element={<Movies />} />
 
-            <Route
-              path="/movies/:movieID"
-              element={
-                <MovieDetailsProvider>
-                  <MoviesDeatails />
-                </MovieDetailsProvider>
-              }
-            />
+              <Route
+                path="/movies/:movieID"
+                element={
+                  <MovieDetailsProvider>
+                    <MoviesDeatails />
+                  </MovieDetailsProvider>
+                }
+              />
 
-            <Route path="/series" element={<Series />} />
+              <Route path="/series" element={<Series />} />
 
-            <Route path="/series/:seriesID" element={<SeriesDetails />} />
+              <Route path="/series/:seriesID" element={<SeriesDetails />} />
 
-            <Route path="/contact" element={<Contact />} />
+              <Route path="/contact" element={<Contact />} />
 
-            <Route path="/login" element={<Login />} />
-          </Routes>
+              <Route path="/login" element={<Login />} />
+            </Routes>
 
-          <Footer />
-        </SeriesContext>
-      </MovieContext>
-    </HomeProvider>
+            <Footer />
+          </SeriesContext>
+        </MovieContext>
+      </HomeProvider>
+    </NavContext>
   );
 };
 

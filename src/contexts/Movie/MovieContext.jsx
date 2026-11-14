@@ -7,15 +7,16 @@ const MovieContext = ({ children }) => {
   const [selectedGenreId, setSelectedGenreId] = useState(null);
   const [page, setPage] = useState(1);
   const [input, setInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchMoviesResults, setSearchMoviesResults] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const token = import.meta.env.VITE_TOKEN;
 
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ZTNiODYwYjkyZmRmNDBjMGI0YzI4YjY1MWFlZGE3NiIsIm5iZiI6MTc5NDI1MDgwNS4wMjksInN1YiI6IjZhZjIxODM1ZmFhOTlmMjU3ZDE1NTAwNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sjgfVghvgXHkZM1jai47GIHPCtztYdObUOYYPXdtdxs",
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -37,7 +38,6 @@ const MovieContext = ({ children }) => {
       setLoading(false);
     } catch (err) {
       console.log(err.message);
-      setLoading(true);
     }
   };
 
@@ -107,7 +107,7 @@ const MovieContext = ({ children }) => {
       const req = await fetch(apiLink, options);
       const res = await req.json();
 
-      setSearchResults(res.results);
+      setSearchMoviesResults(res.results);
     } catch (err) {
       console.log(err.message);
     }
@@ -124,14 +124,14 @@ const MovieContext = ({ children }) => {
   };
 
   useEffect(() => {
-    searchMovies();
+    if (input.trim() !== "") {
+      searchMovies();
+    }
   }, [input]);
 
   useEffect(() => {
     getMovies();
     getGenresId();
-    getTopRatingMovies();
-    getNewestMovies();
   }, [page]);
   return (
     <MovieStore.Provider
@@ -146,10 +146,11 @@ const MovieContext = ({ children }) => {
         getTopRatingMovies,
         getMovies,
         getNewestMovies,
-        setInput,
-        searchResults,
+        searchMoviesResults,
         movieDetails,
         loading,
+        searchMovies,
+        setInput,
       }}
     >
       {children}
