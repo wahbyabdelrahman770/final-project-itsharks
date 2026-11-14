@@ -17,6 +17,7 @@ const Series = () => {
     setInput,
     searchSeriesResults,
     loading,
+    input,
   } = useSeries();
 
   return (
@@ -60,6 +61,7 @@ const Series = () => {
 
               <input
                 type="text"
+                value={input}
                 placeholder="Search movies..."
                 onChange={(e) => setInput(e.target.value)}
                 className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
@@ -80,14 +82,13 @@ const Series = () => {
               "
             >
               {searchSeriesResults.map((search) => (
-                <div
+                <Link
+                  to={`/series/${search.id}`}
                   key={search.id}
-                  className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
                 >
-                  <Link to={`/movies/${search.id}`}>
-                    <div>{search.name}</div>
-                  </Link>
-                </div>
+                  {search.name}
+                </Link>
               ))}
             </div>
           </div>

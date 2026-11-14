@@ -223,21 +223,22 @@ const Nav = () => {
         >
           {searchTitel === "movie"
             ? searchResults.map((search) => (
-                // (search) => console.log(search),
-                <div
+                <Link
+                  to={`/movies/${search.id}`}
                   key={search.id}
-                  className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
                 >
-                  {search.original_title};
-                </div>
+                  {search.original_title}
+                </Link>
               ))
             : searchResults.map((search) => (
-                <div
+                <Link
+                  to={`/series/${search.id}`}
                   key={search.id}
-                  className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
                 >
                   {search.name}
-                </div>
+                </Link>
               ))}
         </div>
 

@@ -20,18 +20,6 @@ export default function Movies() {
     loading,
   } = useMovie();
 
-  const linkM = movies.map((movie) => {
-    return (
-      <Link
-        key={movie.id}
-        to={`/movies/${movie.id}`}
-        className="flex items-center justify-center w-full h-full"
-      ></Link>
-    );
-  });
-
-  // console.log(linkM);
-
   return (
     <div className="min-h-screen bg-[#08090d] text-white">
       <main className="max-w-400 mx-auto px-6 md:px-12">
@@ -93,14 +81,13 @@ export default function Movies() {
     "
             >
               {searchMoviesResults.map((search) => (
-                <div
+                <Link
+                  to={`/movies/${search.id}`}
                   key={search.id}
-                  className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
                 >
-                  <Link to={`/movies/${search.id}`}>
-                    <div>{search.original_title}</div>
-                  </Link>
-                </div>
+                  {search.original_title}
+                </Link>
               ))}
             </div>
           </div>
