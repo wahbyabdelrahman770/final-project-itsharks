@@ -2,6 +2,7 @@ import MoviesCard from "./MoviesCard";
 import { useMovie } from "../../contexts/Movie/MovieContext";
 import { FiSearch } from "react-icons/fi";
 import Loading from "../../components/Loading";
+import { Link } from "react-router-dom";
 
 export default function Movies() {
   const {
@@ -15,9 +16,22 @@ export default function Movies() {
     getTopRatingMovies,
     getNewestMovies,
     setInput,
-    searchResults,
+    searchMoviesResults,
     loading,
   } = useMovie();
+
+  const linkM = movies.map((movie) => {
+    return (
+      <Link
+        key={movie.id}
+        to={`/movies/${movie.id}`}
+        className="flex items-center justify-center w-full h-full"
+      ></Link>
+    );
+  });
+
+  // console.log(linkM);
+
   return (
     <div className="min-h-screen bg-[#08090d] text-white">
       <main className="max-w-400 mx-auto px-6 md:px-12">
@@ -78,12 +92,14 @@ export default function Movies() {
       shadow-2xl flex flex-col
     "
             >
-              {searchResults.map((search) => (
+              {searchMoviesResults.map((search) => (
                 <div
                   key={search.id}
                   className="px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
                 >
-                  {search.original_title}
+                  <Link to={`/movies/${search.id}`}>
+                    <div>{search.original_title}</div>
+                  </Link>
                 </div>
               ))}
             </div>
