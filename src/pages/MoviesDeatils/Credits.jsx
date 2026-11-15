@@ -9,11 +9,11 @@ const Credits = () => {
 
     return (
         <div className="w-[93%] mx-auto mt-8 mb-4">
-            <div className="flex flex-col">
-                <span className="text-[#e50924] text-[0.6rem] font-bold tracking-[2px] uppercase">Faces of the story</span>
+            <div className="mb-4 flex flex-col">
+                <span className="text-[#e50924] text-[0.8rem] font-bold tracking-[2px] uppercase">Faces of the story</span>
 
                 <section className="flex flex-row justify-between items-end">
-                    <p className="mt-2 font-serif text-[1.6rem] text-white font-medium">Cast & Crew</p>
+                    <p className="mt-2 font-serif text-[1.9rem] text-white font-medium">Cast & Crew</p>
                     <Link className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">View Full Cast and Crew →</Link>
                 </section>
             </div>

@@ -105,7 +105,7 @@ const CloseIcon = () => (
 const Nav = () => {
   // const { theme, setTheme } = useTheme();
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [searchTitel, setSearchTitel] = useState("movie");
+  // const [searchTitle, setsearchTitle] = useState("movie");
   // const [input, setInput] = useState("");
   // const [searchResults, setSearchResults] = useState([]);
   // const navLinks = [
@@ -126,7 +126,7 @@ const Nav = () => {
   // };
 
   // const searchData = async () => {
-  //   const apiLink = `https://api.themoviedb.org/3/search/${searchTitel}?&query=${input}&include_adult=false&language=en-US`;
+  //   const apiLink = `https://api.themoviedb.org/3/search/${searchTitle}?&query=${input}&include_adult=false&language=en-US`;
   //   try {
   //     const req = await fetch(apiLink, options);
   //     const res = await req.json();
@@ -138,7 +138,7 @@ const Nav = () => {
   // };
 
   // const toggleSearch = () => {
-  //   setSearchTitel(searchTitel === "movie" ? "tv" : "movie");
+  //   setsearchTitle(searchTitle === "movie" ? "tv" : "movie");
   // };
 
   // const handleSearch = () => {
@@ -149,7 +149,7 @@ const Nav = () => {
   //   if (input.trim() !== "") {
   //     searchData();
   //   }
-  // }, [input, searchTitel]);
+  // }, [input, searchTitle]);
 
   const {
     theme,
@@ -161,7 +161,7 @@ const Nav = () => {
     toggleSearch,
     handleSearch,
     input,
-    searchTitel,
+    searchTitle,
   } = useNav();
 
   const navLinks = [
@@ -202,7 +202,7 @@ const Nav = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={
-              searchTitel === "movie" ? "Search movies..." : "Search series..."
+              searchTitle === "movie" ? "Search movies..." : "Search series..."
             }
             className="border-0 outline-0 w-auto bg-transparent text-white"
           />
@@ -214,32 +214,32 @@ const Nav = () => {
       hidden
       group-has-[input:not(:placeholder-shown)]:block
       absolute top-full left-0 z-50 mt-3
-      w-full max-h-[250px]
+      w-full max-h-62.5
       overflow-y-auto
       rounded-lg border border-cyan-400/60
       bg-[#202428] p-1
-      shadow-2xl flex flex-col
+      shadow-2xl
     "
         >
-          {searchTitel === "movie"
+          {searchTitle === "movie"
             ? searchResults.map((search) => (
-                <Link
-                  to={`/movies/${search.id}`}
-                  key={search.id}
-                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-                >
-                  {search.original_title}
-                </Link>
-              ))
+              <Link
+                to={`/movies/${search.id}`}
+                key={search.id}
+                className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+              >
+                {search.original_title}
+              </Link>
+            ))
             : searchResults.map((search) => (
-                <Link
-                  to={`/series/${search.id}`}
-                  key={search.id}
-                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-                >
-                  {search.name}
-                </Link>
-              ))}
+              <Link
+                to={`/series/${search.id}`}
+                key={search.id}
+                className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+              >
+                {search.name}
+              </Link>
+            ))}
         </div>
 
         <Button onClick={handleSearch}>Search</Button>
@@ -249,7 +249,7 @@ const Nav = () => {
           onClick={toggleSearch}
           className="bg-zinc-800 text-white text-xs"
         >
-          {searchTitel === "movie" ? "🎬 Movie" : "📺 Series"}
+          {searchTitle === "movie" ? "🎬 Movie" : "📺 Series"}
         </Button>
 
         <Button

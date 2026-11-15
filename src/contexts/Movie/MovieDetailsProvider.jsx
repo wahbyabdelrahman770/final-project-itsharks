@@ -9,6 +9,7 @@ const MovieDetailsContext = createContext({});
 const MovieDetailsProvider = ({ children }) => {
   const { movieID } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const token = import.meta.env.VITE_zero_token;
   const options = {
@@ -19,12 +20,13 @@ const MovieDetailsProvider = ({ children }) => {
     },
   };
 
-  const api = `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits,images,videos,release_dates`;
+  const api = `https://api.themoviedb.org/3/movie/${movieID}?append_to_response=credits,images,videos,release_dates,recommendations`;
   async function getMovieDetails() {
     try {
       const request = await fetch(api, options);
       const response = await request.json();
       setMovieDetails(response);
+      setLoading(false);
     } catch (e) {
       console.log(e);
     }
@@ -32,14 +34,16 @@ const MovieDetailsProvider = ({ children }) => {
 
   useEffect(() => {
     getMovieDetails();
-  }, []);
+    setLoading(true);
+  }, [movieID]);
 
   const {
     images: { backdrops = [], posters = [] } = {},
     credits: { cast = [], crew = [] } = {},
+    recommendations: { results: recommended = [] } = {},
     release_dates,
     videos,
-    production_companies,
+    production_companies
   } = movieDetails;
 
   const background = backdrops[0]
@@ -96,6 +100,7 @@ const MovieDetailsProvider = ({ children }) => {
         cast,
         crew,
         videos,
+        recommended,
         production_companies,
         release_date,
         rating,
@@ -108,6 +113,7 @@ const MovieDetailsProvider = ({ children }) => {
         budget,
         rated,
         trailerLink,
+        loading
       }}
     >
       {children}
