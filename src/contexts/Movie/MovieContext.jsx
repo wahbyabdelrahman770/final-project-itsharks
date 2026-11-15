@@ -123,6 +123,10 @@ const MovieContext = ({ children }) => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     if (input.trim() !== "") {
       searchMovies();
@@ -132,6 +136,7 @@ const MovieContext = ({ children }) => {
   useEffect(() => {
     getMovies();
     getGenresId();
+    scrollToTop();
   }, [page]);
   return (
     <MovieStore.Provider
