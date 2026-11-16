@@ -7,7 +7,6 @@ import Recommendations from "./Recommendations";
 
 const MoviesDeatails = () => {
 	const { loading } = useMovieDetails();
-	console.log(loading);
 	return (
 		<ContentLoading loading={loading}>
 			<div className="w-full" >

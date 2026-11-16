@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 import Nav from "./components/Nav";
 import Home from "./pages/home/Home";
@@ -18,6 +18,7 @@ import Footer from "./components/Footer";
 
 import { HomeProvider } from "./contexts/Home/HomeContext";
 import NavContext from "./contexts/Navbar/Navbar";
+import FullCast from "./pages/fullCast/FullCast";
 
 const App = () => {
     return (
@@ -32,14 +33,15 @@ const App = () => {
 
                             <Route path="/movies" element={<Movies />} />
 
-                            <Route
-                                path="/movies/:movieID"
-                                element={
-                                    <MovieDetailsProvider>
-                                        <MoviesDeatails />
-                                    </MovieDetailsProvider>
-                                }
-                            />
+                            <Route path="/movies/:movieID" element={
+                                <MovieDetailsProvider>
+                                    <Outlet />
+                                </MovieDetailsProvider>
+                            }
+                            >
+                                <Route index element={<MoviesDeatails />} />
+                                <Route path="credits" element={<FullCast />} />
+                            </Route>
 
                             <Route path="/series" element={<Series />} />
 

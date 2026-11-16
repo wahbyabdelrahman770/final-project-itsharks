@@ -97,6 +97,7 @@ const MovieDetailsProvider = ({ children }) => {
     <MovieDetailsContext.Provider
       value={{
         movieDetails,
+        movieID,
         cast,
         crew,
         videos,
