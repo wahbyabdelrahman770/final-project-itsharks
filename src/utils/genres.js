@@ -144,18 +144,34 @@ const tvGenresArray = [
     }
 ];
 
-export const movieGenres = Object.fromEntries(
+const movieGenres = Object.fromEntries(
     movieGenresArray.map((genre) => [genre.id, genre])
 );
 
-export const tvGenres = Object.fromEntries(
+const movieGenresID = Object.fromEntries(
+    movieGenresArray.map((genre) => [genre.name, genre])
+);
+
+const tvGenres = Object.fromEntries(
     tvGenresArray.map((genre) => [genre.id, genre])
+);
+
+const tvGenresID = Object.fromEntries(
+    tvGenresArray.map((genre) => [genre.name, genre])
 );
 
 export function getMovieGenre(genreID) {
     return movieGenres[`${genreID}`]?.name;
 }
 
+export function getMovieGenreID(genreName) {
+    return movieGenresID[`${genreName}`]?.id;
+}
+
 export function getTvGenre(genreID) {
     return tvGenres[`${genreID}`]?.name;
 };
+
+export function getTvGenreID(genreName) {
+    return tvGenresID[`${genreName}`]?.id;
+}
