@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 export default function Movies() {
   const {
     movies,
-    filteredMovies,
+    moviesGenres,
+    filterMovies,
     movieLength,
     page,
     nextPage,
@@ -18,6 +19,7 @@ export default function Movies() {
     setInput,
     searchMoviesResults,
     loading,
+    input,
   } = useMovie();
 
   return (
@@ -62,6 +64,7 @@ export default function Movies() {
               <input
                 type="text"
                 placeholder="Search movies..."
+                value={input}
                 onChange={(e) => setInput(e.target.value)}
                 className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
               />
@@ -123,50 +126,45 @@ export default function Movies() {
           <button className="rounded-full bg-red-600 text-white px-6 py-2.5 text-[9px] font-bold tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer">
             ALL
           </button>
+          <button onClick={filterMovies}>ACTION</button>
           <button
-            // onClick={filteredMovies}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
-          >
-            ACTION
-          </button>
-          <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             DRAMA
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             Science Fiction
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             COMEDY
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             CRIME
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             FANTASY
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             MYSTERY
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={filterMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             ROMANCE

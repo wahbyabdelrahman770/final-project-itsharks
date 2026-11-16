@@ -4,7 +4,7 @@ export const MovieStore = createContext({});
 const MovieContext = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [moviesGenres, setMoviesGenres] = useState([]);
-  const [selectedGenreId, setSelectedGenreId] = useState(null);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [input, setInput] = useState("");
   const [searchMoviesResults, setSearchMoviesResults] = useState([]);
@@ -80,24 +80,41 @@ const MovieContext = ({ children }) => {
     setMoviesGenres(genres);
   };
 
-  const filteredMovies = movies.filter((movie) => {
-    //   let genres = movie.genre_ids[0];
-    //   return genres;
+  const filterMovies = async () => {
+    const apiLink = "https://api.themoviedb.org/3/genre/movie/list?language=en";
+    const req = await fetch(apiLink, options);
+    const res = await req.json();
 
-    //   if (movie.id == movieId.includes()) {
-    //     console.log("H");
-    //   } else {
-    //     console.log("no");
-    //   }
-    //   // console.log(movieId);
+    let genres = res.genres;
+    console.log(genres);
 
-    //   console.log(movieId);
+    // let g = genres.map((g) => {
+    //   console.log(g.name);
+    //   return g;
     // });
-    // return filterrr;
-    if (!selectedGenreId) return true;
 
-    return movie.genre_ids.includes(selectedGenreId);
-  });
+    // const filteredMovies = movies.filter((movie) => {
+    //   // console.log(movie.genre_ids);
+    //   // return movie.genre_ids.includes(res.genres);
+    //   // console.log(g);
+
+    //   genres.map((g) => {
+    //     console.log(g.name);
+    //     return g;
+    //   });
+    //   return movie;
+    // });
+
+    const fil = genres.map((g) => {
+      console.log(g.name);
+
+      const filteredMovies = movies.filter((movie) => {
+        console.log(movie.genre_ids.includes(g));
+      });
+    });
+
+    setFilteredMovies(filteredMovies);
+  };
 
   const movieLength = movies.length;
 
@@ -138,7 +155,7 @@ const MovieContext = ({ children }) => {
       value={{
         movies,
         moviesGenres,
-        filteredMovies,
+        filterMovies,
         movieLength,
         page,
         nextPage,
