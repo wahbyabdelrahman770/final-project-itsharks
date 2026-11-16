@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { useTheme } from "../contexts/ThemeProvider";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@heroui/react";
-import { useMovie } from "../contexts/Movie/MovieContext";
-import { useSeries } from "./../contexts/Series/SeriesContext";
 import { useNav } from "../contexts/Navbar/Navbar";
 
 const FilmIcon = () => (
@@ -103,54 +99,6 @@ const CloseIcon = () => (
 );
 
 const Nav = () => {
-  // const { theme, setTheme } = useTheme();
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [searchTitel, setSearchTitel] = useState("movie");
-  // const [input, setInput] = useState("");
-  // const [searchResults, setSearchResults] = useState([]);
-  // const navLinks = [
-  //   { label: "Home", to: "/" },
-  //   { label: "Movies", to: "/movies" },
-  //   { label: "Series", to: "/series" },
-  //   { label: "ContactUs", to: "/contact" },
-  // ];
-
-  // const token = import.meta.env.VITE_TOKEN;
-
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     accept: "application/json",
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // };
-
-  // const searchData = async () => {
-  //   const apiLink = `https://api.themoviedb.org/3/search/${searchTitel}?&query=${input}&include_adult=false&language=en-US`;
-  //   try {
-  //     const req = await fetch(apiLink, options);
-  //     const res = await req.json();
-
-  //     setSearchResults(res.results);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
-
-  // const toggleSearch = () => {
-  //   setSearchTitel(searchTitel === "movie" ? "tv" : "movie");
-  // };
-
-  // const handleSearch = () => {
-  //   searchData();
-  // };
-
-  // useEffect(() => {
-  //   if (input.trim() !== "") {
-  //     searchData();
-  //   }
-  // }, [input, searchTitel]);
-
   const {
     theme,
     setTheme,
@@ -161,7 +109,7 @@ const Nav = () => {
     toggleSearch,
     handleSearch,
     input,
-    searchTitel,
+    searchTitle,
   } = useNav();
 
   const navLinks = [
@@ -202,7 +150,7 @@ const Nav = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={
-              searchTitel === "movie" ? "Search movies..." : "Search series..."
+              searchTitle === "movie" ? "Search movies..." : "Search series..."
             }
             className="border-0 outline-0 w-auto bg-transparent text-white"
           />
@@ -214,14 +162,14 @@ const Nav = () => {
       hidden
       group-has-[input:not(:placeholder-shown)]:block
       absolute top-full left-0 z-50 mt-3
-      w-full max-h-[250px]
+      w-full max-h-62.5
       overflow-y-auto
       rounded-lg border border-cyan-400/60
       bg-[#202428] p-1
-      shadow-2xl flex flex-col
+      shadow-2xl
     "
         >
-          {searchTitel === "movie"
+          {searchTitle === "movie"
             ? searchResults.map((search) => (
                 <Link
                   to={`/movies/${search.id}`}
@@ -249,7 +197,7 @@ const Nav = () => {
           onClick={toggleSearch}
           className="bg-zinc-800 text-white text-xs"
         >
-          {searchTitel === "movie" ? "🎬 Movie" : "📺 Series"}
+          {searchTitle === "movie" ? "🎬 Movie" : "📺 Series"}
         </Button>
 
         <Button

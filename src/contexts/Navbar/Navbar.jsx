@@ -1,11 +1,11 @@
-import { useTheme } from "@heroui/react";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { useTheme } from "../ThemeProvider";
+import { createContext, useContext, useEffect, useState } from "react";
 export const NavStore = createContext({});
 
 const NavContext = ({ children }) => {
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchTitel, setSearchTitel] = useState("movie");
+  const [searchTitle, setSearchTitle] = useState("movie");
   const [input, setInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
@@ -20,7 +20,7 @@ const NavContext = ({ children }) => {
   };
 
   const searchData = async () => {
-    const apiLink = `https://api.themoviedb.org/3/search/${searchTitel}?&query=${input}&include_adult=false&language=en-US`;
+    const apiLink = `https://api.themoviedb.org/3/search/${searchTitle}?&query=${input}&include_adult=false&language=en-US`;
     try {
       const req = await fetch(apiLink, options);
       const res = await req.json();
@@ -32,7 +32,7 @@ const NavContext = ({ children }) => {
   };
 
   const toggleSearch = () => {
-    setSearchTitel(searchTitel === "movie" ? "tv" : "movie");
+    setSearchTitle(searchTitle === "movie" ? "tv" : "movie");
   };
 
   const handleSearch = () => {
@@ -43,7 +43,7 @@ const NavContext = ({ children }) => {
     if (input.trim() !== "") {
       searchData();
     }
-  }, [input, searchTitel]);
+  }, [input, searchTitle]);
 
   return (
     <NavStore.Provider
@@ -59,7 +59,7 @@ const NavContext = ({ children }) => {
         toggleSearch,
         handleSearch,
         input,
-        searchTitel,
+        searchTitle,
       }}
     >
       {children}

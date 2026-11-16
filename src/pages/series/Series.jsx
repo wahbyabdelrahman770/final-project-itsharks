@@ -1,8 +1,8 @@
 import { useSeries } from "../../contexts/Series/SeriesContext";
 import SeriesCard from "./SeriesCard";
 import Loading from "./../../components/Loading";
-import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import ErrorState from "../../components/ErrorState";
+import NotFound from "../../components/NotFound";
 
 const Series = () => {
   const {
@@ -14,10 +14,10 @@ const Series = () => {
     getNewestSeries,
     getRatingSeries,
     getSeries,
-    setInput,
-    searchSeriesResults,
     loading,
-    input,
+    error,
+    filterSeries,
+    notFound,
   } = useSeries();
 
   return (
@@ -54,45 +54,6 @@ const Series = () => {
 
         {/* Search & Sort */}
         <section className="flex flex-col md:flex-row justify-between items-center gap-7 py-9">
-          <div className="relative group w-full md:w-150">
-            {/* Search Input */}
-            <div className="flex items-center gap-4 border-b border-white/10 pb-4">
-              <FiSearch className="shrink-0 text-gray-400 text-xl" />
-
-              <input
-                type="text"
-                value={input}
-                placeholder="Search movies..."
-                onChange={(e) => setInput(e.target.value)}
-                className="w-full bg-transparent outline-none text-white placeholder:text-gray-500 text-sm"
-              />
-            </div>
-
-            {/* Dropdown */}
-            <div
-              className="
-                hidden
-                group-has-[input:not(:placeholder-shown)]:block
-                absolute top-full left-0 z-50 mt-3
-                w-full max-h-[250px]
-                overflow-y-auto
-                rounded-lg border border-cyan-400/60
-                bg-[#202428] p-1
-                shadow-2xl flex flex-col
-              "
-            >
-              {searchSeriesResults.map((search) => (
-                <Link
-                  to={`/series/${search.id}`}
-                  key={search.id}
-                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-                >
-                  {search.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
           <div className="flex items-center gap-4">
             <span className="text-[10px] tracking-widest text-gray-400 font-medium">
               SORT BY
@@ -121,53 +82,56 @@ const Series = () => {
 
         {/* Categories */}
         <section className="flex flex-wrap items-center gap-2 mb-16">
-          <button className="rounded-full bg-red-600 text-white px-6 py-2.5 text-[9px] font-bold tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer">
+          <button
+            onClick={getSeries}
+            className="rounded-full bg-red-600 text-white px-6 py-2.5 text-[9px] font-bold tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer"
+          >
             ALL
           </button>
           <button
-            // onClick={filteredMovies}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => filterSeries("Action")}
           >
-            ACTION
+            "Action & Adventure"
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Drama")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             DRAMA
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Science Fiction")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
-            Science Fiction
+            "Sci-Fi & Fantasy"
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Comedy")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             COMEDY
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Crime")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             CRIME
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Fantasy")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             FANTASY
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Mystery")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             MYSTERY
           </button>
           <button
-            // onClick={filteredMovies}
+            onClick={() => filterSeries("Romance")}
             className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
           >
             ROMANCE
@@ -194,6 +158,8 @@ const Series = () => {
               return <SeriesCard ser={ser} key={ser.id} />;
             })
           )}
+          {error == true && <ErrorState />}
+          {seriesLength == 0 && <NotFound />}
         </section>
 
         {/* Pagination */}
