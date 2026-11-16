@@ -1,4 +1,6 @@
 function ErrorState({ onRetry }) {
+  // console.log(onRetry);
+
   return (
     <section className="flex min-h-80 w-full flex-col items-center justify-center bg-[#090a0e] px-5 py-16 text-center text-white">
       <div className="mb-5 flex size-20 items-center justify-center rounded-full bg-red-600/10">
@@ -14,7 +16,7 @@ function ErrorState({ onRetry }) {
 
       <button
         onClick={onRetry}
-        className="flex items-center gap-3 rounded bg-red-600 px-7 py-3 text-sm font-bold transition hover:bg-red-700"
+        className="cursor-pointer flex items-center gap-3 rounded bg-red-600 px-7 py-3 text-sm font-bold transition hover:bg-red-700"
       >
         Try Again
         <span>↻</span>

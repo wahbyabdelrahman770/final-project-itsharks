@@ -1,9 +1,5 @@
-import { useEffect, useState } from "react";
-import { useTheme } from "../contexts/ThemeProvider";
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@heroui/react";
-import { useMovie } from "../contexts/Movie/MovieContext";
-import { useSeries } from "./../contexts/Series/SeriesContext";
 import { useNav } from "../contexts/Navbar/Navbar";
 
 const FilmIcon = () => (
@@ -103,54 +99,6 @@ const CloseIcon = () => (
 );
 
 const Nav = () => {
-  // const { theme, setTheme } = useTheme();
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [searchTitle, setsearchTitle] = useState("movie");
-  // const [input, setInput] = useState("");
-  // const [searchResults, setSearchResults] = useState([]);
-  // const navLinks = [
-  //   { label: "Home", to: "/" },
-  //   { label: "Movies", to: "/movies" },
-  //   { label: "Series", to: "/series" },
-  //   { label: "ContactUs", to: "/contact" },
-  // ];
-
-  // const token = import.meta.env.VITE_TOKEN;
-
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     accept: "application/json",
-  //     Authorization: `Bearer ${token}`,
-  //   },
-  // };
-
-  // const searchData = async () => {
-  //   const apiLink = `https://api.themoviedb.org/3/search/${searchTitle}?&query=${input}&include_adult=false&language=en-US`;
-  //   try {
-  //     const req = await fetch(apiLink, options);
-  //     const res = await req.json();
-
-  //     setSearchResults(res.results);
-  //   } catch (err) {
-  //     console.log(err.message);
-  //   }
-  // };
-
-  // const toggleSearch = () => {
-  //   setsearchTitle(searchTitle === "movie" ? "tv" : "movie");
-  // };
-
-  // const handleSearch = () => {
-  //   searchData();
-  // };
-
-  // useEffect(() => {
-  //   if (input.trim() !== "") {
-  //     searchData();
-  //   }
-  // }, [input, searchTitle]);
-
   const {
     theme,
     setTheme,
@@ -223,23 +171,23 @@ const Nav = () => {
         >
           {searchTitle === "movie"
             ? searchResults.map((search) => (
-              <Link
-                to={`/movies/${search.id}`}
-                key={search.id}
-                className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-              >
-                {search.original_title}
-              </Link>
-            ))
+                <Link
+                  to={`/movies/${search.id}`}
+                  key={search.id}
+                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                >
+                  {search.original_title}
+                </Link>
+              ))
             : searchResults.map((search) => (
-              <Link
-                to={`/series/${search.id}`}
-                key={search.id}
-                className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-              >
-                {search.name}
-              </Link>
-            ))}
+                <Link
+                  to={`/series/${search.id}`}
+                  key={search.id}
+                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
+                >
+                  {search.name}
+                </Link>
+              ))}
         </div>
 
         <Button onClick={handleSearch}>Search</Button>

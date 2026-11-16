@@ -47,11 +47,13 @@ const SeriesCard = ({
           <span>{first_air_date.slice(0, 4)}</span>
           <span>•</span>
           <span>
-            {seriesGenres.map((gen) => {
-              if (gen.id == genre_ids[0]) {
-                return gen.name;
-              }
-            })}
+            <div className="flex flex-wrap gap-2">
+              {seriesGenres.map((gen) => {
+                if (genre_ids.includes(gen.id)) {
+                  return <span key={gen.id}>{gen.name}</span>;
+                }
+              })}
+            </div>
           </span>
         </div>
       </div>
