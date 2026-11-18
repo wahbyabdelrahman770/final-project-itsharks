@@ -2,6 +2,8 @@ import MoviesCard from "./MoviesCard";
 import { useMovie } from "../../contexts/Movie/MovieContext";
 import Loading from "../../components/Loading";
 import ErrorState from "../../components/ErrorState";
+import { useState } from "react";
+import NotFound from "../../components/NotFound";
 
 export default function Movies() {
   const {
@@ -16,6 +18,8 @@ export default function Movies() {
     getNewestMovies,
     loading,
     error,
+    active,
+    setActive,
   } = useMovie();
 
   return (
@@ -81,56 +85,91 @@ export default function Movies() {
         {/* Categories */}
         <section className="flex flex-wrap items-center gap-2 mb-16">
           <button
-            onClick={getMovies}
-            className="rounded-full bg-red-600 text-white px-6 py-2.5 text-[9px] font-bold tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer"
+            onClick={() => {
+              setActive("ALL");
+              getMovies();
+            }}
+            className={`${active === "ALL" ? "bg-red-600 text-white shadow-lg shadow-red-600/30" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ALL
           </button>
+
           <button
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
-            onClick={() => filterMovies("Action")}
+            onClick={() => {
+              setActive("Action");
+              filterMovies("Action");
+            }}
+            className={`${active === "Action" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ACTION
           </button>
+
           <button
-            onClick={() => filterMovies("Drama")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Drama");
+              filterMovies("Drama");
+            }}
+            className={`${active === "Drama" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             DRAMA
           </button>
+
           <button
-            onClick={() => filterMovies("Science Fiction")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Science Fiction");
+              filterMovies("Science Fiction");
+            }}
+            className={`${active === "Science Fiction" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             Science Fiction
           </button>
+
           <button
-            onClick={() => filterMovies("Comedy")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Comedy");
+              filterMovies("Comedy");
+            }}
+            className={`${active === "Comedy" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             COMEDY
           </button>
+
           <button
-            onClick={() => filterMovies("Crime")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Crime");
+              filterMovies("Crime");
+            }}
+            className={`${active === "Crime" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             CRIME
           </button>
+
           <button
-            onClick={() => filterMovies("Fantasy")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Fantasy");
+              filterMovies("Fantasy");
+            }}
+            className={`${active === "Fantasy" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             FANTASY
           </button>
+
           <button
-            onClick={() => filterMovies("Mystery")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Mystery");
+              filterMovies("Mystery");
+            }}
+            className={`${active === "Mystery" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             MYSTERY
           </button>
+
           <button
-            onClick={() => filterMovies("Romance")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Romance");
+              filterMovies("Romance");
+            }}
+            className={`${active === "Romance" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ROMANCE
           </button>
@@ -156,6 +195,7 @@ export default function Movies() {
               return <MoviesCard key={movie.id} movie={movie} />;
             })
           )}
+          {movieLength == 0 && <NotFound />}
           {error == true && <ErrorState />}
         </section>
 

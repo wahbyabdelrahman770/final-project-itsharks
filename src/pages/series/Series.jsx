@@ -3,8 +3,10 @@ import SeriesCard from "./SeriesCard";
 import Loading from "./../../components/Loading";
 import ErrorState from "../../components/ErrorState";
 import NotFound from "../../components/NotFound";
+import { useState } from "react";
 
 const Series = () => {
+  const [active, setActive] = useState("ALL");
   const {
     series,
     nextSeries,
@@ -17,7 +19,6 @@ const Series = () => {
     loading,
     error,
     filterSeries,
-    notFound,
   } = useSeries();
 
   return (
@@ -83,56 +84,91 @@ const Series = () => {
         {/* Categories */}
         <section className="flex flex-wrap items-center gap-2 mb-16">
           <button
-            onClick={getSeries}
-            className="rounded-full bg-red-600 text-white px-6 py-2.5 text-[9px] font-bold tracking-wider shadow-lg shadow-red-600/30 transition-all cursor-pointer"
+            onClick={() => {
+              setActive("ALL");
+              getMovies();
+            }}
+            className={`${active === "ALL" ? "bg-red-600 text-white shadow-lg shadow-red-600/30" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ALL
           </button>
+
           <button
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
-            onClick={() => filterSeries("Action")}
+            onClick={() => {
+              setActive("Action");
+              filterSeries("Action");
+            }}
+            className={`${active === "Action" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
-            "Action & Adventure"
+            ACTION
           </button>
+
           <button
-            onClick={() => filterSeries("Drama")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Drama");
+              filterSeries("Drama");
+            }}
+            className={`${active === "Drama" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             DRAMA
           </button>
+
           <button
-            onClick={() => filterSeries("Science Fiction")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Science Fiction");
+              filterSeries("Science Fiction");
+            }}
+            className={`${active === "Science Fiction" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
-            "Sci-Fi & Fantasy"
+            Science Fiction
           </button>
+
           <button
-            onClick={() => filterSeries("Comedy")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Comedy");
+              filterSeries("Comedy");
+            }}
+            className={`${active === "Comedy" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             COMEDY
           </button>
+
           <button
-            onClick={() => filterSeries("Crime")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Crime");
+              filterSeries("Crime");
+            }}
+            className={`${active === "Crime" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             CRIME
           </button>
+
           <button
-            onClick={() => filterSeries("Fantasy")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Fantasy");
+              filterSeries("Fantasy");
+            }}
+            className={`${active === "Fantasy" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             FANTASY
           </button>
+
           <button
-            onClick={() => filterSeries("Mystery")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Mystery");
+              filterSeries("Mystery");
+            }}
+            className={`${active === "Mystery" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             MYSTERY
           </button>
+
           <button
-            onClick={() => filterSeries("Romance")}
-            className="rounded-full bg-black text-[#969da9] border border-white/15 px-6 py-2.5 text-[9px] font-bold tracking-wider hover:bg-red-600 hover:text-white transition-all cursor-pointer"
+            onClick={() => {
+              setActive("Romance");
+              filterSeries("Romance");
+            }}
+            className={`${active === "Romance" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ROMANCE
           </button>
