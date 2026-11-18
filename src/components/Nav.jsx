@@ -118,120 +118,68 @@ const Nav = () => {
     { label: "Series", to: "/series" },
     { label: "ContactUs", to: "/contact" },
   ];
+
+  const themeButton = (
+    <Button
+      isIconOnly
+      variant="flat"
+      size="sm"
+      aria-label="Toggle theme"
+      onPress={() => setTheme(() => (theme === "light" ? "dark" : "light"))}
+      className="w-10 min-w-10 h-10 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700 rounded-full"
+    >
+      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+    </Button>
+  );
+
+  const searchTypeButton = (
+    <Button
+      variant="flat"
+      onClick={toggleSearch}
+      className="bg-zinc-800 text-white text-xs font-semibold h-10 px-5 rounded-full"
+    >
+      {searchTitle === "movie" ? "🎬 Movie" : "📺 Series"}
+    </Button>
+  );
+
+  const searchButton = (
+    <Button
+      onClick={handleSearch}
+      className="h-10 px-6 rounded-full font-semibold bg-sky-500 text-white hover:bg-sky-600"
+    >
+      Search
+    </Button>
+  );
+
   return (
-    <nav className="sticky top-0 z-50 flex flex-wrap items-center justify-between py-6 px-4 lg:px-10 bg-[#090b10] backdrop-blur-md border-b border-zinc-800">
-      <Link to="/" className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-[10px_3px] -rotate-6 bg-red-600 text-white shadow-md shadow-red-600/30 grid place-items-center">
-          <FilmIcon />
-        </div>
-        <p className="text-xl font-bold tracking-tight text-white">
-          Cinema<span className="text-red-600">4</span>You
-        </p>
-      </Link>
+    <nav className="sticky top-0 z-50 w-full bg-[#090b10]/95 backdrop-blur-xl border-b border-zinc-800">
+      <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-10">
+        {/* Main Navbar */}
+        <div className="flex flex-wrap items-center justify-between gap-y-4 py-4 lg:py-5">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 shrink-0">
+            <div className="w-10 h-10 rounded-[10px_3px] -rotate-6 bg-red-600 text-white shadow-md shadow-red-600/30 grid place-items-center">
+              <FilmIcon />
+            </div>
 
-      <ul className="hidden lg:flex items-center gap-8">
-        {navLinks.map((item) => (
-          <li key={item.label}>
-            <NavLink
-              to={item.to}
-              className="text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
-            >
-              {item.label}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+            <p className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+              Cinema<span className="text-red-600">4</span>You
+            </p>
+          </Link>
 
-      <div className="relative group flex items-center gap-3">
-        <div className="hidden lg:flex w-56 py-2 px-2.5 text-sm rounded-4xl bg-[#1f2125] border-[0.5px] border-[#606060] text-white overflow-hidden justify-start items-center gap-3">
-          <SearchIcon className="w-4 h-4 text-[#ffffff82]" />
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={
-              searchTitle === "movie" ? "Search movies..." : "Search series..."
-            }
-            className="border-0 outline-0 w-auto bg-transparent text-white"
-          />
-        </div>
-
-        {/* Dropdown */}
-        <div
-          className="
-      hidden
-      group-has-[input:not(:placeholder-shown)]:block
-      absolute top-full left-0 z-50 mt-3
-      w-full max-h-62.5
-      overflow-y-auto
-      rounded-lg border border-cyan-400/60
-      bg-[#202428] p-1
-      shadow-2xl
-    "
-        >
-          {searchTitle === "movie"
-            ? searchResults.map((search) => (
-                <Link
-                  to={`/movies/${search.id}`}
-                  key={search.id}
-                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-                >
-                  {search.original_title}
-                </Link>
-              ))
-            : searchResults.map((search) => (
-                <Link
-                  to={`/series/${search.id}`}
-                  key={search.id}
-                  className="block px-4 py-2 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors duration-150 border-b border-gray-700/50 last:border-b-0"
-                >
-                  {search.name}
-                </Link>
-              ))}
-        </div>
-
-        <Button onClick={handleSearch}>Search</Button>
-
-        <Button
-          variant="flat"
-          onClick={toggleSearch}
-          className="bg-zinc-800 text-white text-xs"
-        >
-          {searchTitle === "movie" ? "🎬 Movie" : "📺 Series"}
-        </Button>
-
-        <Button
-          isIconOnly
-          variant="flat"
-          size="sm"
-          aria-label="Toggle theme"
-          onPress={() => setTheme(() => (theme === "light" ? "dark" : "light"))}
-          className="w-8.75 h-8.75 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700"
-        >
-          {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-        </Button>
-
-        <Button
-          isIconOnly
-          variant="flat"
-          size="sm"
-          aria-label="Toggle mobile menu"
-          onPress={() => setIsMenuOpen((prev) => !prev)}
-          className="lg:hidden w-8.75 h-8.75 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700"
-        >
-          {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
-        </Button>
-      </div>
-
-      {isMenuOpen && (
-        <div className="w-full flex lg:hidden flex-col items-start gap-4 pt-6 mt-4 border-t border-zinc-800">
-          <ul className="flex flex-col items-start gap-4 w-full">
+          {/* Desktop Links */}
+          <ul className="hidden lg:flex items-center gap-7 xl:gap-9">
             {navLinks.map((item) => (
-              <li key={item.label} className="">
+              <li key={item.label}>
                 <NavLink
                   to={item.to}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block text-sm font-medium text-zinc-400 transition-colors duration-200 hover:text-white"
+                  className={({ isActive }) =>
+                    `relative text-sm font-medium transition-colors duration-200 hover:text-white ${
+                      isActive
+                        ? "text-white after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
+                        : "text-zinc-400"
+                    }`
+                  }
                 >
                   {item.label}
                 </NavLink>
@@ -239,16 +187,164 @@ const Nav = () => {
             ))}
           </ul>
 
-          <div className="w-full max-w-xs py-2 px-2.5 text-sm rounded-4xl bg-[#1f2125] border-[0.5px] border-[#606060] text-white overflow-hidden flex justify-start items-center gap-3 mt-1">
-            <SearchIcon className="w-4 h-4 text-[#ffffff82]" />
-            <input
-              type="text"
-              placeholder="Search titles..."
-              className="border-0 outline-0 w-full bg-transparent"
-            />
+          {/* Desktop Search & Actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            <div className="relative group flex items-center">
+              <div className="flex w-52 xl:w-60 py-2.5 px-3 text-sm rounded-full bg-[#1f2125] border border-[#606060] text-white items-center gap-3">
+                <SearchIcon className="w-4 h-4 shrink-0 text-zinc-400" />
+
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder={
+                    searchTitle === "movie"
+                      ? "Search movies..."
+                      : "Search series..."
+                  }
+                  className="border-0 outline-0 w-full min-w-0 bg-transparent text-white placeholder:text-zinc-500"
+                />
+              </div>
+
+              {/* Search Dropdown */}
+              <div
+                className="
+                  hidden
+                  group-has-[input:not(:placeholder-shown)]:block
+                  absolute top-full left-0 z-50 mt-3
+                  w-full max-h-62.5 overflow-y-auto
+                  rounded-xl border border-cyan-400/60
+                  bg-[#202428] p-1 shadow-2xl
+                "
+              >
+                {searchTitle === "movie"
+                  ? searchResults.map((search) => (
+                      <Link
+                        to={`/movies/${search.id}`}
+                        key={search.id}
+                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                      >
+                        {search.original_title}
+                      </Link>
+                    ))
+                  : searchResults.map((search) => (
+                      <Link
+                        to={`/series/${search.id}`}
+                        key={search.id}
+                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                      >
+                        {search.name}
+                      </Link>
+                    ))}
+              </div>
+            </div>
+
+            {searchButton}
+            {searchTypeButton}
+            {themeButton}
           </div>
+
+          {/* Mobile Actions */}
+          <div className="flex lg:hidden items-center gap-2">
+            {themeButton}
+
+            <Button
+              isIconOnly
+              variant="flat"
+              size="sm"
+              aria-label="Toggle mobile menu"
+              onPress={() => setIsMenuOpen((prev) => !prev)}
+              className="w-10 min-w-10 h-10 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700 rounded-full"
+            >
+              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </Button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="w-full lg:hidden flex flex-col gap-6 pt-5 pb-3 mt-2 border-t border-zinc-800">
+              {/* Mobile Links */}
+              <ul className="flex flex-col gap-1">
+                {navLinks.map((item) => (
+                  <li key={item.label}>
+                    <NavLink
+                      to={item.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={({ isActive }) =>
+                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          isActive
+                            ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
+                            : "text-zinc-400 hover:text-white hover:bg-white/5"
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Mobile Search */}
+              <div className="flex flex-col gap-3 border-t border-zinc-800 pt-5">
+                <div className="relative group w-full">
+                  <div className="flex items-center gap-3 w-full px-4 py-3 rounded-full bg-[#1f2125] border border-zinc-700">
+                    <SearchIcon className="w-5 h-5 shrink-0 text-zinc-400" />
+
+                    <input
+                      type="text"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder={
+                        searchTitle === "movie"
+                          ? "Search movies..."
+                          : "Search series..."
+                      }
+                      className="w-full min-w-0 bg-transparent outline-none border-0 text-sm text-white placeholder:text-zinc-500"
+                    />
+                    {/* Search Mobile Dropdown */}
+                    <div
+                      className="
+                  hidden
+                  group-has-[input:not(:placeholder-shown)]:block
+                  absolute top-full left-0 z-50 mt-3
+                  w-full max-h-62.5 overflow-y-auto
+                  rounded-xl border border-cyan-400/60
+                  bg-[#202428] p-1 shadow-2xl
+                "
+                    >
+                      {searchTitle === "movie"
+                        ? searchResults.map((search) => (
+                            <Link
+                              to={`/movies/${search.id}`}
+                              key={search.id}
+                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                            >
+                              {search.original_title}
+                            </Link>
+                          ))
+                        : searchResults.map((search) => (
+                            <Link
+                              to={`/series/${search.id}`}
+                              key={search.id}
+                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                            >
+                              {search.name}
+                            </Link>
+                          ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 w-full">
+                  <div className="flex-1">{searchButton}</div>
+
+                  <div className="flex-1">{searchTypeButton}</div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </nav>
   );
 };

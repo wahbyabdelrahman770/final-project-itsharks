@@ -11,6 +11,7 @@ const MovieContext = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
+  const [active, setActive] = useState("ALL");
 
   const token = import.meta.env.VITE_TOKEN;
 
@@ -113,16 +114,24 @@ const MovieContext = ({ children }) => {
   };
 
   const filterMovies = (name) => {
+    setActive(name);
+
     setLoading(true);
     setError(false);
+
     try {
-      const genreID = getMovieGenreID(name);
+      if (name === "ALL") {
+        setMovies(allMovies);
+      } else {
+        const genreID = getMovieGenreID(name);
 
-      const filtered = allMovies.filter((movie) =>
-        movie.genre_ids.includes(genreID),
-      );
+        const filtered = allMovies.filter((movie) =>
+          movie.genre_ids.includes(genreID),
+        );
 
-      setMovies(filtered);
+        setMovies(filtered);
+      }
+
       setLoading(false);
       setError(false);
     } catch (err) {
@@ -131,7 +140,6 @@ const MovieContext = ({ children }) => {
       setError(true);
     }
   };
-
   const movieLength = movies.length;
 
   const movieDetails = async (movieID) => {
@@ -155,7 +163,9 @@ const MovieContext = ({ children }) => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
-
+  useEffect(() => {
+    filterMovies(active);
+  }, [allMovies]);
   useEffect(() => {
     if (input.trim() !== "") {
       searchMovies();
@@ -185,6 +195,8 @@ const MovieContext = ({ children }) => {
         loading,
         setInput,
         error,
+        setActive,
+        active,
       }}
     >
       {children}
