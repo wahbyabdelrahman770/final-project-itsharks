@@ -3,11 +3,11 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getMovieGenre } from "../../utils/genres";
 
-const Card = ({ movie: { id, poster_path, title, vote_average, release_date, genre_ids } }) => {
+const Card = ({ className, movie: { id, poster_path, title, vote_average, release_date, genre_ids } }) => {
     return (
         <Link
             to={`/movies/${id}`}
-            className="group block h-full cursor-pointer"
+            className={`group block h-full cursor-pointer ${className}`}
         >
             {/* Poster */}
             <div className="relative mb-4 aspect-2/3 overflow-hidden bg-gray-900">

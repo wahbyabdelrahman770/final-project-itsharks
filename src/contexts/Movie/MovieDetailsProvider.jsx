@@ -41,6 +41,7 @@ const MovieDetailsProvider = ({ children }) => {
     images: { backdrops = [], posters = [] } = {},
     credits: { cast = [], crew = [] } = {},
     recommendations: { results: recommended = [] } = {},
+    belongs_to_collection,
     release_dates,
     videos,
     production_companies
@@ -93,11 +94,14 @@ const MovieDetailsProvider = ({ children }) => {
   const revenue = `$${formatUSD(+movieDetails?.revenue)}`;
   const budget = `$${formatUSD(+movieDetails?.budget)}`;
 
+  const collectionID = belongs_to_collection?.id;
+
   return (
     <MovieDetailsContext.Provider
       value={{
         movieDetails,
         movieID,
+        collectionID,
         cast,
         crew,
         videos,
