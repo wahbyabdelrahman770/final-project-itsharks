@@ -18,7 +18,9 @@ import Footer from "./components/Footer";
 
 import { HomeProvider } from "./contexts/Home/HomeContext";
 import NavContext from "./contexts/Navbar/Navbar";
-import FullCast from "./pages/fullCast/FullCast";
+import MovieFullCast from "./pages/fullCast/MovieFullCast";
+import SeriesDetailsProvider from "./contexts/Series/SeriesDetailsProvider";
+import SeriesFullCast from "./pages/fullCast/SeriesFullCast";
 
 const App = () => {
     return (
@@ -40,12 +42,19 @@ const App = () => {
                             }
                             >
                                 <Route index element={<MoviesDeatails />} />
-                                <Route path="credits" element={<FullCast />} />
+                                <Route path="credits" element={<MovieFullCast />} />
                             </Route>
 
                             <Route path="/series" element={<Series />} />
 
-                            <Route path="/series/:seriesID" element={<SeriesDetails />} />
+                            <Route path="/series/:seriesID" element={
+                                <SeriesDetailsProvider>
+                                    <Outlet />
+                                </SeriesDetailsProvider>
+                            }>
+                                <Route index element={<SeriesDetails />} />
+                                <Route path="credits" element={<SeriesFullCast />} />
+                            </Route>
 
                             <Route path="/contact" element={<Contact />} />
 

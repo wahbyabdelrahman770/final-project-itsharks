@@ -86,7 +86,7 @@ const Series = () => {
           <button
             onClick={() => {
               setActive("ALL");
-              getMovies();
+              getSeries();
             }}
             className={`${active === "ALL" ? "bg-red-600 text-white shadow-lg shadow-red-600/30" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >

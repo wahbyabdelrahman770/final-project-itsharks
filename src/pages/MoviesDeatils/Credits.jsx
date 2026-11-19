@@ -7,8 +7,8 @@ export const ActorCard = ({ imgSrc, actorName, actorRole, className }) => {
             <img src={imgSrc} loading="lazy"
                 className="w-[70%] md:w-full h-[stretch]"
             />
-            <p className="text-white">{actorName}</p>
-            <p className="text-[12px] text-mauve-500">{actorRole}</p>
+            <p className="text-white text-center">{actorName}</p>
+            <p className="text-[12px] text-center text-mauve-500">{actorRole}</p>
         </div>
     );
 };
@@ -31,9 +31,9 @@ const Credits = () => {
             </div>
 
             <div className="mt-4 md:grid md:grid-cols-6 md:gap-4">
-                {firstThreeCast?.map(person => <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.character} />)}
+                {firstThreeCast?.map(person => person && <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.character} />)}
 
-                {firstThreeCrew?.map(person => <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.job} />)}
+                {firstThreeCrew?.map(person => person && <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.job} />)}
             </div>
         </div>
     );
