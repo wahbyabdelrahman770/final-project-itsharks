@@ -138,7 +138,7 @@ const Nav = () => {
       onClick={toggleSearch}
       className="bg-zinc-800 text-white text-xs font-semibold h-10 px-5 rounded-full"
     >
-      {searchTitle === "movie" ? "🎬 Movie" : "📺 Series"}
+      {searchTitle === "tv" ? "🎬 Movie" : "📺 Series"}
     </Button>
   );
 
@@ -174,10 +174,9 @@ const Nav = () => {
                 <NavLink
                   to={item.to}
                   className={({ isActive }) =>
-                    `relative text-sm font-medium transition-colors duration-200 hover:text-white ${
-                      isActive
-                        ? "text-white after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
-                        : "text-zinc-400"
+                    `relative text-sm font-medium transition-colors duration-200 hover:text-white ${isActive
+                      ? "text-white after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
+                      : "text-zinc-400"
                     }`
                   }
                 >
@@ -194,7 +193,7 @@ const Nav = () => {
                 <SearchIcon className="w-4 h-4 shrink-0 text-zinc-400" />
 
                 <input
-                  type="text"
+                  type="search"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={
@@ -219,23 +218,23 @@ const Nav = () => {
               >
                 {searchTitle === "movie"
                   ? searchResults.map((search) => (
-                      <Link
-                        to={`/movies/${search.id}`}
-                        key={search.id}
-                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                      >
-                        {search.original_title}
-                      </Link>
-                    ))
+                    <Link
+                      to={`/movies/${search.id}`}
+                      key={search.id}
+                      className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                    >
+                      {search.original_title}
+                    </Link>
+                  ))
                   : searchResults.map((search) => (
-                      <Link
-                        to={`/series/${search.id}`}
-                        key={search.id}
-                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                      >
-                        {search.name}
-                      </Link>
-                    ))}
+                    <Link
+                      to={`/series/${search.id}`}
+                      key={search.id}
+                      className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                    >
+                      {search.name}
+                    </Link>
+                  ))}
               </div>
             </div>
 
@@ -271,10 +270,9 @@ const Nav = () => {
                       to={item.to}
                       onClick={() => setIsMenuOpen(false)}
                       className={({ isActive }) =>
-                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-                          isActive
-                            ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
-                            : "text-zinc-400 hover:text-white hover:bg-white/5"
+                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive
+                          ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
+                          : "text-zinc-400 hover:text-white hover:bg-white/5"
                         }`
                       }
                     >
@@ -291,7 +289,7 @@ const Nav = () => {
                     <SearchIcon className="w-5 h-5 shrink-0 text-zinc-400" />
 
                     <input
-                      type="text"
+                      type="search"
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       placeholder={
@@ -314,23 +312,23 @@ const Nav = () => {
                     >
                       {searchTitle === "movie"
                         ? searchResults.map((search) => (
-                            <Link
-                              to={`/movies/${search.id}`}
-                              key={search.id}
-                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                            >
-                              {search.original_title}
-                            </Link>
-                          ))
+                          <Link
+                            to={`/movies/${search.id}`}
+                            key={search.id}
+                            className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                          >
+                            {search.original_title}
+                          </Link>
+                        ))
                         : searchResults.map((search) => (
-                            <Link
-                              to={`/series/${search.id}`}
-                              key={search.id}
-                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                            >
-                              {search.name}
-                            </Link>
-                          ))}
+                          <Link
+                            to={`/series/${search.id}`}
+                            key={search.id}
+                            className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                          >
+                            {search.name}
+                          </Link>
+                        ))}
                     </div>
                   </div>
                 </div>

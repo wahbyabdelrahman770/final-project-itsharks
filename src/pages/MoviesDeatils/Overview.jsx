@@ -1,18 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
-
-const PlayIcon = ({ className, fill }) => {
-    return (
-        <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className={className}
-            fill={fill}
-        >
-            <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11-6.86a1 1 0 0 0 0-1.7l-11-6.86A1 1 0 0 0 8 5.14z" />
-        </svg>
-    );
-};
+import PlayIcon from "../../components/PlayIcon";
 
 const Overview = () => {
     const { movieDetails, background, poster, release_date, rated, rating, trailerLink } = useMovieDetails();
@@ -31,7 +19,7 @@ const Overview = () => {
                         <p className="text-[#d8d9dc] text-[14px] font-semibold">FEATURED FILM</p>
                     </div>
 
-                    <h1 className="w-3/4 my-3 text-6xl text-white font-serif">{movieDetails?.title}</h1>
+                    <h1 className="my-3 text-[clamp(50px,5vw,95px)] text-white font-serif">{movieDetails?.title}</h1>
                     <p className="text-[#7f858f] uppercase text-[14px] mb-2">{movieDetails?.original_title}</p>
                     {movieDetails?.tagline && <p className="my-6 font-serif text-[#c0c4cb] text-[17px] italic">{`"${movieDetails.tagline}"`}</p>}
 

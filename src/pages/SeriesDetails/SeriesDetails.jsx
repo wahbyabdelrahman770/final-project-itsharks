@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
-import { useSeries } from "../../contexts/Series/SeriesContext";
-import { useParams } from "react-router-dom";
+import Loading from "../../components/Loading";
+import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
+import Credits from "./Credits";
+import Overview from "./Overview";
+import ProductionDetails from "./ProductionDetails";
+import Recommendations from "./Recommendations";
 
 const SeriesDetails = () => {
-  const { seriesID } = useParams();
-  const { seriesDetails } = useSeries();
-
-  useEffect(() => {
-    seriesDetails(seriesID);
-  }, []);
-  return <div>SeriesDetails</div>;
+	const { loading } = useSeriesDetails();
+	if (loading) {
+		return <Loading />;
+	}
+	return (
+		<div className="w-full">
+			<Overview />
+			<ProductionDetails />
+			<Credits />
+			<Recommendations />
+		</div>
+	);
 };
 
 export default SeriesDetails;
