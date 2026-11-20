@@ -21,6 +21,11 @@ import NavContext from "./contexts/Navbar/Navbar";
 import MovieFullCast from "./pages/fullCast/MovieFullCast";
 import SeriesDetailsProvider from "./contexts/Series/SeriesDetailsProvider";
 import SeriesFullCast from "./pages/fullCast/SeriesFullCast";
+import Season from "./pages/SeriesSeason/Season";
+import ScrollToTopButton from "./components/ScrollToTopButton";
+import SeasonFullCast from "./pages/fullCast/SeasonFullCast";
+import SeriesSeasonProvider from "./contexts/Series/SeriesSeasonProvider";
+import SeriesAllSeasons from './pages/SeriesAllSeasons/SeriesAllSeasons';
 
 const App = () => {
     return (
@@ -49,11 +54,16 @@ const App = () => {
 
                             <Route path="/series/:seriesID" element={
                                 <SeriesDetailsProvider>
-                                    <Outlet />
+                                    <SeriesSeasonProvider>
+                                        <Outlet />
+                                    </SeriesSeasonProvider>
                                 </SeriesDetailsProvider>
                             }>
                                 <Route index element={<SeriesDetails />} />
                                 <Route path="credits" element={<SeriesFullCast />} />
+                                <Route path="seasons" element={<SeriesAllSeasons />} />
+                                <Route path="season/:seasonNumber" element={<Season />} />
+                                <Route path="season/:seasonNumber/credits" element={<SeasonFullCast />} />
                             </Route>
 
                             <Route path="/contact" element={<Contact />} />
@@ -62,6 +72,7 @@ const App = () => {
                         </Routes>
 
                         <Footer />
+                        <ScrollToTopButton />
                     </SeriesContext>
                 </MovieContext>
             </HomeProvider>

@@ -34,7 +34,7 @@ const SeriesDetailsProvider = ({ children }) => {
         setLoading(false);
     }
 
-    const { content_ratings, production_companies, credits: { cast = [], crew = [] } = {}, recommendations } = seriesDetails;
+    const { name, content_ratings, production_companies, credits: { cast = [], crew = [] } = {}, recommendations, seasons } = seriesDetails;
 
     const background = `https://media.themoviedb.org/t/p/original${seriesDetails?.backdrop_path}`;
     const poster = `https://media.themoviedb.org/t/p/original${seriesDetails?.poster_path}`;
@@ -59,7 +59,7 @@ const SeriesDetailsProvider = ({ children }) => {
     }, [seriesID]);
 
     return (
-        <SeriesDetailsContext.Provider value={{ seriesID, seriesDetails, loading, background, poster, firstAirDate, rating, rated, formattedFirstAirDate, formattedLastAirDate, language, production_companies, cast, crew, recommendedSeries }}>
+        <SeriesDetailsContext.Provider value={{ seriesID, seriesDetails, name, loading, background, poster, firstAirDate, rating, rated, formattedFirstAirDate, formattedLastAirDate, language, production_companies, cast, crew, recommendedSeries, seasons }}>
             {children}
         </SeriesDetailsContext.Provider>
     );

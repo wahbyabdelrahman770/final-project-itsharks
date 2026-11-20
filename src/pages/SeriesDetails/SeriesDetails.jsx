@@ -4,6 +4,7 @@ import Credits from "./Credits";
 import Overview from "./Overview";
 import ProductionDetails from "./ProductionDetails";
 import Recommendations from "./Recommendations";
+import Seasons from "./Seasons";
 
 const SeriesDetails = () => {
 	const { loading } = useSeriesDetails();
@@ -15,6 +16,7 @@ const SeriesDetails = () => {
 			<Overview />
 			<ProductionDetails />
 			<Credits />
+			<Seasons />
 			<Recommendations />
 		</div>
 	);
