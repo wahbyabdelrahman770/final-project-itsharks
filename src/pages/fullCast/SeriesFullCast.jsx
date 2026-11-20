@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ActorCard } from "../MoviesDeatils/Credits";
-import { FaArrowUpLong } from "react-icons/fa6";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
 
 const SeriesFullCast = () => {
@@ -20,8 +19,6 @@ const SeriesFullCast = () => {
                     {crew.map(person => <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.job} />)}
                 </div>
             </div>
-
-            <button className="fixed bottom-[5%] right-[5%] w-10 h-10 bg-red-500 border-0 rounded-[50%] text-white cursor-pointer flex justify-center items-center" onClick={() => { scrollTo({ top: 0, behavior: "smooth" }); }}><FaArrowUpLong /></button>
         </div>
     );
 };
