@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa";
+import { FaPlay, FaStar } from "react-icons/fa";
 
 export const Season = ({ to, season: { name, season_number, poster_path, air_date, vote_average, episode_count } }) => {
     return (
@@ -27,8 +26,7 @@ export const Season = ({ to, season: { name, season_number, poster_path, air_dat
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100">
                     <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600">
-                        <FaArrowRightLong className="text-lg" />
-                        {/* <span className="text-4xl">→</span> */}
+                        <FaPlay className="text-2xl" />
                     </div>
                 </div>
             </div>

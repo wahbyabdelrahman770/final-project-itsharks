@@ -26,6 +26,7 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import SeasonFullCast from "./pages/fullCast/SeasonFullCast";
 import SeriesSeasonProvider from "./contexts/Series/SeriesSeasonProvider";
 import SeriesAllSeasons from './pages/SeriesAllSeasons/SeriesAllSeasons';
+import MovieMedia from "./pages/MovieMedia/MovieMedia";
 
 const App = () => {
     return (
@@ -48,6 +49,7 @@ const App = () => {
                             >
                                 <Route index element={<MoviesDeatails />} />
                                 <Route path="credits" element={<MovieFullCast />} />
+                                <Route path="media" element={<MovieMedia />} />
                             </Route>
 
                             <Route path="/series" element={<Series />} />
