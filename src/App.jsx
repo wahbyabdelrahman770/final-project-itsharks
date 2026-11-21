@@ -25,7 +25,9 @@ import Season from "./pages/SeriesSeason/Season";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import SeasonFullCast from "./pages/fullCast/SeasonFullCast";
 import SeriesSeasonProvider from "./contexts/Series/SeriesSeasonProvider";
-import SeriesAllSeasons from "./pages/SeriesAllSeasons/SeriesAllSeasons";
+import SeriesAllSeasons from './pages/SeriesAllSeasons/SeriesAllSeasons';
+import MovieMedia from "./pages/MovieMedia/MovieMedia";
+
 
 const App = () => {
   return (

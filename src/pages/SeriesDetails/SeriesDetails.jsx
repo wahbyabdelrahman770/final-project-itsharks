@@ -1,4 +1,4 @@
-import Loading from "../../components/Loading";
+import DetailsLoading from "../../components/DetailsLoading";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
 import Credits from "./Credits";
 import Overview from "./Overview";
@@ -9,7 +9,7 @@ import Seasons from "./Seasons";
 const SeriesDetails = () => {
 	const { loading } = useSeriesDetails();
 	if (loading) {
-		return <Loading />;
+		return <DetailsLoading />;
 	}
 	return (
 		<div className="w-full">
