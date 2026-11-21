@@ -7,8 +7,6 @@ import { useTheme } from "../../contexts/ThemeProvider";
 
 const Home = () => {
   const { theme } = useTheme();
-  console.log(theme);
-
   return (
     <div>
       <HeroCarousel />
