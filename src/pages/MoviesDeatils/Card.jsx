@@ -1,7 +1,8 @@
-import { FaStar } from "react-icons/fa";
+import { FaPlay, FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getMovieGenre } from "../../utils/genres";
+import PlayIcon from "../../components/PlayIcon";
 
 const Card = ({ className, movie: { id, poster_path, title, vote_average, release_date, genre_ids } }) => {
     return (
@@ -27,8 +28,7 @@ const Card = ({ className, movie: { id, poster_path, title, vote_average, releas
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100">
                     <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600">
-                        <FaArrowRightLong className="text-lg" />
-                        {/* <span className="text-4xl">→</span> */}
+                        <FaPlay className="text-2xl" />
                     </div>
                 </div>
             </div>

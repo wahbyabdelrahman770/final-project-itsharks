@@ -38,7 +38,7 @@ const MovieDetailsProvider = ({ children }) => {
   }, [movieID]);
 
   const {
-    images: { backdrops = [], posters = [] } = {},
+    images: { backdrops = [], posters = [], logos = [] } = {},
     credits: { cast = [], crew = [] } = {},
     recommendations: { results: recommended = [] } = {},
     belongs_to_collection,
@@ -80,7 +80,7 @@ const MovieDetailsProvider = ({ children }) => {
       item.name.includes("Trailer") ||
       item.name.includes("4K"),
   )?.key;
-  const trailerLink = `https://www.youtube.com/watch?v=${trailerKey}`;
+  const trailerLink = `https://www.youtube.com/embed/${trailerKey}`;
 
   const director = crew?.find((person) => person.job == "Director")?.name;
 
@@ -101,6 +101,9 @@ const MovieDetailsProvider = ({ children }) => {
       value={{
         movieDetails,
         movieID,
+        backdrops,
+        posters,
+        logos,
         collectionID,
         cast,
         crew,
