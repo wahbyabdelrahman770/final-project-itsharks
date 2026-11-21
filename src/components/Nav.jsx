@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { Button } from "@heroui/react";
+import { Button, useTheme } from "@heroui/react";
 import { useNav } from "../contexts/Navbar/Navbar";
 
 const FilmIcon = () => (
@@ -100,8 +100,8 @@ const CloseIcon = () => (
 
 const Nav = () => {
   const {
-    theme,
-    setTheme,
+    // theme,
+    // setTheme,
     isMenuOpen,
     setIsMenuOpen,
     setInput,
@@ -119,14 +119,16 @@ const Nav = () => {
     { label: "ContactUs", to: "/contact" },
   ];
 
+  const { theme, setTheme } = useTheme();
+
   const themeButton = (
     <Button
       isIconOnly
       variant="flat"
       size="sm"
       aria-label="Toggle theme"
-      onPress={() => setTheme(() => (theme === "light" ? "dark" : "light"))}
-      className="w-10 min-w-10 h-10 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700 rounded-full"
+      onPress={() => setTheme(theme === "light" ? "dark" : "light")}
+      className=" w-10 min-w-10 h-10 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700 rounded-full"
     >
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </Button>
@@ -174,9 +176,10 @@ const Nav = () => {
                 <NavLink
                   to={item.to}
                   className={({ isActive }) =>
-                    `relative text-sm font-medium transition-colors duration-200 hover:text-white ${isActive
-                      ? "text-white after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
-                      : "text-zinc-400"
+                    `relative text-sm font-medium transition-colors duration-200 hover:text-white ${
+                      isActive
+                        ? "text-white after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
+                        : "text-zinc-400"
                     }`
                   }
                 >
@@ -218,23 +221,25 @@ const Nav = () => {
               >
                 {searchTitle === "movie"
                   ? searchResults.map((search) => (
-                    <Link
-                      to={`/movies/${search.id}`}
-                      key={search.id}
-                      className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                    >
-                      {search.original_title}
-                    </Link>
-                  ))
+                      <Link
+                        to={`/movies/${search.id}`}
+                        key={search.id}
+                        onClick={() => setInput("")}
+                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                      >
+                        {search.original_title}
+                      </Link>
+                    ))
                   : searchResults.map((search) => (
-                    <Link
-                      to={`/series/${search.id}`}
-                      key={search.id}
-                      className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                    >
-                      {search.name}
-                    </Link>
-                  ))}
+                      <Link
+                        to={`/series/${search.id}`}
+                        key={search.id}
+                        onClick={() => setInput("")}
+                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                      >
+                        {search.name}
+                      </Link>
+                    ))}
               </div>
             </div>
 
@@ -270,9 +275,10 @@ const Nav = () => {
                       to={item.to}
                       onClick={() => setIsMenuOpen(false)}
                       className={({ isActive }) =>
-                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive
-                          ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
-                          : "text-zinc-400 hover:text-white hover:bg-white/5"
+                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          isActive
+                            ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
+                            : "text-zinc-400 hover:text-white hover:bg-white/5"
                         }`
                       }
                     >
@@ -312,23 +318,31 @@ const Nav = () => {
                     >
                       {searchTitle === "movie"
                         ? searchResults.map((search) => (
-                          <Link
-                            to={`/movies/${search.id}`}
-                            key={search.id}
-                            className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                          >
-                            {search.original_title}
-                          </Link>
-                        ))
+                            <Link
+                              to={`/movies/${search.id}`}
+                              key={search.id}
+                              onClick={() => {
+                                setInput("");
+                                setIsMenuOpen(false);
+                              }}
+                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                            >
+                              {search.original_title}
+                            </Link>
+                          ))
                         : searchResults.map((search) => (
-                          <Link
-                            to={`/series/${search.id}`}
-                            key={search.id}
-                            className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                          >
-                            {search.name}
-                          </Link>
-                        ))}
+                            <Link
+                              to={`/series/${search.id}`}
+                              key={search.id}
+                              onClick={() => {
+                                setInput("");
+                                setIsMenuOpen(false);
+                              }}
+                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                            >
+                              {search.name}
+                            </Link>
+                          ))}
                     </div>
                   </div>
                 </div>
