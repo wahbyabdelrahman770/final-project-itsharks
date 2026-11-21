@@ -10,7 +10,7 @@ const Home = () => {
   console.log(theme);
 
   return (
-    <div className={`${theme === "light" ? "bg-amber-600" : "bg-green-600"}`}>
+    <div>
       <HeroCarousel />
       <PopularMovies />
       <TrendMovie />
