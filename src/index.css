@@ -20,3 +20,9 @@ body {
     border-bottom: 2px solid red;
     filter: brightness(2);
 }
+
+.activeMedia {
+    background-color: red;
+    padding: 8px;
+    border-radius: 12px;
+}
