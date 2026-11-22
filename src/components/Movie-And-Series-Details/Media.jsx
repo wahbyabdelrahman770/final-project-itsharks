@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { Modal, Button } from "@heroui/react";
+import { IframeWithLoading, ImageWithLoading } from "../Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
 
-const Media = ({ backdrops, videos }) => {
+const Media = ({ backdrops, posters, videos }) => {
   const first3Videos = videos.slice(0, 3);
+  const shownMedia = backdrops.length !== 0 ? backdrops.slice(0, 3) : posters.length !== 0 ? posters.slice(0, 2) : null;
 
   return (
     <div className="w-[93%] mx-auto mb-12">
@@ -24,10 +26,10 @@ const Media = ({ backdrops, videos }) => {
         </section>
       </div>
 
-      <div className="w-full mb-8 flex flex-col md:flex-row gap-2">
-        <div className="max-w-2/3 mx-auto overflow-hidden relative">
-          <img
-            src={`https://media.themoviedb.org/t/p/original${backdrops[0]?.file_path}`}
+      {shownMedia && <div className="w-full mb-8 flex flex-col md:flex-row gap-2">
+        <div className="max-w-full md:max-w-2/3 mx-auto overflow-hidden relative">
+          <ImageWithLoading
+            src={`https://media.themoviedb.org/t/p/original${shownMedia[0]?.file_path}`}
             className="w-full duration-300 hover:scale-105 active:scale-105"
             alt=""
           />
@@ -39,8 +41,8 @@ const Media = ({ backdrops, videos }) => {
               <Modal.Container size="cover">
                 <Modal.Dialog className="bg-[#000000e6] flex justify-center items-center rounded-none">
                   <Modal.CloseTrigger />
-                  <img
-                    src={`https://media.themoviedb.org/t/p/original${backdrops[0]?.file_path}`}
+                  <ImageWithLoading
+                    src={`https://media.themoviedb.org/t/p/original${shownMedia[0]?.file_path}`}
                     className="w-full md:w-3/4"
                     alt=""
                   />
@@ -51,9 +53,9 @@ const Media = ({ backdrops, videos }) => {
         </div>
 
         <div className="w-full md:w-1/3 flex flex-col gap-y-2">
-          <div className="w-2/3 md:w-full mx-auto overflow-hidden relative">
-            <img
-              src={`https://media.themoviedb.org/t/p/original${backdrops[1]?.file_path}`}
+          {shownMedia[1] && <div className="w-full mx-auto overflow-hidden relative">
+            <ImageWithLoading
+              src={`https://media.themoviedb.org/t/p/original${shownMedia[1]?.file_path}`}
               className="w-full duration-300 hover:scale-105 active:scale-105"
               alt=""
             />
@@ -65,8 +67,8 @@ const Media = ({ backdrops, videos }) => {
                 <Modal.Container size="cover">
                   <Modal.Dialog className="bg-[#000000e6] flex justify-center items-center rounded-none">
                     <Modal.CloseTrigger />
-                    <img
-                      src={`https://media.themoviedb.org/t/p/original${backdrops[1]?.file_path}`}
+                    <ImageWithLoading
+                      src={`https://media.themoviedb.org/t/p/original${shownMedia[1]?.file_path}`}
                       className="w-full md:w-3/4"
                       alt=""
                     />
@@ -74,11 +76,11 @@ const Media = ({ backdrops, videos }) => {
                 </Modal.Container>
               </Modal.Backdrop>
             </Modal>
-          </div>
+          </div>}
 
-          <div className="w-2/3 md:w-full mx-auto overflow-hidden relative">
-            <img
-              src={`https://media.themoviedb.org/t/p/original${backdrops[2]?.file_path}`}
+          {shownMedia[2] && <div className="w-full mx-auto overflow-hidden relative">
+            <ImageWithLoading
+              src={`https://media.themoviedb.org/t/p/original${shownMedia[2]?.file_path}`}
               className="w-full duration-300 hover:scale-105 active:scale-105"
               alt=""
             />
@@ -90,8 +92,8 @@ const Media = ({ backdrops, videos }) => {
                 <Modal.Container size="cover">
                   <Modal.Dialog className="bg-[#000000e6] flex justify-center items-center rounded-none">
                     <Modal.CloseTrigger />
-                    <img
-                      src={`https://media.themoviedb.org/t/p/original${backdrops[2]?.file_path}`}
+                    <ImageWithLoading
+                      src={`https://media.themoviedb.org/t/p/original${shownMedia[2]?.file_path}`}
                       className="w-full md:w-3/4"
                       alt=""
                     />
@@ -99,9 +101,9 @@ const Media = ({ backdrops, videos }) => {
                 </Modal.Container>
               </Modal.Backdrop>
             </Modal>
-          </div>
+          </div>}
         </div>
-      </div>
+      </div>}
 
       {videos.length != 0 && (
         <div className="flex flex-col">
@@ -124,12 +126,12 @@ const Media = ({ backdrops, videos }) => {
 
       <div className="mt-3 flex flex-col md:flex-row items-center gap-3">
         {first3Videos.map((video) => (
-          <iframe
+          <IframeWithLoading
             key={video.name}
             src={`https://www.youtube.com/embed/${video.key}`}
             title={video.name}
             className="w-[95%] md:w-1/3 h-62.5"
-          ></iframe>
+          ></IframeWithLoading>
         ))}
       </div>
     </div>

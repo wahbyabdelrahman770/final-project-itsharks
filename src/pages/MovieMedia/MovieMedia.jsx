@@ -19,14 +19,14 @@ const MovieMedia = () => {
   } = useMovieDetails();
   const [activePage, setActivePage] = useState("backdrops");
   return (
-    <div className="w-[96%] mx-auto">
+    <div className="w-[90%] md:w-[96%] mx-auto">
       <Link
         to={`/movies/${movieID}`}
         className="inline-block mt-8 ml-8  uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]"
       >
         ← Back to {movieDetails?.title}
       </Link>
-      <section className="my-8 bg-gray-700 rounded-2xl p-2 flex flex-row justify-around items-center text-lg md:text-xl text-white">
+      <section className="my-8 bg-gray-700 rounded-2xl p-2 flex flex-row justify-around items-center text-sm sm:text-lg md:text-xl text-white">
         <button
           className={`${activePage == "backdrops" && "activeMedia"} cursor-pointer`}
           onClick={() => {

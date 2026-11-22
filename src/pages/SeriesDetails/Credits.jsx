@@ -1,31 +1,15 @@
 import { Link } from "react-router-dom";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
-
-export const ActorCard = ({ imgSrc, actorName, actorRole, className }) => {
-  return (
-    <div
-      className={`w-full flex flex-col items-center md:items-start ${className}`}
-    >
-      <img
-        src={imgSrc}
-        loading="lazy"
-        className="w-[70%] md:w-full h-[stretch]"
-      />
-      <p className=" text-center">{actorName}</p>
-      <p
-        title={actorRole}
-        className="text-[12px] text-center text-mauve-500 overflow-hidden max-h-8"
-      >
-        {actorRole}
-      </p>
-    </div>
-  );
-};
+import ActorCard from "../../components/ActorCard";
 
 const Credits = () => {
   const { cast, crew } = useSeriesDetails();
   const firstThreeCast = [cast[0], cast[1], cast[2]];
   const firstThreeCrew = [crew[0], crew[3], crew[6]];
+
+  if (firstThreeCast.length == 0 && firstThreeCrew.length == 0) {
+    return;
+  }
 
   return (
     <div className="w-[93%] mx-auto mt-8 mb-4">
@@ -40,7 +24,7 @@ const Credits = () => {
           </p>
           <Link
             to="credits"
-            className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]"
+            className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]"
           >
             View Full Cast and Crew →
           </Link>
@@ -53,6 +37,7 @@ const Credits = () => {
             person && (
               <ActorCard
                 key={Math.random()}
+                actorID={person.id}
                 imgSrc={
                   person?.profile_path
                     ? `https://media.themoviedb.org/t/p/original${person?.profile_path}`
@@ -69,6 +54,7 @@ const Credits = () => {
             person && (
               <ActorCard
                 key={Math.random()}
+                actorID={person.id}
                 imgSrc={
                   person?.profile_path
                     ? `https://media.themoviedb.org/t/p/original${person?.profile_path}`

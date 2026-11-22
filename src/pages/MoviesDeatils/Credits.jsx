@@ -1,44 +1,18 @@
 
 import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
-
-// Actor Card
-export const ActorCard = ({
-  actorID,
-  imgSrc,
-  actorName,
-  actorRole,
-  className = "",
-}) => {
-  return (
-    <Link
-      to={`/actor/${actorID}`}
-      className={`group flex w-full cursor-pointer flex-col items-center md:items-start ${className}`}
-    >
-      <img
-        src={imgSrc}
-        alt={actorName || "Cast member"}
-        loading="lazy"
-        className="aspect-3/4 w-[70%] rounded-xl object-cover transition-transform duration-300 group-hover:scale-105 md:w-full"
-      />
-
-      <p className="text-center transition-colors group-hover:text-[#e50924]">
-        {actorName}
-      </p>
-
-      <p className="text-center text-[12px] text-mauve-500">
-        {actorRole}
-      </p>
-    </Link>
-  );
-};
+import ActorCard from "../../components/ActorCard";
 
 const Credits = () => {
   const { cast = [], crew = [] } = useMovieDetails();
 
   const firstThreeCast = cast.slice(0, 3);
 
-  const firstThreeCrew = [crew[0], crew[3], crew[6]].filter(Boolean);
+  const firstThreeCrew = [crew[0], crew[3], crew[6]];
+
+  if (firstThreeCast.length == 0 && firstThreeCrew.length == 0) {
+    return;
+  }
 
   return (
     <div className="mx-auto mb-4 mt-8 w-[93%]">
@@ -54,7 +28,7 @@ const Credits = () => {
 
           <Link
             to="credits"
-            className="border-b border-b-[#ffffff1a] pb-1.5 text-[9px] font-bold uppercase tracking-[1.2px] transition-colors hover:border-b-[#e50924] hover:text-[#e50924]"
+            className="border-b border-b-[#ffffff1a] pb-1.5 text-[9px] font-bold uppercase tracking-[1.2px] transition-colors hover:border-b-[#e50924] hover:text-[#e50924] active:border-b-[#e50924] active:text-[#e50924]"
           >
             View Full Cast and Crew →
           </Link>
