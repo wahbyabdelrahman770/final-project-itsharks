@@ -39,6 +39,8 @@ import { useTheme } from "./contexts/ThemeProvider";
 import ActorContext from "./contexts/Actor/ActorContext";
 import ActorDetails from "./pages/ActorDetails/ActorDetails";
 import SeasonMedia from "./pages/SeasonMedia/SeasonMedia";
+import MovieRecommendations from "./pages/MovieRecommendations/MovieRecommendations";
+import SeriesRecommendations from "./pages/SeriesRecommendations/SeriesRecommendations";
 
 const App = () => {
   const { theme } = useTheme();
@@ -50,8 +52,8 @@ const App = () => {
           <SeriesContext>
             <div
               className={`min-h-screen transition-colors duration-300 ${theme === "light"
-                  ? "bg-[#F4F5F7] text-[#171923]"
-                  : "bg-black text-[#E2E8F0]"
+                ? "bg-[#F4F5F7] text-[#171923]"
+                : "bg-black text-[#E2E8F0]"
                 }`}
             >
               <Nav />
@@ -72,6 +74,7 @@ const App = () => {
                   <Route index element={<MoviesDeatails />} />
                   <Route path="credits" element={<MovieFullCast />} />
                   <Route path="media" element={<MovieMedia />} />
+                  <Route path="recommendations" element={<MovieRecommendations />} />
                 </Route>
 
                 <Route path="/series" element={<Series />} />
@@ -90,6 +93,7 @@ const App = () => {
                   <Route path="credits" element={<SeriesFullCast />} />
                   <Route path="seasons" element={<SeriesAllSeasons />} />
                   <Route path="media" element={<SeriesMedia />} />
+                  <Route path="recommendations" element={<SeriesRecommendations />} />
                   <Route path="season/:seasonNumber" element={<Season />} />
                   <Route
                     path="season/:seasonNumber/credits"

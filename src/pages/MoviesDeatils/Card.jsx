@@ -1,8 +1,6 @@
 import { FaPlay, FaStar } from "react-icons/fa";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getMovieGenre } from "../../utils/genres";
-import PlayIcon from "../../components/PlayIcon";
 import { ImageWithLoading } from "../../components/Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
 
 const Card = ({

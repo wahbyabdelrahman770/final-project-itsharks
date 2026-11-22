@@ -123,7 +123,7 @@ const ActorMovies = ({ movies = [] }) => {
 
                 {(movie.character || movie.job) && (
                   <p className="mt-2 line-clamp-1 text-xs text-gray-500">
-                    As {movie.character || movie.job}
+                    {movie.character || movie.job}
                   </p>
                 )}
               </div>

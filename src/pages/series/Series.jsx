@@ -29,8 +29,8 @@ const Series = () => {
       <main className="max-w-[1600px] mx-auto px-6 md:px-12">
         {/* Hero */}
         <section className="relative flex flex-col justify-center gap-7 py-24 border-b border-white/10">
-          <span className="text-xs font-bold tracking-[4px]">
-            <span className="text-red-600">━━</span> THE COMPLETE COLLECTION
+          <span className="text-xs font-bold tracking-[4px] flex flex-row items-center gap-2">
+            <span className="inline-block w-6 h-[2.05px] bg-[#e50924]"></span> THE COMPLETE COLLECTION
           </span>
 
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
