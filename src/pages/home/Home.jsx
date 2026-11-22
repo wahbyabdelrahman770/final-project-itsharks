@@ -6,7 +6,6 @@ import TrendMovie from "./../../components/home/TrendMovie";
 import { useTheme } from "../../contexts/ThemeProvider";
 
 const Home = () => {
-  const { theme } = useTheme();
   return (
     <div>
       <HeroCarousel />
