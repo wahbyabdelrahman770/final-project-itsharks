@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#08090d] border-t border-white/10 text-white">
+    <footer className="w-full border-t border-white/10">
       {/* Footer Content */}
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-16 md:py-20">
-        <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-8">
+      <div className="mx-auto max-w-[1600px] px-6 py-16 md:px-12 md:py-20">
+        <div className="flex flex-col justify-between gap-12 md:flex-row md:gap-8">
           {/* Brand */}
           <div className="flex flex-col gap-5 md:w-[35%]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-red-600 rounded-xl rotate-[-5deg] shadow-lg shadow-red-600/20">
-                <FaTicketAlt className="text-white text-lg" />
+              <div className="flex h-10 w-10 rotate-[-5deg] items-center justify-center rounded-xl bg-red-600 shadow-lg shadow-red-600/20">
+                <FaTicketAlt className="text-lg text-white" />
               </div>
 
               <h2 className="text-sm font-bold">
@@ -19,7 +19,7 @@ const Footer = () => {
               </h2>
             </div>
 
-            <p className="text-sm text-slate-400 leading-7 max-w-sm">
+            <p className="max-w-sm text-sm leading-7">
               Your curated guide to exceptional movies and television. Discover
               what to watch next.
             </p>
@@ -27,49 +27,48 @@ const Footer = () => {
 
           {/* Explore */}
           <div className="flex flex-col gap-7">
-            <h3 className="text-[11px] font-bold tracking-widest text-white">
-              EXPLORE
-            </h3>
+            <h3 className="text-[11px] font-bold tracking-widest">EXPLORE</h3>
 
-            <div className="flex flex-col gap-4 text-xs text-slate-400">
+            <div className="flex flex-col gap-4 text-xs">
               <Link
-                href="/movies"
-                className="hover:text-red-500 transition-colors"
+                to="/movies"
+                className="transition-colors hover:text-red-500"
               >
                 Movies
               </Link>
 
               <Link
-                href="/series"
-                className="hover:text-red-500 transition-colors"
+                to="/series"
+                className="transition-colors hover:text-red-500"
               >
                 TV Series
               </Link>
 
-              <Link href="#" className="hover:text-red-500 transition-colors">
+              <Link to="#" className="transition-colors hover:text-red-500">
                 Trending
               </Link>
             </div>
           </div>
+
           {/* Cinema */}
           <div className="flex flex-col gap-7">
-            <h3 className="text-[11px] font-bold tracking-widest text-white">
+            <h3 className="text-[11px] font-bold tracking-widest">
               CINEMA4YOU
             </h3>
 
-            <div className="flex flex-col gap-4 text-xs text-slate-400">
+            <div className="flex flex-col gap-4 text-xs">
               <Link
-                href="/contact"
-                className="hover:text-red-500 transition-colors"
+                to="/contact"
+                className="transition-colors hover:text-red-500"
               >
                 Contact us
               </Link>
 
-              <Link href="#" className="hover:text-red-500 transition-colors">
+              <Link to="#" className="transition-colors hover:text-red-500">
                 About
               </Link>
 
-              <Link href="#" className="hover:text-red-500 transition-colors">
+              <Link to="#" className="transition-colors hover:text-red-500">
                 Privacy
               </Link>
             </div>
@@ -77,28 +76,28 @@ const Footer = () => {
 
           {/* Social Media */}
           <div className="flex flex-col gap-7">
-            <h3 className="text-[11px] font-bold tracking-widest text-white">
+            <h3 className="text-[11px] font-bold tracking-widest">
               FOLLOW THE STORY
             </h3>
 
             <div className="flex items-center gap-3">
               <Link
-                href="#"
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[10px] text-slate-400 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all"
+                to="#"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
               >
                 IG
               </Link>
 
               <Link
-                href="#"
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[10px] text-slate-400 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all"
+                to="#"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
               >
                 X
               </Link>
 
               <Link
-                href="#"
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-[10px] text-slate-400 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all"
+                to="#"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
               >
                 YT
               </Link>
@@ -107,21 +106,21 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="w-full border-t border-white/10 mt-16 mb-7"></div>
+        <div className="mb-7 mt-16 w-full border-t border-white/10"></div>
 
         {/* Bottom Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
-          <p className="text-[9px] tracking-wider text-slate-500">
+        <div className="flex flex-col items-start justify-between gap-5 md:flex-row md:items-center">
+          <p className="text-[9px] tracking-wider">
             © 2026 CINEMA4YOU. ALL RIGHTS RESERVED.
           </p>
 
-          <p className="text-[9px] tracking-wider text-slate-500">
+          <p className="text-[9px] tracking-wider">
             MADE WITH CARE FOR PEOPLE WHO LOVE CINEMA.
           </p>
 
-          <p className="text-[9px] tracking-wider text-slate-500">
+          <p className="text-[9px] tracking-wider">
             POWERED BY{" "}
-            <span className="text-teal-400 font-bold ml-1">TMDB</span>
+            <span className="ml-1 font-bold text-teal-400">TMDB</span>
           </p>
         </div>
       </div>

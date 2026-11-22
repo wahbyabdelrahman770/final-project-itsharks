@@ -15,9 +15,11 @@ function TrendMovie() {
   if (loading) {
     return <Loading />;
   }
+
   if (error) {
     return <ErrorState onRetry={retry} />;
   }
+
   if (!popularMovies?.length) {
     return <ErrorState onRetry={retry} />;
   }
@@ -37,8 +39,8 @@ function TrendMovie() {
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "N/A";
 
   return (
-    <section className="w-full overflow-hidden bg-[#090a0e] px-4 py-16 text-white sm:px-6 md:px-10 lg:px-16 lg:py-24">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center overflow-hidden bg-[#11141d] lg:grid-cols-[1.15fr_0.85fr]">
+    <section className="w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 lg:px-16 lg:py-24">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center overflow-hidden lg:grid-cols-[1.15fr_0.85fr]">
         {/* Movie Image */}
         <div className="group relative aspect-16/10 overflow-hidden sm:aspect-video lg:aspect-auto lg:h-full lg:min-h-120">
           <img
@@ -69,7 +71,7 @@ function TrendMovie() {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-0.5 w-7 bg-red-600" />
 
-            <p className="text-[10px] font-bold uppercase tracking-[3px] text-gray-400 sm:text-xs">
+            <p className="text-[10px] font-bold uppercase tracking-[3px] sm:text-xs">
               #1 Trending This Week
             </p>
           </div>
@@ -82,13 +84,13 @@ function TrendMovie() {
           </h2>
 
           {/* Overview */}
-          <p className="mb-7 line-clamp-3 max-w-xl text-sm leading-7 text-gray-400 sm:text-base">
+          <p className="mb-7 line-clamp-3 max-w-xl text-sm leading-7 sm:text-base">
             {movie.overview ||
               "Discover this featured movie and explore its story."}
           </p>
 
           {/* Movie Details */}
-          <div className="mb-9 flex flex-wrap items-center gap-x-3 gap-y-3 text-xs font-semibold text-gray-400 sm:text-sm">
+          <div className="mb-9 flex flex-wrap items-center gap-x-3 gap-y-3 text-xs font-semibold sm:text-sm">
             <span className="flex items-center gap-2 text-yellow-400">
               <FaStar />
               {rating}

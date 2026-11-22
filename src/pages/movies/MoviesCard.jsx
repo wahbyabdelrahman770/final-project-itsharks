@@ -44,11 +44,11 @@ const MoviesCard = ({
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-base font-semibold text-white group-hover:text-red-500 transition-colors">
+        <h3 className="text-base font-semibold  group-hover:text-red-500 transition-colors">
           {original_title}
         </h3>
 
-        <div className="flex items-center gap-3 text-[11px] tracking-wider text-gray-400">
+        <div className="flex items-center gap-3 text-[11px] tracking-wider ">
           <span>{release_date.slice(0, 4)}</span>
           <span>•</span>
           <span>

@@ -15,8 +15,14 @@ const SeriesCard = ({
 }) => {
   const { seriesGenres } = useSeries();
   const navigate = useNavigate();
+
   return (
-    <div onClick={() => { navigate(`/series/${id}`); }} className="group flex flex-col gap-4 cursor-pointer w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(20%-16px)]">
+    <div
+      onClick={() => {
+        navigate(`/series/${id}`);
+      }}
+      className="group flex flex-col gap-4 cursor-pointer w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] xl:w-[calc(20%-16px)]"
+    >
       <div className="relative w-full aspect-2/3 overflow-hidden bg-[#151515]">
         <img
           src={`https://media.themoviedb.org/t/p/w440_and_h660_face/${backdrop_path}`}
@@ -40,11 +46,11 @@ const SeriesCard = ({
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-base font-semibold text-white group-hover:text-red-500 transition-colors">
+        <h3 className="text-base font-semibold group-hover:text-red-500 transition-colors">
           {original_name}
         </h3>
 
-        <div className="flex items-center gap-3 text-[11px] tracking-wider text-gray-400">
+        <div className="flex items-center gap-3 text-[11px] tracking-wider">
           <span>{first_air_date.slice(0, 4)}</span>
           <span>•</span>
           <span>

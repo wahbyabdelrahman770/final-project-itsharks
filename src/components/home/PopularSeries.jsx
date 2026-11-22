@@ -27,7 +27,7 @@ function PopularSeries() {
   }
 
   return (
-    <section className="w-full overflow-hidden bg-[#090a0e] px-6 py-16 text-white md:px-12 lg:px-16">
+    <section className="w-full overflow-hidden px-6 py-16 md:px-12 lg:px-16">
       {/* Section Header */}
       <div className="mb-10 flex items-end justify-between gap-5">
         <div>
@@ -88,19 +88,16 @@ function PopularSeries() {
         className="popular-series-swiper w-full overflow-hidden! pb-12! [&_.swiper-scrollbar]:h-2! [&_.swiper-scrollbar]:rounded-full! [&_.swiper-scrollbar]:bg-gray-900! [&_.swiper-scrollbar-drag]:rounded-full! [&_.swiper-scrollbar-drag]:bg-gray-700! [&_.swiper-scrollbar-drag]:cursor-grab! [&_.swiper-scrollbar-drag]:active:cursor-grabbing"
       >
         {series.slice(0, 10).map((item) => {
-          // First Air Year
           const releaseYear = item.first_air_date
             ? item.first_air_date.slice(0, 4)
             : "N/A";
 
-          // Series Genre
           const genreName =
             seriesGenres.find((genre) => item.genre_ids?.includes(genre.id))
               ?.name || "TV Series";
 
           return (
             <SwiperSlide key={item.id} className="h-auto">
-              {/* Series Card */}
               <Link
                 to={`/series/${item.id}`}
                 className="group block h-full cursor-pointer"
@@ -138,11 +135,9 @@ function PopularSeries() {
                     {item.name}
                   </h3>
 
-                  <div className="flex items-center gap-2 text-xs tracking-wide text-gray-500">
+                  <div className="flex items-center gap-2 text-xs tracking-wide">
                     <span>{releaseYear}</span>
-
                     <span>•</span>
-
                     <span className="truncate">{genreName}</span>
                   </div>
                 </div>

@@ -25,7 +25,7 @@ function HeroCarousel() {
 
   if (!heroMovies || heroMovies.length === 0) {
     return (
-      <section className="flex h-screen items-center justify-center bg-[#090a0e] text-white">
+      <section className="flex h-screen items-center justify-center text-3xl">
         No Movies Available
       </section>
     );

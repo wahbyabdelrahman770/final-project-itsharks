@@ -8,20 +8,31 @@ import Recommendations from "./Recommendations";
 import Seasons from "./Seasons";
 
 const SeriesDetails = () => {
-	const { loading, backdrops, posters, logos, videos: { results: videos = [] } = {} } = useSeriesDetails();
-	if (loading) {
-		return <DetailsLoading />;
-	}
-	return (
-		<div className="w-full">
-			<Overview />
-			<ProductionDetails />
-			<Credits />
-			<Seasons />
-			<Media backdrops={backdrops} posters={posters} logos={logos} videos={videos} />
-			<Recommendations />
-		</div>
-	);
+  const {
+    loading,
+    backdrops,
+    posters,
+    logos,
+    videos: { results: videos = [] } = {},
+  } = useSeriesDetails();
+  if (loading) {
+    return <DetailsLoading />;
+  }
+  return (
+    <div className="w-full">
+      <Overview />
+      <ProductionDetails />
+      <Credits />
+      <Seasons />
+      <Media
+        backdrops={backdrops}
+        posters={posters}
+        logos={logos}
+        videos={videos}
+      />
+      <Recommendations />
+    </div>
+  );
 };
 
 export default SeriesDetails;

@@ -18,6 +18,7 @@ const IMAGE_URL = "https://image.tmdb.org/t/p/";
 function PopularMovies() {
   const { popularMovies, loading } = useHome();
   const { moviesGenres } = useMovie();
+
   if (loading) {
     return <Loading />;
   }
@@ -27,7 +28,7 @@ function PopularMovies() {
   }
 
   return (
-    <section className="w-full overflow-hidden bg-[#090a0e] px-6 py-16 text-white md:px-12 lg:px-16">
+    <section className="w-full overflow-hidden px-6 py-16 md:px-12 lg:px-16">
       {/* Section Header */}
       <div className="mb-10 flex items-end justify-between gap-5">
         <div>
@@ -92,14 +93,12 @@ function PopularMovies() {
             ? movie.release_date.slice(0, 4)
             : "N/A";
 
-          // Get Genre Name from MovieContext API
           const genreName =
             moviesGenres.find((genre) => movie.genre_ids?.includes(genre.id))
               ?.name || "MOVIE";
 
           return (
             <SwiperSlide key={movie.id} className="h-auto">
-              {/* Movie Card */}
               <Link
                 to={`/movies/${movie.id}`}
                 className="group block h-full cursor-pointer"
@@ -137,7 +136,7 @@ function PopularMovies() {
                     {movie.title}
                   </h3>
 
-                  <div className="flex items-center gap-2 text-xs tracking-wide text-gray-500">
+                  <div className="flex items-center gap-2 text-xs tracking-wide">
                     <span>{releaseYear}</span>
                     <span>•</span>
                     <span className="truncate">{genreName}</span>

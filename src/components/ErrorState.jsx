@@ -1,15 +1,20 @@
+import { useTheme } from "../contexts/ThemeProvider";
+
 function ErrorState({ onRetry }) {
   // console.log(onRetry);
 
+  const { theme } = useTheme();
   return (
-    <section className="flex min-h-80 w-full flex-col items-center justify-center bg-[#090a0e] px-5 py-16 text-center text-white">
+    <section
+      className={`flex min-h-80 w-full flex-col items-center justify-center ${theme === "dark" ? "border border-white" : "border border-black"}  px-5 py-16 text-center`}
+    >
       <div className="mb-5 flex size-20 items-center justify-center rounded-full bg-red-600/10">
         <span className="text-4xl text-red-500">!</span>
       </div>
 
       <h2 className="mb-3 text-2xl font-bold">Something Went Wrong</h2>
 
-      <p className="mb-7 max-w-md text-sm leading-6 text-gray-400">
+      <p className="mb-7 max-w-md text-sm leading-6">
         We couldn't load the movies right now. Please check your internet
         connection and try again.
       </p>
