@@ -1,8 +1,6 @@
 import { useTheme } from "../contexts/ThemeProvider";
 
 function ErrorState({ onRetry }) {
-  // console.log(onRetry);
-
   const { theme } = useTheme();
   return (
     <section

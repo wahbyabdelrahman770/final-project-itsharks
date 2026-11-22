@@ -3,6 +3,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getMovieGenre } from "../../utils/genres";
 import PlayIcon from "../../components/PlayIcon";
+import { ImageWithLoading } from "../../components/Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
 
 const Card = ({
   className,
@@ -15,7 +16,7 @@ const Card = ({
     >
       {/* Poster */}
       <div className="relative mb-4 aspect-2/3 overflow-hidden bg-gray-900">
-        <img
+        <ImageWithLoading
           src={`https://media.themoviedb.org/t/p/original${poster_path}`}
           alt={title}
           loading="lazy"

@@ -7,8 +7,8 @@ import MediaLoading from "../../components/MediaLoading";
 export const ImageLoading = () => {
     const bone = "animate-shine rounded-lg bg-neutral-200/90 dark:bg-neutral-800/90";
     return (
-        <div className="w-full space-y-5 rounded-xl bg-gray-300 p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-            <Skeleton className={`h-32 ${bone} w-full bg-gray-300`} />
+        <div className="w-full h-full space-y-5 rounded-xl bg-gray-300 p-4 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+            <Skeleton className={`h-full min-h-32 ${bone} w-full bg-gray-300`} />
         </div>
     );
 };
@@ -16,9 +16,9 @@ export const ImageLoading = () => {
 export const ImageWithLoading = ({ src, alt, loading, className }) => {
     const [isLoading, setIsLoading] = useState(true);
     return (
-        <div className={className}>
+        <div className={`w-full ${className}`}>
             {isLoading && <ImageLoading />}
-            <img onLoad={() => setIsLoading(false)} src={src} alt={alt} loading={loading} className="w-full" />
+            <img onLoad={() => setIsLoading(false)} src={src} alt={alt} loading={loading} className="w-full h-full" />
         </div>
     );
 };
@@ -40,7 +40,7 @@ export const BackDrops = ({ backdrops }) => {
         );
     }
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {backdrops?.map(backdrop => <div key={backdrop?.file_path} className="max-w-full overflow-hidden relative">
                 <ImageWithLoading loading="lazy" src={`https://media.themoviedb.org/t/p/original${backdrop?.file_path}`} className="w-full duration-300 hover:scale-105" alt="The Batman" />
                 <Modal>
@@ -92,7 +92,7 @@ export const Logos = ({ logos }) => {
         );
     }
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             {logos?.map(logo => <div key={logo?.file_path} className="max-w-full overflow-hidden relative">
                 <ImageWithLoading loading="lazy" src={`https://media.themoviedb.org/t/p/original${logo?.file_path}`} className="w-full duration-300 hover:scale-105" alt="The Batman" />
                 <Modal>

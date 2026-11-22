@@ -19,6 +19,7 @@ const ActorMovies = ({ movies = [] }) => {
   return (
     <section className="mt-20">
       {/* Section Header */}
+
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-[3px] text-[#e50924]">
@@ -73,10 +74,10 @@ const ActorMovies = ({ movies = [] }) => {
         className="pb-5!"
       >
         {movies.map((movie) => (
-          <SwiperSlide key={movie.credit_id || movie.id}>
+          <SwiperSlide className="h-[stretch]!" key={movie.credit_id || movie.id}>
             <Link
               to={`/movies/${movie.id}`}
-              className="group block h-full overflow-hidden rounded-xl border border-white/10 bg-[#15161b] transition duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:shadow-[0_10px_35px_#e5092420]"
+              className="group h-[stretch]! block overflow-hidden rounded-xl border border-white/10 bg-[#15161b] transition duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:shadow-[0_10px_35px_#e5092420]"
             >
               {/* Movie Poster */}
               <div className="relative aspect-2/3 overflow-hidden bg-[#202127]">
@@ -97,7 +98,7 @@ const ActorMovies = ({ movies = [] }) => {
                 <div className="absolute right-3 top-3 flex items-center gap-1 rounded-lg bg-black/80 px-2 py-1 text-xs font-bold text-white">
                   <FaStar className="text-yellow-400" />
                   {typeof movie.vote_average === "number" &&
-                  movie.vote_count > 0
+                    movie.vote_count > 0
                     ? movie.vote_average.toFixed(1)
                     : "N/A"}
                 </div>
@@ -111,7 +112,7 @@ const ActorMovies = ({ movies = [] }) => {
               </div>
 
               {/* Movie Information */}
-              <div className="p-4">
+              <div className="p-4 flex flex-col justify-between">
                 <h3 className="line-clamp-1 font-bold text-white transition group-hover:text-[#e50924]">
                   {movie.title || "Untitled Movie"}
                 </h3>
@@ -120,9 +121,9 @@ const ActorMovies = ({ movies = [] }) => {
                   {movie.release_date?.slice(0, 4) || "Unknown Year"}
                 </p>
 
-                {movie.character && (
+                {(movie.character || movie.job) && (
                   <p className="mt-2 line-clamp-1 text-xs text-gray-500">
-                    As {movie.character}
+                    As {movie.character || movie.job}
                   </p>
                 )}
               </div>

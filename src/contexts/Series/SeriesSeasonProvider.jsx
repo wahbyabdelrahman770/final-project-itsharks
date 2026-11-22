@@ -16,7 +16,7 @@ const SeriesSeasonProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
         },
     };
-    const api = `https://api.themoviedb.org/3/tv/${seriesID}/season/${seasonNumber}?append_to_response=credits`;
+    const api = `https://api.themoviedb.org/3/tv/${seriesID}/season/${seasonNumber}?append_to_response=credits,images,videos`;
 
     async function getSeasonDetails() {
         setLoading(true);
@@ -31,16 +31,33 @@ const SeriesSeasonProvider = ({ children }) => {
         }
     }
 
-    const { air_date, episodes, overview, poster_path, vote_average, credits: { cast = [], crew = [] } = {} } = seasonDetails;
+    const { air_date, episodes, overview, poster_path, vote_average, credits: { cast = [], crew = [] } = {}, images: { backdrops = [], posters = [], logos = [] } = {}, videos: { results: videos = [] } = {} } = seasonDetails;
 
     const poster = poster_path ? `https://media.themoviedb.org/t/p/original${poster_path}` : "/placeholderImg.avif";
+
+    const trailerKey = videos?.find(
+        (item) =>
+            item.type == "Trailer" ||
+            item.type == "trailer" ||
+            item.name == "Main Trailer" ||
+            item.name == "Official Trailer" ||
+            item.name == "Original Trailer" ||
+            item.name == "Official Trailer [Subtitled]" ||
+            item.name == "International Trailer [Subtitled]" ||
+            item.name == "Official English Trailer [Dubbed]" ||
+            item.name.includes("official") ||
+            item.name.includes("Official") ||
+            item.name.includes("trailer") ||
+            item.name.includes("Trailer")
+    )?.key;
+    const trailerLink = trailerKey != null ? `https://www.youtube.com/embed/${trailerKey}` : null;
 
     useEffect(() => {
         getSeasonDetails();
     }, [seasonNumber]);
 
     return (
-        <SeriesSeasonContext.Provider value={{ seriesID, seasonNumber, seasonDetails, loading, air_date, episodes, overview, vote_average, cast, crew, poster }}>
+        <SeriesSeasonContext.Provider value={{ seriesID, seasonNumber, seasonDetails, loading, air_date, episodes, overview, vote_average, cast, crew, poster, trailerLink, backdrops, posters, logos, videos }}>
             {children}
         </SeriesSeasonContext.Provider>
     );

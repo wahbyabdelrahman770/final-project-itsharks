@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
 import { FaPlay, FaStar } from "react-icons/fa";
+import { ImageWithLoading } from "../../components/Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
 
 export const Season = ({
   to,
   season: {
     name,
-    season_number,
     poster_path,
     air_date,
     vote_average,
@@ -17,7 +17,7 @@ export const Season = ({
     <Link to={to} className="group block h-full cursor-pointer">
       {/* Poster */}
       <div className="relative mb-4 aspect-2/3 overflow-hidden bg-gray-900">
-        <img
+        <ImageWithLoading
           src={`https://media.themoviedb.org/t/p/original${poster_path}`}
           alt={name}
           loading="lazy"

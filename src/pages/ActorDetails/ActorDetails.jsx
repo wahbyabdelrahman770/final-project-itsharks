@@ -11,6 +11,8 @@ import {
   FaFilm,
   FaArrowDown,
   FaArrowUp,
+  FaArrowLeft,
+  FaArrowRight,
 } from "react-icons/fa";
 
 const ActorDetails = () => {
@@ -80,7 +82,7 @@ const ActorDetails = () => {
 
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-12 md:pt-20">
           {/* Breadcrumb */}
-          <div className="mb-12 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[2px]">
+          <div className="mb-12 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[2px] cursor-default">
             <span className="text-gray-500">Cinema4You</span>
             <span className="text-[#e50924]">/</span>
             <span className="text-gray-500">People</span>
@@ -216,6 +218,9 @@ const ActorDetails = () => {
           )}
         </div>
       </section>
+
+      {/* Section Header */}
+
 
       {/* Filmography Carousel */}
       <div className="mx-auto max-w-7xl px-5 pb-20">
