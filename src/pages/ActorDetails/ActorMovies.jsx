@@ -138,9 +138,9 @@ const ActorMovies = ({ movies = [] }) => {
                 </p>
 
                 {/* Actor Character */}
-                {movie.character && (
+                {(movie.character || movie.job) && (
                   <p className="mt-2 line-clamp-1 text-xs text-red-400">
-                    {movie.character}
+                    {movie.character || movie.job}
                   </p>
                 )}
               </div>
