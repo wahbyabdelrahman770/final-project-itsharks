@@ -4,6 +4,7 @@ import Loading from "../../components/Loading";
 import ErrorState from "../../components/ErrorState";
 import { useState } from "react";
 import NotFound from "../../components/NotFound";
+import { useTheme } from "../../contexts/ThemeProvider";
 
 export default function Movies() {
   const {
@@ -22,13 +23,16 @@ export default function Movies() {
     setActive,
   } = useMovie();
 
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-[#08090d] text-white">
+    // bg-[#08090d]
+    <div className="min-h-screen ">
       <main className="max-w-400 mx-auto px-6 md:px-12">
         {/* Hero */}
         <section className="relative flex flex-col justify-center gap-7 py-24 border-b border-white/10">
-          <span className="text-xs font-bold tracking-[4px] text-gray-300">
-            <span className="text-red-600">━━</span> THE COMPLETE COLLECTION
+          <span className="text-xs font-bold tracking-[4px] ">
+            <span className="zzztext-red-600">━━</span> THE COMPLETE COLLECTION
           </span>
 
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
@@ -37,7 +41,7 @@ export default function Movies() {
                 Explore Movies<span className="text-red-600">.</span>
               </h1>
 
-              <p className="max-w-xl text-gray-400 leading-7 text-sm md:text-base">
+              <p className="max-w-xl  leading-7 text-sm md:text-base">
                 Discover exceptional stories, from celebrated masterpieces to
                 the next thing everyone will be talking about.
               </p>
@@ -47,7 +51,7 @@ export default function Movies() {
               <span className="text-5xl font-serif font-bold">
                 {movieLength}
               </span>
-              <span className="text-[10px] tracking-widest text-gray-400">
+              <span className="text-[10px] tracking-widest">
                 TITLES TO DISCOVER
               </span>
             </div>
@@ -57,7 +61,7 @@ export default function Movies() {
         {/* Sort */}
         <section className="flex flex-col md:flex-row justify-between items-center gap-7 py-9">
           <div className="flex items-center gap-4">
-            <span className="text-[10px] tracking-widest text-gray-400 font-medium">
+            <span className="text-[10px] tracking-widest font-medium">
               SORT BY
             </span>
             <select
@@ -67,15 +71,15 @@ export default function Movies() {
                 value == "Rating" && getTopRatingMovies();
                 value == "Newest" && getNewestMovies();
               }}
-              className="bg-[#11131a] text-white border border-white/10 px-4 py-2 text-sm outline-none cursor-pointer rounded hover:border-white/30 transition-colors"
+              className="  border border-gray-900 px-4 py-2 text-sm outline-none cursor-pointer rounded  transition-colors"
             >
-              <option value="popular" className="bg-[#11131a] text-white">
+              <option value="popular" className=" ">
                 Popularity
               </option>
-              <option value="Rating" className="bg-[#11131a] text-white">
+              <option value="Rating" className=" ">
                 Rating
               </option>
-              <option value="Newest" className="bg-[#11131a] text-white">
+              <option value="Newest" className=" ">
                 Newest
               </option>
             </select>
@@ -89,7 +93,7 @@ export default function Movies() {
               setActive("ALL");
               getMovies();
             }}
-            className={`${active === "ALL" ? "bg-red-600 text-white shadow-lg shadow-red-600/30" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "ALL" ? "bg-red-600  shadow-lg shadow-red-600/30" : "  border border-gray-900 "} ${theme === "dark" ? "bor der-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ALL
           </button>
@@ -99,7 +103,7 @@ export default function Movies() {
               setActive("Action");
               filterMovies("Action");
             }}
-            className={`${active === "Action" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Action" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ACTION
           </button>
@@ -109,7 +113,7 @@ export default function Movies() {
               setActive("Drama");
               filterMovies("Drama");
             }}
-            className={`${active === "Drama" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Drama" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             DRAMA
           </button>
@@ -119,7 +123,7 @@ export default function Movies() {
               setActive("Science Fiction");
               filterMovies("Science Fiction");
             }}
-            className={`${active === "Science Fiction" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Science Fiction" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             Science Fiction
           </button>
@@ -129,7 +133,7 @@ export default function Movies() {
               setActive("Comedy");
               filterMovies("Comedy");
             }}
-            className={`${active === "Comedy" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Comedy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             COMEDY
           </button>
@@ -139,7 +143,7 @@ export default function Movies() {
               setActive("Crime");
               filterMovies("Crime");
             }}
-            className={`${active === "Crime" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Crime" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             CRIME
           </button>
@@ -149,7 +153,7 @@ export default function Movies() {
               setActive("Fantasy");
               filterMovies("Fantasy");
             }}
-            className={`${active === "Fantasy" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Fantasy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             FANTASY
           </button>
@@ -159,7 +163,7 @@ export default function Movies() {
               setActive("Mystery");
               filterMovies("Mystery");
             }}
-            className={`${active === "Mystery" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Mystery" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             MYSTERY
           </button>
@@ -169,7 +173,7 @@ export default function Movies() {
               setActive("Romance");
               filterMovies("Romance");
             }}
-            className={`${active === "Romance" ? "bg-red-600 text-white" : "bg-black text-[#969da9] border border-white/15"} rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Romance" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ROMANCE
           </button>
@@ -177,8 +181,14 @@ export default function Movies() {
 
         {/* Results */}
         <section className="flex justify-between items-center border-b border-white/10 pb-5 mb-7">
-          <p className="text-[11px] tracking-wider text-gray-400">
-            SHOWING <span className="text-white">20</span> OF 40 RESULTS
+          <p className="text-[11px] tracking-wider text-gray-500">
+            SHOWING{" "}
+            <span
+              className={`${theme === "dark" ? "text-white font-bold" : "text-black font-bold"}`}
+            >
+              20
+            </span>{" "}
+            OF 40 RESULTS
           </p>
 
           <span className="text-[11px] tracking-wider text-gray-400">
@@ -195,8 +205,8 @@ export default function Movies() {
               return <MoviesCard key={movie.id} movie={movie} />;
             })
           )}
-          {movieLength == 0 && <NotFound />}
           {error == true && <ErrorState />}
+          {movieLength == 0 && <NotFound />}
         </section>
 
         {/* Pagination */}
@@ -204,7 +214,7 @@ export default function Movies() {
           <button
             disabled={page <= 1 ? true : false}
             onClick={previousPage}
-            className={`flex items-center gap-3 px-3 py-3 text-xs  ${page > 1 ? "hover:text-white text-gray-400 cursor-pointer" : "text-gray-600"} transition-colors`}
+            className={`flex items-center gap-3 px-3 py-3 text-xs  ${page > 1 ? " text-gray-400 cursor-pointer" : "text-gray-600"} transition-colors`}
           >
             ❮ PREVIOUS
           </button>
@@ -212,13 +222,13 @@ export default function Movies() {
           <div className="w-10 h-10 bg-red-600 text-white flex items-center justify-center text-sm font-medium shadow-md">
             {page}
           </div>
-          <div className="w-10 h-10 border border-white/10 bg-black/40 text-gray-400 flex items-center justify-center text-sm font-medium">
+          <div className="w-10 h-10 border border-white/10  text-gray-400 flex items-center justify-center text-sm font-medium">
             {page + 1}
           </div>
 
           <button
             onClick={nextPage}
-            className="flex items-center gap-3 px-3 py-3 text-xs text-gray-400 cursor-pointer hover:text-white transition-colors"
+            className="flex items-center gap-3 px-3 py-3 text-xs text-gray-400 cursor-pointer  transition-colors"
           >
             NEXT ❯
           </button>

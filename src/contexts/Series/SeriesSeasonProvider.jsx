@@ -33,7 +33,7 @@ const SeriesSeasonProvider = ({ children }) => {
 
     const { air_date, episodes, overview, poster_path, vote_average, credits: { cast = [], crew = [] } = {} } = seasonDetails;
 
-    const poster = `https://media.themoviedb.org/t/p/original${poster_path}`;
+    const poster = poster_path ? `https://media.themoviedb.org/t/p/original${poster_path}` : "/placeholderImg.avif";
 
     useEffect(() => {
         getSeasonDetails();

@@ -25,7 +25,7 @@ function HeroCarousel() {
 
   if (!heroMovies || heroMovies.length === 0) {
     return (
-      <section className="flex h-screen items-center justify-center bg-[#090a0e] text-white">
+      <section className="flex h-screen items-center justify-center text-3xl">
         No Movies Available
       </section>
     );
@@ -123,7 +123,7 @@ function HeroCarousel() {
           <div className="flex flex-wrap items-center gap-7">
             <Link
               to="/movies"
-              className="flex items-center gap-5 rounded bg-red-600 px-7 py-5 text-xs font-bold tracking-wider transition duration-300 hover:-translate-y-1 hover:bg-red-700"
+              className="flex items-center gap-5 rounded bg-red-600 px-7 py-5 text-xs font-bold tracking-wider transition duration-300 hover:-translate-y-1 hover:bg-red-700 active:-translate-y-1 active:bg-red-700"
             >
               EXPLORE MOVIE
               <FaArrowRight />
@@ -165,11 +165,10 @@ function HeroCarousel() {
             onClick={() => {
               swiperRef.current?.slideToLoop(index);
             }}
-            className={`w-2 rounded-full transition-all duration-300 ${
-              activeIndex === index
-                ? "h-9 bg-red-600"
-                : "h-2 bg-gray-500 hover:bg-white"
-            }`}
+            className={`w-2 rounded-full transition-all duration-300 ${activeIndex === index
+              ? "h-9 bg-red-600"
+              : "h-2 bg-gray-500 hover:bg-white active:bg-white"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}

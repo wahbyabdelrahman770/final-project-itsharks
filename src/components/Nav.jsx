@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { Button } from "@heroui/react";
 import { useNav } from "../contexts/Navbar/Navbar";
+import { useTheme } from "../contexts/ThemeProvider";
 
 const FilmIcon = () => (
   <svg
@@ -100,8 +101,6 @@ const CloseIcon = () => (
 
 const Nav = () => {
   const {
-    theme,
-    setTheme,
     isMenuOpen,
     setIsMenuOpen,
     setInput,
@@ -119,14 +118,16 @@ const Nav = () => {
     { label: "ContactUs", to: "/contact" },
   ];
 
+  const { theme, setTheme } = useTheme();
+
   const themeButton = (
     <Button
       isIconOnly
       variant="flat"
       size="sm"
       aria-label="Toggle theme"
-      onPress={() => setTheme(() => (theme === "light" ? "dark" : "light"))}
-      className="w-10 min-w-10 h-10 bg-zinc-900 text-zinc-300 grid place-items-center hover:text-white border border-zinc-700 rounded-full"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="w-10 min-w-10 h-10 grid place-items-center rounded-full border border-zinc-700  transition-colors "
     >
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </Button>
@@ -136,7 +137,7 @@ const Nav = () => {
     <Button
       variant="flat"
       onClick={toggleSearch}
-      className="bg-zinc-800 text-white text-xs font-semibold h-10 px-5 rounded-full"
+      className="h-10 rounded-full border border-zinc-700  px-5 text-xs font-semibold  transition-colors"
     >
       {searchTitle === "tv" ? "🎬 Movie" : "📺 Series"}
     </Button>
@@ -152,17 +153,23 @@ const Nav = () => {
   );
 
   return (
-    <nav className="sticky top-0 z-50 w-full bg-[#090b10]/95 backdrop-blur-xl border-b border-zinc-800">
+    <nav
+      className={`sticky top-0 z-50 w-full border-b backdrop-blur-xl transition-colors duration-300 ${
+        theme === "light"
+          ? "bg-[#F4F5F7] text-[#171923]"
+          : "bg-[#090a0e] text-white"
+      }`}
+    >
       <div className="max-w-400 mx-auto px-4 sm:px-6 lg:px-10">
         {/* Main Navbar */}
         <div className="flex flex-wrap items-center justify-between gap-y-4 py-4 lg:py-5">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
+            {" "}
             <div className="w-10 h-10 rounded-[10px_3px] -rotate-6 bg-red-600 text-white shadow-md shadow-red-600/30 grid place-items-center">
               <FilmIcon />
             </div>
-
-            <p className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            <p className="text-xl sm:text-2xl font-bold tracking-tight">
               Cinema<span className="text-red-600">4</span>You
             </p>
           </Link>
@@ -174,9 +181,10 @@ const Nav = () => {
                 <NavLink
                   to={item.to}
                   className={({ isActive }) =>
-                    `relative text-sm font-medium transition-colors duration-200 hover:text-white ${isActive
-                      ? "text-white after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
-                      : "text-zinc-400"
+                    `relative text-sm font-medium transition-colors duration-200 ${
+                      isActive
+                        ? "after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-red-600"
+                        : ""
                     }`
                   }
                 >
@@ -189,7 +197,7 @@ const Nav = () => {
           {/* Desktop Search & Actions */}
           <div className="hidden lg:flex items-center gap-3">
             <div className="relative group flex items-center">
-              <div className="flex w-52 xl:w-60 py-2.5 px-3 text-sm rounded-full bg-[#1f2125] border border-[#606060] text-white items-center gap-3">
+              <div className="flex w-52 xl:w-60 py-2.5 px-3 text-sm rounded-full  border border-[#606060]  items-center gap-3">
                 <SearchIcon className="w-4 h-4 shrink-0 text-zinc-400" />
 
                 <input
@@ -201,7 +209,7 @@ const Nav = () => {
                       ? "Search movies..."
                       : "Search series..."
                   }
-                  className="border-0 outline-0 w-full min-w-0 bg-transparent text-white placeholder:text-zinc-500"
+                  className="border-0 outline-0 w-full min-w-0 bg-transparent  placeholder:text-zinc-500"
                 />
               </div>
 
@@ -218,23 +226,25 @@ const Nav = () => {
               >
                 {searchTitle === "movie"
                   ? searchResults.map((search) => (
-                    <Link
-                      to={`/movies/${search.id}`}
-                      key={search.id}
-                      className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                    >
-                      {search.original_title}
-                    </Link>
-                  ))
+                      <Link
+                        to={`/movies/${search.id}`}
+                        key={search.id}
+                        onClick={() => setInput("")}
+                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                      >
+                        {search.original_title}
+                      </Link>
+                    ))
                   : searchResults.map((search) => (
-                    <Link
-                      to={`/series/${search.id}`}
-                      key={search.id}
-                      className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                    >
-                      {search.name}
-                    </Link>
-                  ))}
+                      <Link
+                        to={`/series/${search.id}`}
+                        key={search.id}
+                        onClick={() => setInput("")}
+                        className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                      >
+                        {search.name}
+                      </Link>
+                    ))}
               </div>
             </div>
 
@@ -270,9 +280,10 @@ const Nav = () => {
                       to={item.to}
                       onClick={() => setIsMenuOpen(false)}
                       className={({ isActive }) =>
-                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive
-                          ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
-                          : "text-zinc-400 hover:text-white hover:bg-white/5"
+                        `block w-full px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                          isActive
+                            ? "bg-red-600/10 text-red-500 border-l-2 border-red-600"
+                            : "hover:bg-white/5"
                         }`
                       }
                     >
@@ -299,43 +310,51 @@ const Nav = () => {
                       }
                       className="w-full min-w-0 bg-transparent outline-none border-0 text-sm text-white placeholder:text-zinc-500"
                     />
+
                     {/* Search Mobile Dropdown */}
                     <div
                       className="
-                  hidden
-                  group-has-[input:not(:placeholder-shown)]:block
-                  absolute top-full left-0 z-50 mt-3
-                  w-full max-h-62.5 overflow-y-auto
-                  rounded-xl border border-cyan-400/60
-                  bg-[#202428] p-1 shadow-2xl
-                "
+                        hidden
+                        group-has-[input:not(:placeholder-shown)]:block
+                        absolute top-full left-0 z-50 mt-3
+                        w-full max-h-62.5 overflow-y-auto
+                        rounded-xl border border-cyan-400/60
+                        bg-[#202428] p-1 shadow-2xl
+                      "
                     >
                       {searchTitle === "movie"
                         ? searchResults.map((search) => (
-                          <Link
-                            to={`/movies/${search.id}`}
-                            key={search.id}
-                            className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                          >
-                            {search.original_title}
-                          </Link>
-                        ))
+                            <Link
+                              to={`/movies/${search.id}`}
+                              key={search.id}
+                              onClick={() => {
+                                setInput("");
+                                setIsMenuOpen(false);
+                              }}
+                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                            >
+                              {search.original_title}
+                            </Link>
+                          ))
                         : searchResults.map((search) => (
-                          <Link
-                            to={`/series/${search.id}`}
-                            key={search.id}
-                            className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
-                          >
-                            {search.name}
-                          </Link>
-                        ))}
+                            <Link
+                              to={`/series/${search.id}`}
+                              key={search.id}
+                              onClick={() => {
+                                setInput("");
+                                setIsMenuOpen(false);
+                              }}
+                              className="block px-4 py-3 text-sm text-gray-200 hover:bg-cyan-500/20 cursor-pointer transition-colors border-b border-gray-700/50 last:border-b-0"
+                            >
+                              {search.name}
+                            </Link>
+                          ))}
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 w-full">
                   <div className="flex-1">{searchButton}</div>
-
                   <div className="flex-1">{searchTypeButton}</div>
                 </div>
               </div>

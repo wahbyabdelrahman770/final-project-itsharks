@@ -27,7 +27,7 @@ function PopularSeries() {
   }
 
   return (
-    <section className="w-full overflow-hidden bg-[#090a0e] px-6 py-16 text-white md:px-12 lg:px-16">
+    <section className="w-full overflow-hidden px-6 py-16 md:px-12 lg:px-16">
       {/* Section Header */}
       <div className="mb-10 flex items-end justify-between gap-5">
         <div>
@@ -42,10 +42,10 @@ function PopularSeries() {
 
         <Link
           to="/series"
-          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 md:flex"
+          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:flex"
         >
           VIEW ALL SERIES
-          <FaArrowRight className="transition group-hover:translate-x-1" />
+          <FaArrowRight className="transition group-hover:translate-x-1 group-active:translate-x-1" />
         </Link>
       </div>
 
@@ -88,19 +88,16 @@ function PopularSeries() {
         className="popular-series-swiper w-full overflow-hidden! pb-12! [&_.swiper-scrollbar]:h-2! [&_.swiper-scrollbar]:rounded-full! [&_.swiper-scrollbar]:bg-gray-900! [&_.swiper-scrollbar-drag]:rounded-full! [&_.swiper-scrollbar-drag]:bg-gray-700! [&_.swiper-scrollbar-drag]:cursor-grab! [&_.swiper-scrollbar-drag]:active:cursor-grabbing"
       >
         {series.slice(0, 10).map((item) => {
-          // First Air Year
           const releaseYear = item.first_air_date
             ? item.first_air_date.slice(0, 4)
             : "N/A";
 
-          // Series Genre
           const genreName =
             seriesGenres.find((genre) => item.genre_ids?.includes(genre.id))
               ?.name || "TV Series";
 
           return (
             <SwiperSlide key={item.id} className="h-auto">
-              {/* Series Card */}
               <Link
                 to={`/series/${item.id}`}
                 className="group block h-full cursor-pointer"
@@ -115,7 +112,7 @@ function PopularSeries() {
                     }
                     alt={item.name}
                     loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110 group-active:scale-110"
                   />
 
                   {/* Rating */}
@@ -125,8 +122,8 @@ function PopularSeries() {
                   </div>
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100">
-                    <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100 group-active:opacity-100">
+                    <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-active:scale-110 group-hover:border-red-600 group-hover:bg-red-600 group-active:border-red-600 group-active:bg-red-600">
                       <FaPlay className="ml-1 text-xl" />
                     </div>
                   </div>
@@ -134,15 +131,13 @@ function PopularSeries() {
 
                 {/* Series Information */}
                 <div>
-                  <h3 className="mb-2 truncate text-base font-bold transition group-hover:text-red-500">
+                  <h3 className="mb-2 truncate text-base font-bold transition group-hover:text-red-500 group-active:text-red-500">
                     {item.name}
                   </h3>
 
-                  <div className="flex items-center gap-2 text-xs tracking-wide text-gray-500">
+                  <div className="flex items-center gap-2 text-xs tracking-wide">
                     <span>{releaseYear}</span>
-
                     <span>•</span>
-
                     <span className="truncate">{genreName}</span>
                   </div>
                 </div>

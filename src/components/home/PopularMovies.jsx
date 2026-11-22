@@ -18,6 +18,7 @@ const IMAGE_URL = "https://image.tmdb.org/t/p/";
 function PopularMovies() {
   const { popularMovies, loading } = useHome();
   const { moviesGenres } = useMovie();
+
   if (loading) {
     return <Loading />;
   }
@@ -27,7 +28,7 @@ function PopularMovies() {
   }
 
   return (
-    <section className="w-full overflow-hidden bg-[#090a0e] px-6 py-16 text-white md:px-12 lg:px-16">
+    <section className="w-full overflow-hidden px-6 py-16 md:px-12 lg:px-16">
       {/* Section Header */}
       <div className="mb-10 flex items-end justify-between gap-5">
         <div>
@@ -42,10 +43,10 @@ function PopularMovies() {
 
         <Link
           to="/movies"
-          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 md:flex"
+          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:flex"
         >
           VIEW ALL MOVIES
-          <FaArrowRight className="transition group-hover:translate-x-1" />
+          <FaArrowRight className="transition group-hover:translate-x-1 group-active:translate-x-1" />
         </Link>
       </div>
 
@@ -92,14 +93,12 @@ function PopularMovies() {
             ? movie.release_date.slice(0, 4)
             : "N/A";
 
-          // Get Genre Name from MovieContext API
           const genreName =
             moviesGenres.find((genre) => movie.genre_ids?.includes(genre.id))
               ?.name || "MOVIE";
 
           return (
             <SwiperSlide key={movie.id} className="h-auto">
-              {/* Movie Card */}
               <Link
                 to={`/movies/${movie.id}`}
                 className="group block h-full cursor-pointer"
@@ -114,7 +113,7 @@ function PopularMovies() {
                     }
                     alt={movie.title}
                     loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110 group-active:scale-110"
                   />
 
                   {/* Rating */}
@@ -124,8 +123,8 @@ function PopularMovies() {
                   </div>
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100">
-                    <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100 group-active:opacity-100">
+                    <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-active:scale-110 group-hover:border-red-600 group-hover:bg-red-600 group-active:border-red-600 group-active:bg-red-600">
                       <FaPlay className="ml-1 text-xl" />
                     </div>
                   </div>
@@ -133,11 +132,11 @@ function PopularMovies() {
 
                 {/* Movie Information */}
                 <div>
-                  <h3 className="mb-2 truncate text-base font-bold transition group-hover:text-red-500">
+                  <h3 className="mb-2 truncate text-base font-bold transition group-hover:text-red-500 group-active:text-red-500">
                     {movie.title}
                   </h3>
 
-                  <div className="flex items-center gap-2 text-xs tracking-wide text-gray-500">
+                  <div className="flex items-center gap-2 text-xs tracking-wide">
                     <span>{releaseYear}</span>
                     <span>•</span>
                     <span className="truncate">{genreName}</span>

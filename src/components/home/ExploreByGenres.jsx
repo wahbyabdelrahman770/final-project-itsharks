@@ -17,7 +17,7 @@ function ExploreGenres() {
   }, [moviesGenres]);
 
   return (
-    <section className="bg-[#090a0e] px-6 py-16 text-white md:px-12 lg:px-16">
+    <section className="px-6 py-16 md:px-12 lg:px-16">
       <div className="mb-10 flex items-end justify-between gap-5">
         <div>
           <p className="mb-3 text-xs font-bold tracking-[3px] text-red-600">
@@ -31,7 +31,7 @@ function ExploreGenres() {
 
         <Link
           to="/movies"
-          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 md:flex"
+          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:flex"
         >
           Browse all genres
           <FaArrowRight className="transition group-hover:translate-x-1" />
@@ -43,10 +43,8 @@ function ExploreGenres() {
           <Link
             to="/movies"
             key={genre.genreId}
-            className="group relative flex h-40 items-end overflow-hidden rounded-lg border border-white/10 bg-[#11141d] p-5 transition duration-500 hover:border-red-600 sm:h-52"
+            className="group relative flex h-40 items-end overflow-hidden rounded-lg border border-white/10 bg-[#11141d] p-5 transition duration-500 hover:border-red-600 active:border-red-600 sm:h-52"
           >
-            {/* Background Image */}
-
             {genre.movie && (
               <img
                 src={`${IMAGE_URL}${
@@ -61,7 +59,7 @@ function ExploreGenres() {
 
             <div className="absolute inset-0 z-10 bg-linear-to-t from-red-600/80 via-red-500/20 to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-            <h3 className="relative z-20 text-lg font-bold tracking-wide text-white transition duration-300 group-hover:text-white sm:text-xl">
+            <h3 className="relative z-20 text-lg font-bold tracking-wide text-white transition duration-300 sm:text-xl">
               {genre.genreName}
             </h3>
           </Link>
@@ -70,7 +68,7 @@ function ExploreGenres() {
 
       <Link
         to="/movies"
-        className="group mt-8 flex w-fit items-center gap-3 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 md:hidden"
+        className="group mt-8 flex w-fit items-center gap-3 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:hidden"
       >
         Browse all genres
         <FaArrowRight className="transition group-hover:translate-x-1" />
