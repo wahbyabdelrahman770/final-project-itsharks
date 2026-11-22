@@ -58,7 +58,7 @@ const ActorContext = ({ children }) => {
     }
   }, []);
 
-  // Actor Movies Only
+  // Actor Movies
   const actorMovies = useMemo(() => {
     return (actor?.combined_credits ? [...(actor?.combined_credits?.cast), ...(actor?.combined_credits?.crew)] : [])
       .filter((movie) => movie.media_type === "movie")
@@ -69,11 +69,23 @@ const ActorContext = ({ children }) => {
       );
   }, [actor]);
 
+  // Actor TV Series
+  const actorSeries = useMemo(() => {
+    return (actor.combined_credits?.cast || [])
+      .filter((series) => series.media_type === "tv")
+      .sort((firstSeries, secondSeries) =>
+        (secondSeries.first_air_date || "").localeCompare(
+          firstSeries.first_air_date || "",
+        ),
+      );
+  }, [actor]);
+
   return (
     <ActorStore.Provider
       value={{
         actor,
         actorMovies,
+        actorSeries,
         loading,
         error,
         getActorDetails,
