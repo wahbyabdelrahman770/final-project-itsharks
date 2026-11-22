@@ -25,59 +25,79 @@ import Season from "./pages/SeriesSeason/Season";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import SeasonFullCast from "./pages/fullCast/SeasonFullCast";
 import SeriesSeasonProvider from "./contexts/Series/SeriesSeasonProvider";
-import SeriesAllSeasons from './pages/SeriesAllSeasons/SeriesAllSeasons';
+import SeriesAllSeasons from "./pages/SeriesAllSeasons/SeriesAllSeasons";
 
+import ActorContext from "./contexts/Actor/ActorContext";
+import ActorDetails from "./pages/ActorDetails/ActorDetails";
 const App = () => {
-    return (
-        <NavContext>
-            <HomeProvider>
-                <MovieContext>
-                    <SeriesContext>
-                        <Nav />
+  return (
+    <NavContext>
+      <HomeProvider>
+        <MovieContext>
+          <SeriesContext>
+            <Nav />
 
-                        <Routes>
-                            <Route path="/" element={<Home />} />
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-                            <Route path="/movies" element={<Movies />} />
+              <Route path="/movies" element={<Movies />} />
 
-                            <Route path="/movies/:movieID" element={
-                                <MovieDetailsProvider>
-                                    <Outlet />
-                                </MovieDetailsProvider>
-                            }
-                            >
-                                <Route index element={<MoviesDeatails />} />
-                                <Route path="credits" element={<MovieFullCast />} />
-                            </Route>
+              <Route
+                path="/movies/:movieID"
+                element={
+                  <MovieDetailsProvider>
+                    <Outlet />
+                  </MovieDetailsProvider>
+                }
+              >
+                <Route index element={<MoviesDeatails />} />
+                <Route path="credits" element={<MovieFullCast />} />
+              </Route>
 
-                            <Route path="/series" element={<Series />} />
+              <Route path="/series" element={<Series />} />
 
-                            <Route path="/series/:seriesID" element={
-                                <SeriesDetailsProvider>
-                                    <SeriesSeasonProvider>
-                                        <Outlet />
-                                    </SeriesSeasonProvider>
-                                </SeriesDetailsProvider>
-                            }>
-                                <Route index element={<SeriesDetails />} />
-                                <Route path="credits" element={<SeriesFullCast />} />
-                                <Route path="seasons" element={<SeriesAllSeasons />} />
-                                <Route path="season/:seasonNumber" element={<Season />} />
-                                <Route path="season/:seasonNumber/credits" element={<SeasonFullCast />} />
-                            </Route>
+              <Route
+                path="/series/:seriesID"
+                element={
+                  <SeriesDetailsProvider>
+                    <SeriesSeasonProvider>
+                      <Outlet />
+                    </SeriesSeasonProvider>
+                  </SeriesDetailsProvider>
+                }
+              >
+                <Route index element={<SeriesDetails />} />
+                <Route path="credits" element={<SeriesFullCast />} />
+                <Route path="seasons" element={<SeriesAllSeasons />} />
+                <Route path="season/:seasonNumber" element={<Season />} />
+                <Route
+                  path="season/:seasonNumber/credits"
+                  element={<SeasonFullCast />}
+                />
+              </Route>
 
-                            <Route path="/contact" element={<Contact />} />
+              <Route
+                path="/actor/:actorID"
+                element={
+                  <ActorContext>
+                    <ActorDetails />
+                  </ActorContext>
+                }
+              >
+                <Route index element={<ActorDetails />} />
+              </Route>
+              <Route path="/contact" element={<Contact />} />
 
-                            <Route path="/login" element={<Login />} />
-                        </Routes>
+              <Route path="/login" element={<Login />} />
+            </Routes>
 
-                        <Footer />
-                        <ScrollToTopButton />
-                    </SeriesContext>
-                </MovieContext>
-            </HomeProvider>
-        </NavContext>
-    );
+            <Footer />
+            <ScrollToTopButton />
+          </SeriesContext>
+        </MovieContext>
+      </HomeProvider>
+    </NavContext>
+  );
 };
 
 export default App;
