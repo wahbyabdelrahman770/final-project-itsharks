@@ -1,3 +1,4 @@
+
 import { Outlet, Route, Routes } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -26,12 +27,21 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import SeasonFullCast from "./pages/fullCast/SeasonFullCast";
 import SeriesSeasonProvider from "./contexts/Series/SeriesSeasonProvider";
 import SeriesAllSeasons from "./pages/SeriesAllSeasons/SeriesAllSeasons";
+
+// Media Pages (master)
 import MovieMedia from "./pages/MovieMedia/MovieMedia";
 import SeriesMedia from "./pages/SeriesMedia.jsx/SeriesMedia";
+
+// Theme (master)
 import { useTheme } from "./contexts/ThemeProvider";
+
+// Actor Page (Mohamed)
+import ActorContext from "./contexts/Actor/ActorContext";
+import ActorDetails from "./pages/ActorDetails/ActorDetails";
 
 const App = () => {
   const { theme } = useTheme();
+
   return (
     <NavContext>
       <HomeProvider>
@@ -87,13 +97,23 @@ const App = () => {
                   />
                 </Route>
 
-                <Route path="/contact" element={<Contact />} />
+                {/* Actor Details */}
+                <Route
+                  path="/actor/:actorID"
+                  element={
+                    <ActorContext>
+                      <ActorDetails />
+                    </ActorContext>
+                  }
+                />
 
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
               </Routes>
 
               <Footer />
             </div>
+
             <ScrollToTopButton />
           </SeriesContext>
         </MovieContext>
