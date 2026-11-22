@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useActor } from "../../contexts/Actor/ActorContext";
@@ -17,8 +18,14 @@ import {
 const ActorDetails = () => {
   const { actorID } = useParams();
 
-  const { actor, actorMovies, loading, actorSeries, error, getActorDetails } =
-    useActor();
+  const {
+    actor,
+    actorMovies,
+    actorSeries,
+    loading,
+    error,
+    getActorDetails,
+  } = useActor();
 
   const [showFullBio, setShowFullBio] = useState(false);
 
@@ -47,7 +54,9 @@ const ActorDetails = () => {
           <FaUser className="text-3xl text-red-500" />
         </div>
 
-        <h2 className="text-3xl font-bold text-white">Something Went Wrong</h2>
+        <h2 className="text-3xl font-bold text-white">
+          Something Went Wrong
+        </h2>
 
         <p className="mt-3 text-gray-400">
           We couldn't load this actor's information.
@@ -64,40 +73,67 @@ const ActorDetails = () => {
     );
   }
 
+  // No Actor Data
+  if (!actor) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-[#090a0e] text-gray-400">
+        Actor information is not available.
+      </div>
+    );
+  }
+
   const actorImage = actor.profile_path
     ? `https://image.tmdb.org/t/p/h632${actor.profile_path}`
     : "/placeholderImg.avif";
 
-  const biography = actor.biography || "No biography available for this actor.";
+  const biography =
+    actor.biography || "No biography available for this actor.";
 
   const hasLongBio = biography.length > 450;
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#090a0e] text-white">
-      {/* actor section */}
+
+      {/* Actor Section */}
       <div className="relative overflow-hidden border-b border-white/5">
+
+        {/* Background Effects */}
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,rgba(229,9,36,0.18),transparent_55%)]" />
 
         <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-red-900/10 blur-[120px]" />
 
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-12 md:pt-20">
+
           {/* Breadcrumb */}
-          <div className="mb-12 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[2px]">
-            <span className="text-gray-500">Cinema4You</span>
+          <div className="mb-12 flex cursor-default flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[2px]">
+            <span className="text-gray-500">
+              Cinema4You
+            </span>
+
             <span className="text-[#e50924]">/</span>
-            <span className="text-gray-500">People</span>
+
+            <span className="text-gray-500">
+              People
+            </span>
+
             <span className="text-[#e50924]">/</span>
-            <span className="text-white">{actor.name || "Profile"}</span>
+
+            <span className="text-white">
+              {actor.name || "Profile"}
+            </span>
           </div>
 
           {/* Actor Hero */}
           <section className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[360px_1fr] lg:gap-16">
+
             {/* Actor Image */}
             <div className="relative mx-auto w-full max-w-90 lg:mx-0">
+
               {/* Decorative Border */}
               <div className="absolute -inset-2 rounded-[28px] bg-linear-to-br from-[#e50924]/30 via-transparent to-transparent blur-lg" />
 
               <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#15161b] shadow-[0_30px_80px_rgba(0,0,0,0.6)]">
+
                 <img
                   src={actorImage}
                   alt={actor.name || "Actor"}
@@ -116,6 +152,7 @@ const ActorDetails = () => {
 
             {/* Actor Content */}
             <div className="pt-2">
+
               {/* Label */}
               <div className="mb-5 flex items-center gap-3">
                 <span className="h-0.5 w-9 bg-[#e50924]" />
@@ -132,6 +169,7 @@ const ActorDetails = () => {
 
               {/* Tags */}
               <div className="mt-6 flex flex-wrap items-center gap-3">
+
                 <span className="rounded-full border border-red-500/30 bg-red-500/10 px-4 py-2 text-xs font-semibold text-red-400">
                   {actor.known_for_department || "Entertainment"}
                 </span>
@@ -149,12 +187,13 @@ const ActorDetails = () => {
 
               {/* Description */}
               <p className="mt-7 max-w-2xl text-base leading-8 text-gray-400">
-                Discover the story, career, and memorable performances behind
-                one of the faces of cinema.
+                Discover the story, career, and memorable performances
+                behind one of the faces of cinema.
               </p>
 
               {/* Information Cards */}
               <div className="mt-9 grid gap-4 sm:grid-cols-2">
+
                 <InfoCard
                   icon={<FaBirthdayCake />}
                   label="Birthday"
@@ -186,6 +225,7 @@ const ActorDetails = () => {
 
       {/* Biography Section */}
       <section className="mx-auto max-w-7xl px-5 py-16">
+
         <div className="mb-7 flex items-center gap-4">
           <div className="h-9 w-1 rounded-full bg-[#e50924]" />
 
@@ -194,11 +234,14 @@ const ActorDetails = () => {
               The Person Behind The Roles
             </span>
 
-            <h2 className="mt-2 text-3xl font-black">Biography</h2>
+            <h2 className="mt-2 text-3xl font-black">
+              Biography
+            </h2>
           </div>
         </div>
 
         <div className="max-w-5xl rounded-2xl border border-white/5 bg-[#131419] p-6 md:p-9">
+
           <p className="whitespace-pre-line text-base leading-8 text-gray-400">
             {showFullBio || !hasLongBio
               ? biography
@@ -218,13 +261,16 @@ const ActorDetails = () => {
           )}
         </div>
       </section>
+
       {/* Filmography Section */}
       <div className="mx-auto max-w-7xl px-5 pb-20">
+
         {/* Actor Movies */}
         <ActorMovies movies={actorMovies || []} />
 
         {/* Actor TV Series */}
         <ActorSeries series={actorSeries || []} />
+
       </div>
     </main>
   );
@@ -234,7 +280,9 @@ const ActorDetails = () => {
 const InfoCard = ({ icon, label, value }) => {
   return (
     <div className="group rounded-xl border border-white/10 bg-white/3 p-5 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-red-500/30 hover:bg-white/5">
+
       <div className="mb-3 flex items-center gap-3">
+
         <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-500/10 text-[#e50924]">
           {icon}
         </span>

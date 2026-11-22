@@ -37,6 +37,7 @@ import { useTheme } from "./contexts/ThemeProvider";
 // Actor Page (Mohamed)
 import ActorContext from "./contexts/Actor/ActorContext";
 import ActorDetails from "./pages/ActorDetails/ActorDetails";
+import SeasonMedia from "./pages/SeasonMedia/SeasonMedia";
 
 const App = () => {
   const { theme } = useTheme();
@@ -47,11 +48,10 @@ const App = () => {
         <MovieContext>
           <SeriesContext>
             <div
-              className={`min-h-screen transition-colors duration-300 ${
-                theme === "light"
+              className={`min-h-screen transition-colors duration-300 ${theme === "light"
                   ? "bg-[#F4F5F7] text-[#171923]"
                   : "bg-black text-[#E2E8F0]"
-              }`}
+                }`}
             >
               <Nav />
 
@@ -93,6 +93,11 @@ const App = () => {
                   <Route
                     path="season/:seasonNumber/credits"
                     element={<SeasonFullCast />}
+                  />
+
+                  <Route
+                    path="season/:seasonNumber/media"
+                    element={<SeasonMedia />}
                   />
                 </Route>
 

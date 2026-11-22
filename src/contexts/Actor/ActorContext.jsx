@@ -38,8 +38,7 @@ const ActorContext = ({ children }) => {
 
     try {
       const apiLink =
-        `https://api.themoviedb.org/3/person/${actorID}` +
-        `?language=en-US&append_to_response=combined_credits`;
+        `https://api.themoviedb.org/3/person/${actorID}?language=en-US&append_to_response=combined_credits`;
 
       const req = await fetch(apiLink, options);
 
@@ -61,7 +60,7 @@ const ActorContext = ({ children }) => {
 
   // Actor Movies
   const actorMovies = useMemo(() => {
-    return (actor.combined_credits?.cast || [])
+    return (actor?.combined_credits ? [...(actor?.combined_credits?.cast), ...(actor?.combined_credits?.crew)] : [])
       .filter((movie) => movie.media_type === "movie")
       .sort((firstMovie, secondMovie) =>
         (secondMovie.release_date || "").localeCompare(

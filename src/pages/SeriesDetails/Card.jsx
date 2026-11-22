@@ -2,6 +2,7 @@ import { FaPlay, FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { getTvGenre } from "../../utils/genres";
+import { ImageWithLoading } from "../../components/Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
 
 const Card = ({
   series: { id, poster_path, name, vote_average, first_air_date, genre_ids },
@@ -10,7 +11,7 @@ const Card = ({
     <Link to={`/series/${id}`} className="group block h-full cursor-pointer">
       {/* Poster */}
       <div className="relative mb-4 aspect-2/3 overflow-hidden bg-gray-900">
-        <img
+        <ImageWithLoading
           src={`https://media.themoviedb.org/t/p/original${poster_path}`}
           alt={name}
           loading="lazy"
