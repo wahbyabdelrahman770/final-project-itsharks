@@ -1,4 +1,3 @@
-
 import { Outlet, Route, Routes } from "react-router-dom";
 
 import Nav from "./components/Nav";
@@ -113,7 +112,6 @@ const App = () => {
 
               <Footer />
             </div>
-
             <ScrollToTopButton />
           </SeriesContext>
         </MovieContext>

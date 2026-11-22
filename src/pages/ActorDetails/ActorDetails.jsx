@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useActor } from "../../contexts/Actor/ActorContext";
 import ActorMovies from "./ActorMovies";
+import ActorSeries from "./ActorSeries";
 
 import {
   FaBirthdayCake,
@@ -16,7 +17,8 @@ import {
 const ActorDetails = () => {
   const { actorID } = useParams();
 
-  const { actor, actorMovies, loading, error, getActorDetails } = useActor();
+  const { actor, actorMovies, loading, actorSeries, error, getActorDetails } =
+    useActor();
 
   const [showFullBio, setShowFullBio] = useState(false);
 
@@ -72,7 +74,7 @@ const ActorDetails = () => {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#090a0e] text-white">
-      {/* Cinematic Background */}
+      {/* actor section */}
       <div className="relative overflow-hidden border-b border-white/5">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_20%,rgba(229,9,36,0.18),transparent_55%)]" />
 
@@ -216,10 +218,13 @@ const ActorDetails = () => {
           )}
         </div>
       </section>
-
-      {/* Filmography Carousel */}
+      {/* Filmography Section */}
       <div className="mx-auto max-w-7xl px-5 pb-20">
+        {/* Actor Movies */}
         <ActorMovies movies={actorMovies || []} />
+
+        {/* Actor TV Series */}
+        <ActorSeries series={actorSeries || []} />
       </div>
     </main>
   );

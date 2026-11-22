@@ -119,12 +119,6 @@ const ActorMovies = ({ movies = [] }) => {
                 <p className="mt-2 text-sm text-gray-400">
                   {movie.release_date?.slice(0, 4) || "Unknown Year"}
                 </p>
-
-                {movie.character && (
-                  <p className="mt-2 line-clamp-1 text-xs text-gray-500">
-                    As {movie.character}
-                  </p>
-                )}
               </div>
             </Link>
           </SwiperSlide>
