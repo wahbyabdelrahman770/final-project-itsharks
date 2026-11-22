@@ -98,7 +98,7 @@ const Credits = ({ firstThreeCast, firstThreeCrew }) => {
 const VISIBLE_EPISODES = 3;
 
 const Season = () => {
-    const { seriesID, seasonNumber, seasonDetails, loading, air_date, episodes, overview, poster, vote_average, cast, crew } = useSeriesSeasonDetails();
+    const { seriesID, seasonDetails, loading, air_date, episodes, overview, poster, vote_average, cast, crew } = useSeriesSeasonDetails();
     const { name } = useSeriesDetails();
 
     const listRef = useRef(null);

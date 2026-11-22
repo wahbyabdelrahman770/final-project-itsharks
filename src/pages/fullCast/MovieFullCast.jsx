@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
 import { ActorCard } from "../MoviesDeatils/Credits";
-import { FaArrowUpLong } from "react-icons/fa6";
 
 const MovieFullCast = () => {
     const { movieDetails, movieID, cast, crew } = useMovieDetails();

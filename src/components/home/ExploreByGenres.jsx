@@ -31,7 +31,7 @@ function ExploreGenres() {
 
         <Link
           to="/movies"
-          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 md:flex"
+          className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:flex"
         >
           Browse all genres
           <FaArrowRight className="transition group-hover:translate-x-1" />
@@ -43,15 +43,14 @@ function ExploreGenres() {
           <Link
             to="/movies"
             key={genre.genreId}
-            className="group relative flex h-40 items-end overflow-hidden rounded-lg border border-white/10 bg-[#11141d] p-5 transition duration-500 hover:border-red-600 sm:h-52"
+            className="group relative flex h-40 items-end overflow-hidden rounded-lg border border-white/10 bg-[#11141d] p-5 transition duration-500 hover:border-red-600 active:border-red-600 sm:h-52"
           >
             {/* Background Image */}
 
             {genre.movie && (
               <img
-                src={`${IMAGE_URL}${
-                  genre.movie.backdrop_path || genre.movie.poster_path
-                }`}
+                src={`${IMAGE_URL}${genre.movie.backdrop_path || genre.movie.poster_path
+                  }`}
                 alt={genre.genreName}
                 className="absolute inset-0 z-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
               />
@@ -70,7 +69,7 @@ function ExploreGenres() {
 
       <Link
         to="/movies"
-        className="group mt-8 flex w-fit items-center gap-3 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 md:hidden"
+        className="group mt-8 flex w-fit items-center gap-3 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:hidden"
       >
         Browse all genres
         <FaArrowRight className="transition group-hover:translate-x-1" />

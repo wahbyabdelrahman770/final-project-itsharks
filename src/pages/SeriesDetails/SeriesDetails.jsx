@@ -1,4 +1,5 @@
 import DetailsLoading from "../../components/DetailsLoading";
+import Media from "../../components/Movie-And-Series-Details/Media";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
 import Credits from "./Credits";
 import Overview from "./Overview";
@@ -7,7 +8,7 @@ import Recommendations from "./Recommendations";
 import Seasons from "./Seasons";
 
 const SeriesDetails = () => {
-	const { loading } = useSeriesDetails();
+	const { loading, backdrops, posters, logos, videos: { results: videos = [] } = {} } = useSeriesDetails();
 	if (loading) {
 		return <DetailsLoading />;
 	}
@@ -17,6 +18,7 @@ const SeriesDetails = () => {
 			<ProductionDetails />
 			<Credits />
 			<Seasons />
+			<Media backdrops={backdrops} posters={posters} logos={logos} videos={videos} />
 			<Recommendations />
 		</div>
 	);

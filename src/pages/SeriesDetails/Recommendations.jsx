@@ -11,7 +11,7 @@ const Recommendations = () => {
 
                 <section className="flex flex-row justify-between items-end">
                     <p className="mt-2 font-serif text-[1.9rem] text-white font-medium">You May Also Like</p>
-                    <Link className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">View All Recommendations →</Link>
+                    <Link className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">View All Recommendations →</Link>
                 </section>
             </div>
 
