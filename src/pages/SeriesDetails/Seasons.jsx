@@ -14,7 +14,7 @@ export const Season = ({ to, season: { name, season_number, poster_path, air_dat
                     src={`https://media.themoviedb.org/t/p/original${poster_path}`}
                     alt={name}
                     loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110 group-active:scale-110"
                 />
 
                 {/* Rating */}
@@ -24,8 +24,8 @@ export const Season = ({ to, season: { name, season_number, poster_path, air_dat
                 </div>
 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100">
-                    <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100 group-active:opacity-100">
+                    <div className="flex size-16 items-center justify-center rounded-full border border-white/70 text-white transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600 group-active:scale-110 group-active:border-red-600 group-active:bg-red-600">
                         <FaPlay className="text-2xl" />
                     </div>
                 </div>
@@ -33,7 +33,7 @@ export const Season = ({ to, season: { name, season_number, poster_path, air_dat
 
             {/* Movie Information */}
             <div>
-                <h3 className="mb-2 text-white truncate text-base font-bold transition group-hover:text-red-500">
+                <h3 className="mb-2 text-white truncate text-base font-bold transition group-hover:text-red-500 group-active:text-red-500">
                     {name}
                 </h3>
 
@@ -57,7 +57,7 @@ const Seasons = () => {
                 <span className="text-[#e50924] text-[0.8rem] font-bold tracking-[2px] uppercase">the complete journey</span>
                 <section className="flex flex-row justify-between items-end">
                     <p className="mt-2 font-serif text-[1.9rem] text-white font-medium">Seasons</p>
-                    <Link to="seasons" className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">View All Seasons →</Link>
+                    {seasons.length > 5 && <Link to="seasons" className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">View All Seasons →</Link>}
                 </section>
             </div>
 

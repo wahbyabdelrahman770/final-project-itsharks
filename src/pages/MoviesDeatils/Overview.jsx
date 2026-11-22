@@ -41,20 +41,19 @@ const Overview = () => {
 
                     <p className="text-[#afb3bc] max-w-152.5 text-[14px]">{movieDetails?.overview}</p>
 
-                    {/* <Link to={trailerLink} target="blank" className="py-4 px-0 mt-7 w-41.25 bg-[#e50924] text-white text-[12px] font-semibold uppercase rounded-md cursor-pointer flex justify-around items-center duration-150 hover:shadow-[0px_0px_17px_2px_#eb3c3c]"><PlayIcon fill="white" className="w-6 h-6" /> Watch Trailer</Link> */}
-                    <Modal>
-                        <Button className="py-4 px-0 mt-7 w-41.25 bg-[#e50924] text-white text-[12px] font-semibold uppercase rounded-md cursor-pointer flex justify-evenly items-center duration-150 hover:shadow-[0px_0px_17px_2px_#eb3c3c] hover:-translate-y-1">
+                    {trailerLink && <Modal>
+                        <Button className="py-4 px-0 mt-7 w-41.25 bg-[#e50924] text-white text-[12px] font-semibold uppercase rounded-md cursor-pointer flex justify-evenly items-center duration-150 hover:shadow-[0px_0px_17px_2px_#eb3c3c] hover:-translate-y-1 active:shadow-[0px_0px_17px_2px_#eb3c3c] active:-translate-y-1">
                             <PlayIcon fill="white" className="w-6 h-6" /> Watch Trailer
                         </Button>
                         <Modal.Backdrop>
                             <Modal.Container size="cover">
                                 <Modal.Dialog className="bg-[#000000e6] flex justify-center items-center rounded-none">
                                     <Modal.CloseTrigger />
-                                    <iframe src={trailerLink} className="w-full h-full"></iframe>
+                                    <iframe src={trailerLink} className="md:w-full h-62.5 md:h-full"></iframe>
                                 </Modal.Dialog>
                             </Modal.Container>
                         </Modal.Backdrop>
-                    </Modal>
+                    </Modal>}
                 </section>
             </div>
         </div>

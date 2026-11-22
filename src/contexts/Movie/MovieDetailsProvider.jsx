@@ -68,6 +68,8 @@ const MovieDetailsProvider = ({ children }) => {
 
   const trailerKey = videos?.results?.find(
     (item) =>
+      item.type == "Trailer" ||
+      item.type == "trailer" ||
       item.name == "Main Trailer" ||
       item.name == "Official Trailer" ||
       item.name == "Original Trailer" ||
@@ -77,10 +79,9 @@ const MovieDetailsProvider = ({ children }) => {
       item.name.includes("official") ||
       item.name.includes("Official") ||
       item.name.includes("trailer") ||
-      item.name.includes("Trailer") ||
-      item.name.includes("4K"),
+      item.name.includes("Trailer")
   )?.key;
-  const trailerLink = `https://www.youtube.com/embed/${trailerKey}`;
+  const trailerLink = trailerKey != null ? `https://www.youtube.com/embed/${trailerKey}` : null;
 
   const director = crew?.find((person) => person.job == "Director")?.name;
 

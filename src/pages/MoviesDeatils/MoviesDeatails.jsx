@@ -1,15 +1,14 @@
-import ContentLoading from "../../components/ContentLoading";
 import DetailsLoading from "../../components/DetailsLoading";
+import Media from "../../components/Movie-And-Series-Details/Media";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
 import Collection from "./Collection";
 import Credits from "./Credits";
-import Media from "./Media";
 import Overview from "./Overview";
 import ProductionDetails from "./ProductionDetails";
 import Recommendations from "./Recommendations";
 
 const MoviesDeatails = () => {
-	const { loading, collectionID } = useMovieDetails();
+	const { loading, collectionID, backdrops, posters, logos, videos: { results: videos = [] } = {} } = useMovieDetails();
 	if (loading) {
 		return <DetailsLoading />;
 	}
@@ -19,7 +18,7 @@ const MoviesDeatails = () => {
 			<ProductionDetails />
 			<Credits />
 			{collectionID && <Collection />}
-			<Media />
+			<Media backdrops={backdrops} posters={posters} logos={logos} videos={videos} />
 			<Recommendations />
 		</div >
 	);

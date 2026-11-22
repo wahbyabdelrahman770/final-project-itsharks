@@ -27,6 +27,7 @@ import SeasonFullCast from "./pages/fullCast/SeasonFullCast";
 import SeriesSeasonProvider from "./contexts/Series/SeriesSeasonProvider";
 import SeriesAllSeasons from './pages/SeriesAllSeasons/SeriesAllSeasons';
 import MovieMedia from "./pages/MovieMedia/MovieMedia";
+import SeriesMedia from "./pages/SeriesMedia.jsx/SeriesMedia";
 
 
 const App = () => {
@@ -70,6 +71,7 @@ const App = () => {
                                 <Route index element={<SeriesDetails />} />
                                 <Route path="credits" element={<SeriesFullCast />} />
                                 <Route path="seasons" element={<SeriesAllSeasons />} />
+                                <Route path="media" element={<SeriesMedia />} />
                                 <Route path="season/:seasonNumber" element={<Season />} />
                                 <Route
                                     path="season/:seasonNumber/credits"
