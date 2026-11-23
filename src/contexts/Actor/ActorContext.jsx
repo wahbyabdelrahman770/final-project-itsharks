@@ -58,6 +58,14 @@ const ActorContext = ({ children }) => {
     }
   }, []);
 
+  const actorMovieCount = new Set();
+  actor?.combined_credits?.cast.filter(media => media?.media_type === "movie")?.forEach(movie => actorMovieCount.add(movie?.title));
+  actor?.combined_credits?.crew.filter(media => media?.media_type === "movie")?.forEach(movie => actorMovieCount.add(movie?.title));
+
+  const actorSeriesCount = new Set();
+  actor?.combined_credits?.cast.filter(media => media?.media_type === "tv")?.forEach(series => actorSeriesCount.add(series?.name));
+  actor?.combined_credits?.crew.filter(media => media?.media_type === "tv")?.forEach(series => actorSeriesCount.add(series?.name));
+
   // Actor Movies
   const actorMovies = useMemo(() => {
     return (actor?.combined_credits ? [...(actor?.combined_credits?.cast), ...(actor?.combined_credits?.crew)] : [])
@@ -71,7 +79,7 @@ const ActorContext = ({ children }) => {
 
   // Actor TV Series
   const actorSeries = useMemo(() => {
-    return (actor.combined_credits?.cast || [])
+    return (actor?.combined_credits ? [...(actor?.combined_credits?.cast), ...(actor?.combined_credits?.crew)] : [])
       .filter((series) => series.media_type === "tv")
       .sort((firstSeries, secondSeries) =>
         (secondSeries.first_air_date || "").localeCompare(
@@ -86,6 +94,8 @@ const ActorContext = ({ children }) => {
         actor,
         actorMovies,
         actorSeries,
+        actorMovieCount,
+        actorSeriesCount,
         loading,
         error,
         getActorDetails,

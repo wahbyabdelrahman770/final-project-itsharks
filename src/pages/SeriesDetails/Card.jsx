@@ -15,7 +15,7 @@ const Card = ({
           src={`https://media.themoviedb.org/t/p/original${poster_path}`}
           alt={name}
           loading="lazy"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-110 group-active:scale-110"
         />
 
         {/* Rating */}
@@ -25,8 +25,8 @@ const Card = ({
         </div>
 
         {/* Hover Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100">
-          <div className="flex size-16 items-center justify-center rounded-full border border-white/70  transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/65 opacity-0 transition duration-300 group-hover:opacity-100 group-active:opacity-100">
+          <div className="flex size-16 items-center justify-center rounded-full border border-white/70  transition duration-300 group-hover:scale-110 group-hover:border-red-600 group-hover:bg-red-600 group-active:scale-110 group-active:border-red-600 group-active:bg-red-600">
             <FaPlay className="text-2xl" />
           </div>
         </div>
@@ -34,7 +34,7 @@ const Card = ({
 
       {/* Movie Information */}
       <div>
-        <h3 className="mb-2  truncate text-base font-bold transition group-hover:text-red-500">
+        <h3 className="mb-2  truncate text-base font-bold transition group-hover:text-red-500 group-active:text-red-500">
           {name}
         </h3>
 

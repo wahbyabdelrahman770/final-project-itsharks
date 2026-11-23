@@ -19,7 +19,7 @@ function ErrorState({ onRetry }) {
 
       <button
         onClick={onRetry}
-        className="cursor-pointer flex items-center gap-3 rounded bg-red-600 px-7 py-3 text-sm font-bold transition hover:bg-red-700"
+        className="cursor-pointer flex items-center gap-3 rounded bg-red-600 px-7 py-3 text-sm font-bold transition hover:bg-red-700 active:bg-red-700"
       >
         Try Again
         <span>↻</span>

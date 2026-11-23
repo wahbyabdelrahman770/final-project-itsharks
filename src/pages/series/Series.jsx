@@ -1,10 +1,10 @@
 import { useSeries } from "../../contexts/Series/SeriesContext";
-import SeriesCard from "./SeriesCard";
 import Loading from "./../../components/Loading";
 import ErrorState from "../../components/ErrorState";
 import NotFound from "../../components/NotFound";
 import { useState } from "react";
 import { useTheme } from "../../contexts/ThemeProvider";
+import Card from "../SeriesDetails/Card";
 
 const Series = () => {
   const [active, setActive] = useState("ALL");
@@ -91,7 +91,7 @@ const Series = () => {
               setActive("ALL");
               getSeries();
             }}
-            className={`${active === "ALL" ? "bg-red-600 shadow-lg shadow-red-600/30" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "ALL" ? "bg-red-600 shadow-lg shadow-red-600/30" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ALL
           </button>
@@ -101,7 +101,7 @@ const Series = () => {
               setActive("Action");
               filterSeries("Action");
             }}
-            className={`${active === "Action" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Action" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ACTION
           </button>
@@ -111,7 +111,7 @@ const Series = () => {
               setActive("Drama");
               filterSeries("Drama");
             }}
-            className={`${active === "Drama" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Drama" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             DRAMA
           </button>
@@ -121,7 +121,7 @@ const Series = () => {
               setActive("Science Fiction");
               filterSeries("Science Fiction");
             }}
-            className={`${active === "Science Fiction" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Science Fiction" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             Science Fiction
           </button>
@@ -131,7 +131,7 @@ const Series = () => {
               setActive("Comedy");
               filterSeries("Comedy");
             }}
-            className={`${active === "Comedy" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Comedy" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             COMEDY
           </button>
@@ -141,7 +141,7 @@ const Series = () => {
               setActive("Crime");
               filterSeries("Crime");
             }}
-            className={`${active === "Crime" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Crime" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             CRIME
           </button>
@@ -151,7 +151,7 @@ const Series = () => {
               setActive("Fantasy");
               filterSeries("Fantasy");
             }}
-            className={`${active === "Fantasy" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Fantasy" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             FANTASY
           </button>
@@ -161,7 +161,7 @@ const Series = () => {
               setActive("Mystery");
               filterSeries("Mystery");
             }}
-            className={`${active === "Mystery" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Mystery" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             MYSTERY
           </button>
@@ -171,7 +171,7 @@ const Series = () => {
               setActive("Romance");
               filterSeries("Romance");
             }}
-            className={`${active === "Romance" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Romance" ? "bg-red-600" : "border border-gray-900"} ${theme === "dark" ? "border-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ROMANCE
           </button>
@@ -193,12 +193,12 @@ const Series = () => {
         </section>
 
         {/* Series */}
-        <section className="flex flex-wrap items-start gap-x-5 gap-y-12">
+        <section className="grid grid-cols-2 md:grid-cols-5 gap-x-5 gap-y-12">
           {loading ? (
             <Loading />
           ) : (
             series.map((ser) => {
-              return <SeriesCard ser={ser} key={ser.id} />;
+              return <Card series={ser} key={ser.id} />;
             })
           )}
           {error == true && <ErrorState />}

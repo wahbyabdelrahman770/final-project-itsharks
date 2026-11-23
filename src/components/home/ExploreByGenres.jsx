@@ -34,7 +34,7 @@ function ExploreGenres() {
           className="group mb-2 hidden items-center gap-4 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:flex"
         >
           Browse all genres
-          <FaArrowRight className="transition group-hover:translate-x-1" />
+          <FaArrowRight className="transition group-hover:translate-x-1 group-active:translate-x-1" />
         </Link>
       </div>
 
@@ -47,17 +47,16 @@ function ExploreGenres() {
           >
             {genre.movie && (
               <img
-                src={`${IMAGE_URL}${
-                  genre.movie.backdrop_path || genre.movie.poster_path
-                }`}
+                src={`${IMAGE_URL}${genre.movie.backdrop_path || genre.movie.poster_path
+                  }`}
                 alt={genre.genreName}
-                className="absolute inset-0 z-0 h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                className="absolute inset-0 z-0 h-full w-full object-cover transition duration-700 group-hover:scale-110 group-active:scale-110"
               />
             )}
 
             <div className="absolute inset-0 z-10 bg-linear-to-t from-black via-black/40 to-transparent" />
 
-            <div className="absolute inset-0 z-10 bg-linear-to-t from-red-600/80 via-red-500/20 to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="absolute inset-0 z-10 bg-linear-to-t from-red-600/80 via-red-500/20 to-white/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-active:opacity-100" />
 
             <h3 className="relative z-20 text-lg font-bold tracking-wide text-white transition duration-300 sm:text-xl">
               {genre.genreName}
@@ -71,7 +70,7 @@ function ExploreGenres() {
         className="group mt-8 flex w-fit items-center gap-3 border-b border-white/20 pb-2 text-xs font-bold tracking-wider transition hover:border-red-600 active:border-red-600 md:hidden"
       >
         Browse all genres
-        <FaArrowRight className="transition group-hover:translate-x-1" />
+        <FaArrowRight className="transition group-hover:translate-x-1 group-active:translate-x-1" />
       </Link>
     </section>
   );

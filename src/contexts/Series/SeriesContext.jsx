@@ -147,6 +147,10 @@ const SeriesContext = ({ children }) => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     if (input.trim() !== "") {
       searchSeries();
@@ -156,6 +160,7 @@ const SeriesContext = ({ children }) => {
   useEffect(() => {
     getSeries();
     getGenres();
+    scrollToTop();
   }, [page]);
 
   return (

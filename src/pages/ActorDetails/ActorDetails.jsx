@@ -1,6 +1,5 @@
-
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useActor } from "../../contexts/Actor/ActorContext";
 import ActorMovies from "./ActorMovies";
 import ActorSeries from "./ActorSeries";
@@ -22,6 +21,8 @@ const ActorDetails = () => {
     actor,
     actorMovies,
     actorSeries,
+    actorMovieCount,
+    actorSeriesCount,
     loading,
     error,
     getActorDetails,
@@ -65,7 +66,7 @@ const ActorDetails = () => {
         <button
           type="button"
           onClick={() => getActorDetails(actorID)}
-          className="mt-7 rounded-lg bg-[#e50924] px-8 py-3 font-bold text-white transition hover:bg-red-700"
+          className="mt-7 rounded-lg bg-[#e50924] px-8 py-3 font-bold text-white transition hover:bg-red-700 active:bg-red-700"
         >
           Try Again
         </button>
@@ -104,8 +105,15 @@ const ActorDetails = () => {
 
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-12 md:pt-20">
 
+          <Link
+            to={-1}
+            className="mb-8 text-[#898989] hover:text-white active:text-white duration-150"
+          >
+            &lt; Back
+          </Link>
+
           {/* Breadcrumb */}
-          <div className="mb-12 flex cursor-default flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[2px]">
+          <div className="mb-12 mt-8 flex cursor-default flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[2px]">
             <span className="text-gray-500">
               Cinema4You
             </span>
@@ -137,7 +145,7 @@ const ActorDetails = () => {
                 <img
                   src={actorImage}
                   alt={actor.name || "Actor"}
-                  className="aspect-3/4 w-full object-cover transition duration-700 group-hover:scale-105"
+                  className="aspect-3/4 w-full object-cover transition duration-700 group-hover:scale-105 group-active:scale-105"
                 />
 
                 <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
@@ -179,10 +187,15 @@ const ActorDetails = () => {
                   Popularity: {actor.popularity?.toFixed(1) ?? "N/A"}
                 </span>
 
-                <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-gray-300">
+                {actorMovieCount.size > 0 && <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-gray-300">
                   <FaFilm className="text-[#e50924]" />
-                  {actorMovies?.length || 0} Movies
-                </span>
+                  {actorMovieCount?.size} Movies
+                </span>}
+
+                {actorSeriesCount.size > 0 && <span className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-gray-300">
+                  <FaFilm className="text-[#e50924]" />
+                  {actorSeriesCount?.size} Series
+                </span>}
               </div>
 
               {/* Description */}
@@ -252,7 +265,7 @@ const ActorDetails = () => {
             <button
               type="button"
               onClick={() => setShowFullBio(!showFullBio)}
-              className="mt-6 flex items-center gap-2 text-sm font-bold text-[#e50924] transition hover:text-red-400"
+              className="mt-6 flex items-center gap-2 text-sm font-bold text-[#e50924] transition hover:text-red-400 active:text-red-400"
             >
               {showFullBio ? "Show Less" : "Read More"}
 
@@ -279,7 +292,7 @@ const ActorDetails = () => {
 // Information Card
 const InfoCard = ({ icon, label, value }) => {
   return (
-    <div className="group rounded-xl border border-white/10 bg-white/3 p-5 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-red-500/30 hover:bg-white/5">
+    <div className="group rounded-xl border border-white/10 bg-white/3 p-5 backdrop-blur-sm transition">
 
       <div className="mb-3 flex items-center gap-3">
 
