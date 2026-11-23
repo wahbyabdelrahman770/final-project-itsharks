@@ -31,7 +31,7 @@ const Credits = () => {
         </section>
       </div>
 
-      <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-5 gap-4 space-y-3">
+      <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-6 gap-4 space-y-3">
         {firstThreeCast?.map(
           (person) =>
             person && (
