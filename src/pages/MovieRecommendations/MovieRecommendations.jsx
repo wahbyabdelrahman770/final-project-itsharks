@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
-import Card from "../MoviesDeatils/Card";
 import Loading from "../../components/Loading";
+import MovieCard from "../../components/MovieCard";
 
 const MovieRecommendations = () => {
     const { movieID, movieDetails, recommended, loading } = useMovieDetails();
@@ -16,7 +16,7 @@ const MovieRecommendations = () => {
             <h1 className="text-white text-4xl text-center font-semibold my-8">All Recommendations for {`"${movieDetails?.title}"`}</h1>
 
             <div className="w-[93%] mx-auto mb-4 grid grid-cols-2 md:grid-cols-4 gap-4">
-                {recommended?.map(movie => <Card key={Math.random()} movie={movie} />)}
+                {recommended?.map(movie => <MovieCard key={Math.random()} movie={movie} />)}
             </div>
         </div>
     );

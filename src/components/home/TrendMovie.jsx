@@ -2,15 +2,14 @@ import { Link } from "react-router-dom";
 import { FaStar, FaArrowRight } from "react-icons/fa";
 
 import { useHome } from "../../contexts/Home/HomeContext";
-import { useMovie } from "../../contexts/Movie/MovieContext";
 import Loading from "../Loading";
 import ErrorState from "../ErrorState";
+import { getMovieGenre } from "../../utils/genres";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/";
 
 function TrendMovie() {
   const { popularMovies, loading, error, retry } = useHome();
-  const { moviesGenres } = useMovie();
 
   if (loading) {
     return <Loading />;
@@ -31,9 +30,7 @@ function TrendMovie() {
     : "N/A";
 
   // Movie Genre
-  const genreName =
-    moviesGenres.find((genre) => movie.genre_ids?.includes(genre.id))?.name ||
-    "Movie";
+  const genreName = getMovieGenre(movie?.genre_ids[0]);
 
   // Rating
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "N/A";

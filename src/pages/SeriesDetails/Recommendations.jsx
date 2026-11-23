@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
-import Card from "./Card";
+import SeriesCard from "../../components/SeriesCard";
 
 const Recommendations = () => {
   const { recommendedSeries } = useSeriesDetails();
@@ -23,7 +23,7 @@ const Recommendations = () => {
 
       <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-5 gap-4 space-y-3">
         {recommendedSeries.map((series) => (
-          <Card key={Math.random()} series={series} />
+          <SeriesCard key={Math.random()} series={series} />
         ))}
       </div>
     </div>

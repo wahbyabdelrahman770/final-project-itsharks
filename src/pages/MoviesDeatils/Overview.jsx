@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
 import { Button, Modal } from "@heroui/react";
 import PlayIcon from "../../components/PlayIcon";
+import { IframeWithLoading } from "../../components/Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
 
 const Overview = () => {
   const {
@@ -87,10 +88,10 @@ const Overview = () => {
                 <Modal.Container size="cover">
                   <Modal.Dialog className="bg-[#000000e6] flex justify-center items-center rounded-none">
                     <Modal.CloseTrigger />
-                    <iframe
+                    <IframeWithLoading
                       src={trailerLink}
                       className="md:w-full h-62.5 md:h-full"
-                    ></iframe>
+                    ></IframeWithLoading>
                   </Modal.Dialog>
                 </Modal.Container>
               </Modal.Backdrop>
