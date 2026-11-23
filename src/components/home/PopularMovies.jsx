@@ -5,19 +5,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Scrollbar } from "swiper/modules";
 
 import { useHome } from "../../contexts/Home/HomeContext";
-import { useMovie } from "../../contexts/Movie/MovieContext";
 
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
 import ErrorState from "./../ErrorState";
 import Loading from "./../Loading";
+import { getMovieGenre } from "../../utils/genres";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/";
 
 function PopularMovies() {
   const { popularMovies, loading } = useHome();
-  const { moviesGenres } = useMovie();
 
   if (loading) {
     return <Loading />;
@@ -93,9 +92,7 @@ function PopularMovies() {
             ? movie.release_date.slice(0, 4)
             : "N/A";
 
-          const genreName =
-            moviesGenres.find((genre) => movie.genre_ids?.includes(genre.id))
-              ?.name || "MOVIE";
+          const genreName = getMovieGenre(movie?.genre_ids[0]);
 
           return (
             <SwiperSlide key={movie.id} className="h-auto">

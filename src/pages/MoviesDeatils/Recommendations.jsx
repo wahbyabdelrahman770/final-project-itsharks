@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
-import Card from "./Card";
+import MovieCard from "../../components/MovieCard";
 
 const Recommendations = () => {
   const { recommended } = useMovieDetails();
@@ -24,7 +24,7 @@ const Recommendations = () => {
 
       <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-5 gap-4 space-y-3">
         {recommendedMovies.map((movie) => (
-          <Card key={Math.random()} movie={movie} />
+          <MovieCard key={Math.random()} movie={movie} />
         ))}
       </div>
     </div>
