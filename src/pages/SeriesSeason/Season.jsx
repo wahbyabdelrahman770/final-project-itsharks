@@ -93,7 +93,7 @@ const Credits = ({ firstThreeCast, firstThreeCrew }) => {
                 </section>
             </div>
 
-            <div className="mt-4 space-y-4 md:space-y-0 md:grid md:grid-cols-6 md:gap-4">
+            <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-6 gap-4 space-y-3">
                 {firstThreeCast?.map(person => person && <ActorCard key={Math.random()} actorID={person.id} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.character} />)}
 
                 {firstThreeCrew?.map(person => person && <ActorCard key={Math.random()} actorID={person.id} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.job} />)}
