@@ -22,7 +22,7 @@ const Recommendations = () => {
         </section>
       </div>
 
-      <div className="mt-4 w-[80%] mx-auto md:w-full md:grid md:grid-cols-5 md:gap-4 space-y-3">
+      <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-5 gap-4 space-y-3">
         {recommendedMovies.map((movie) => (
           <Card key={Math.random()} movie={movie} />
         ))}

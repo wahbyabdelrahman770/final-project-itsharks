@@ -75,7 +75,7 @@ const Seasons = () => {
         </section>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+      <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-5 gap-4 space-y-3">
         {firstFiveSeasons?.map((season) => (
           <Season
             to={`season/${season?.season_number}`}
