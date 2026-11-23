@@ -1,10 +1,10 @@
-import MoviesCard from "./MoviesCard";
 import { useMovie } from "../../contexts/Movie/MovieContext";
 import Loading from "../../components/Loading";
 import ErrorState from "../../components/ErrorState";
 import { useState } from "react";
 import NotFound from "../../components/NotFound";
 import { useTheme } from "../../contexts/ThemeProvider";
+import Card from "../MoviesDeatils/Card";
 
 export default function Movies() {
   const {
@@ -93,7 +93,7 @@ export default function Movies() {
               setActive("ALL");
               getMovies();
             }}
-            className={`${active === "ALL" ? "bg-red-600  shadow-lg shadow-red-600/30" : "  border border-gray-900 "} ${theme === "dark" ? "bor der-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "ALL" ? "bg-red-600  shadow-lg shadow-red-600/30" : "  border border-gray-900 "} ${theme === "dark" ? "bor der-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ALL
           </button>
@@ -103,7 +103,7 @@ export default function Movies() {
               setActive("Action");
               filterMovies("Action");
             }}
-            className={`${active === "Action" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Action" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ACTION
           </button>
@@ -113,7 +113,7 @@ export default function Movies() {
               setActive("Drama");
               filterMovies("Drama");
             }}
-            className={`${active === "Drama" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Drama" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             DRAMA
           </button>
@@ -123,7 +123,7 @@ export default function Movies() {
               setActive("Science Fiction");
               filterMovies("Science Fiction");
             }}
-            className={`${active === "Science Fiction" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Science Fiction" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             Science Fiction
           </button>
@@ -133,7 +133,7 @@ export default function Movies() {
               setActive("Comedy");
               filterMovies("Comedy");
             }}
-            className={`${active === "Comedy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Comedy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             COMEDY
           </button>
@@ -143,7 +143,7 @@ export default function Movies() {
               setActive("Crime");
               filterMovies("Crime");
             }}
-            className={`${active === "Crime" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Crime" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             CRIME
           </button>
@@ -153,7 +153,7 @@ export default function Movies() {
               setActive("Fantasy");
               filterMovies("Fantasy");
             }}
-            className={`${active === "Fantasy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Fantasy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             FANTASY
           </button>
@@ -163,7 +163,7 @@ export default function Movies() {
               setActive("Mystery");
               filterMovies("Mystery");
             }}
-            className={`${active === "Mystery" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Mystery" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             MYSTERY
           </button>
@@ -173,7 +173,7 @@ export default function Movies() {
               setActive("Romance");
               filterMovies("Romance");
             }}
-            className={`${active === "Romance" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Romance" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ROMANCE
           </button>
@@ -197,12 +197,13 @@ export default function Movies() {
         </section>
 
         {/* Movies */}
-        <section className="flex flex-wrap items-start gap-x-5 gap-y-12">
+        <section className="grid grid-cols-2 md:grid-cols-5 gap-x-5 gap-y-12">
           {loading ? (
             <Loading />
           ) : (
             movies.map((movie) => {
-              return <MoviesCard key={movie.id} movie={movie} />;
+              return <Card key={movie.id} movie={movie} />;
+              // return <MoviesCard key={movie.id} movie={movie} />;
             })
           )}
           {error == true && <ErrorState />}

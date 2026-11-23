@@ -8,7 +8,7 @@ const SeasonFullCast = () => {
     const { name } = useSeriesDetails();
     return (
         <div className="relative">
-            <Link to={`/series/${seriesID}/season/${seasonNumber}`} className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">← Back to {seasonDetails?.name}</Link>
+            <Link to={`/series/${seriesID}/season/${seasonNumber}`} className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">← Back to {seasonDetails?.name}</Link>
             <h1 className="text-white text-4xl text-center font-semibold my-8">Cast and Crew of {`"${name} ${seasonDetails?.name}"`}</h1>
             <div className="w-[96%] mx-auto grid grid-cols-2 justify-items-center gap-4">
                 {cast.length !== 0 && <div className="w-full md:w-[40%] space-y-6">

@@ -53,7 +53,7 @@ function TrendMovie() {
             }
             alt={movie.title || "Movie"}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 group-active:scale-105"
           />
 
           {/* Image Overlay */}
@@ -108,10 +108,10 @@ function TrendMovie() {
           {/* Discover Button */}
           <Link
             to={`/movies/${movie.id}`}
-            className="group flex w-fit items-center gap-4 border-b border-white/20 pb-3 text-[11px] font-bold uppercase tracking-wider transition hover:border-red-600"
+            className="group flex w-fit items-center gap-4 border-b border-white/20 pb-3 text-[11px] font-bold uppercase tracking-wider transition hover:border-red-600 hover:active-red-600"
           >
             Discover {movie.title}
-            <FaArrowRight className="transition duration-300 group-hover:translate-x-2" />
+            <FaArrowRight className="transition duration-300 group-hover:translate-x-2 group-active:translate-x-2" />
           </Link>
 
           {/* Decorative Number Desktop */}

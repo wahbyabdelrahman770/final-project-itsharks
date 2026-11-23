@@ -33,8 +33,8 @@ const MoviesCard = ({
           ⭐ {vote_average.toFixed(1)}
         </div>
 
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-          <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all duration-300">
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 group-active:bg-black/40 transition-all duration-300 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-full bg-red-600 text-white flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transform scale-75 group-hover:scale-100 group-active:scale-100 transition-all duration-300">
             <Link
               to={`/movies/${id}`}
               className="flex items-center justify-center w-full h-full"
@@ -46,7 +46,7 @@ const MoviesCard = ({
       </div>
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-base font-semibold  group-hover:text-red-500 transition-colors">
+        <h3 className="text-base font-semibold  group-hover:text-red-500 group-active:text-red-500 transition-colors">
           {original_title}
         </h3>
 

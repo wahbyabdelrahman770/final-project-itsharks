@@ -16,7 +16,7 @@ const Recommendations = () => {
           <p className="mt-2 font-serif text-[1.9rem] font-medium">
             You May Also Like
           </p>
-          {recommended?.length > 5 && <Link to="recommendations" className=" uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">
+          {recommended?.length > 5 && <Link to="recommendations" className=" uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">
             View All Recommendations →
           </Link>}
         </section>

@@ -32,19 +32,19 @@ const Footer = () => {
             <div className="flex flex-col gap-4 text-xs">
               <Link
                 to="/movies"
-                className="transition-colors hover:text-red-500"
+                className="transition-colors hover:text-red-500 active:text-red-500"
               >
                 Movies
               </Link>
 
               <Link
                 to="/series"
-                className="transition-colors hover:text-red-500"
+                className="transition-colors hover:text-red-500 active:text-red-500"
               >
                 TV Series
               </Link>
 
-              <Link to="#" className="transition-colors hover:text-red-500">
+              <Link to="#" className="transition-colors hover:text-red-500 active:text-red-500">
                 Trending
               </Link>
             </div>
@@ -59,16 +59,16 @@ const Footer = () => {
             <div className="flex flex-col gap-4 text-xs">
               <Link
                 to="/contact"
-                className="transition-colors hover:text-red-500"
+                className="transition-colors hover:text-red-500 active:text-red-500"
               >
                 Contact us
               </Link>
 
-              <Link to="#" className="transition-colors hover:text-red-500">
+              <Link to="#" className="transition-colors hover:text-red-500 active:text-red-500">
                 About
               </Link>
 
-              <Link to="#" className="transition-colors hover:text-red-500">
+              <Link to="#" className="transition-colors hover:text-red-500 active:text-red-500">
                 Privacy
               </Link>
             </div>
@@ -83,21 +83,21 @@ const Footer = () => {
             <div className="flex items-center gap-3">
               <Link
                 to="#"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white active:border-red-600 active:bg-red-600 active:text-white"
               >
                 IG
               </Link>
 
               <Link
                 to="#"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white active:border-red-600 active:bg-red-600 active:text-white"
               >
                 X
               </Link>
 
               <Link
                 to="#"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] transition-all hover:border-red-600 hover:bg-red-600 hover:text-white active:border-red-600 active:bg-red-600 active:text-white"
               >
                 YT
               </Link>

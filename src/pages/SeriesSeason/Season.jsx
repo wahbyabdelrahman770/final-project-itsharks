@@ -51,7 +51,7 @@ export function ShowMoreText({ text, maxLines = 3, className = '' }) {
                     type="button"
                     onClick={() => setIsExpanded((prev) => !prev)}
                     aria-expanded={isExpanded}
-                    className="cursor-pointer text-red-500 hover:underline"
+                    className="cursor-pointer text-red-500 hover:underline active:underline"
                 >
                     {isExpanded ? 'Show less' : 'Show more'}
                 </button>
@@ -89,7 +89,7 @@ const Credits = ({ firstThreeCast, firstThreeCrew }) => {
 
                 <section className="flex flex-row justify-between items-end">
                     <p className="mt-2 font-serif text-[1.9rem] text-white font-medium">Cast & Crew</p>
-                    <Link to="credits" className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">View Full Cast and Crew →</Link>
+                    <Link to="credits" className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">View Full Cast and Crew →</Link>
                 </section>
             </div>
 
@@ -139,7 +139,7 @@ const Season = () => {
 
     return (
         <div>
-            <Link to={`/series/${seriesID}`} className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">← Back to {name}</Link>
+            <Link to={`/series/${seriesID}`} className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">← Back to {name}</Link>
             <div className="w-4/5 md:w-[95%] mx-auto my-8 grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-2">
                 <section className="flex flex-col items-center gap-y-3">
                     <img src={poster} alt={seasonDetails?.name} className="w-full md:w-[80%]" />

@@ -23,7 +23,7 @@ const Overview = () => {
       <div className="w-full min-h-screen py-8 px-10 pt-32 relative flex items-end gap-x-8 bg-[linear-gradient(90deg,#090b10_8%,#090b10d6_42%,#090b103d_75%),linear-gradient(0deg,#090b10_0%,transparent_32%)]">
         <Link
           to="/series"
-          className="absolute top-[5%] left-[5%] text-[#898989] hover:text-white duration-150"
+          className="absolute top-[5%] left-[5%] text-[#898989] hover:text-white active:text-white duration-150"
         >
           &lt; Back to series
         </Link>
@@ -64,13 +64,13 @@ const Overview = () => {
           <div className="w-full my-6 flex flex-row items-center flex-wrap gap-2">
             {seriesDetails?.genres
               ? seriesDetails.genres.map((genre) => (
-                  <p
-                    key={genre.name}
-                    className="uppercase text-[#e1e2e5] border-[0.5px] rounded-[20px] p-[6px_12px] text-[13px]"
-                  >
-                    {genre.name}
-                  </p>
-                ))
+                <p
+                  key={genre.name}
+                  className="uppercase text-[#e1e2e5] border-[0.5px] rounded-[20px] p-[6px_12px] text-[13px]"
+                >
+                  {genre.name}
+                </p>
+              ))
               : ""}
           </div>
 

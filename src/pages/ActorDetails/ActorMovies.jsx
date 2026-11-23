@@ -10,8 +10,11 @@ import {
 } from "react-icons/fa";
 
 import "swiper/css";
+import { useActor } from "../../contexts/Actor/ActorContext";
 
 const ActorMovies = ({ movies = [] }) => {
+  const { actorMovieCount } = useActor();
+
   const swiperRef = useRef(null);
 
   if (!movies.length) {
@@ -49,7 +52,7 @@ const ActorMovies = ({ movies = [] }) => {
             type="button"
             onClick={() => swiperRef.current?.slidePrev()}
             aria-label="Previous movies"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#202127] text-white transition duration-300 hover:border-[#e50924] hover:bg-[#e50924]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#202127] text-white transition duration-300 hover:border-[#e50924] hover:bg-[#e50924] active:border-[#e50924] active:bg-[#e50924]"
           >
             <FaArrowLeft />
           </button>
@@ -58,7 +61,7 @@ const ActorMovies = ({ movies = [] }) => {
             type="button"
             onClick={() => swiperRef.current?.slideNext()}
             aria-label="Next movies"
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#e50924] text-white transition duration-300 hover:bg-red-700"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-[#e50924] text-white transition duration-300 hover:bg-red-700 active:bg-red-700"
           >
             <FaArrowRight />
           </button>
@@ -88,7 +91,7 @@ const ActorMovies = ({ movies = [] }) => {
           >
             <Link
               to={`/movies/${movie.id}`}
-              className="group block h-[stretch]! overflow-hidden rounded-xl border border-white/10 bg-[#15161b] transition duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:shadow-[0_10px_35px_#e5092420]"
+              className="group block h-[stretch]! overflow-hidden rounded-xl border border-white/10 bg-[#15161b] transition duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:shadow-[0_10px_35px_#e5092420] active:-translate-y-1 active:border-red-500/40 active:shadow-[0_10px_35px_#e5092420]"
             >
 
               {/* Movie Poster */}
@@ -99,7 +102,7 @@ const ActorMovies = ({ movies = [] }) => {
                     src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
                     alt={movie.title}
                     loading="lazy"
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-110 group-active:scale-110"
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center text-gray-500">
@@ -112,13 +115,13 @@ const ActorMovies = ({ movies = [] }) => {
                   <FaStar className="text-yellow-400" />
 
                   {typeof movie.vote_average === "number" &&
-                  movie.vote_count > 0
+                    movie.vote_count > 0
                     ? movie.vote_average.toFixed(1)
                     : "N/A"}
                 </div>
 
                 {/* Hover Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition duration-300 group-hover:opacity-100">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 transition duration-300 group-hover:opacity-100 group-active:opacity-100">
 
                   <span className="rounded-full border border-white/30 bg-[#e50924] px-5 py-2 text-xs font-bold uppercase tracking-wider text-white">
                     View Details
@@ -129,7 +132,7 @@ const ActorMovies = ({ movies = [] }) => {
               {/* Movie Information */}
               <div className="flex flex-col justify-between p-4">
 
-                <h3 className="line-clamp-1 font-bold text-white transition group-hover:text-[#e50924]">
+                <h3 className="line-clamp-1 font-bold text-white transition group-hover:text-[#e50924] group-active:text-[#e50924]">
                   {movie.title || "Untitled Movie"}
                 </h3>
 
@@ -151,7 +154,7 @@ const ActorMovies = ({ movies = [] }) => {
 
       {/* Movies Count */}
       <p className="mt-5 text-right text-xs text-gray-500">
-        {movies.length} Movies
+        {actorMovieCount.size} Movies
       </p>
     </section>
   );

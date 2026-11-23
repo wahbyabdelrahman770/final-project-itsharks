@@ -17,10 +17,10 @@ export default function ActorCard({
                 src={imgSrc}
                 alt={actorName || "Cast member"}
                 loading="lazy"
-                className="aspect-3/4 w-[70%] rounded-xl object-cover transition-transform duration-300 group-hover:scale-105 md:w-full"
+                className="aspect-3/4 w-[70%] rounded-xl object-cover transition-transform duration-300 group-hover:scale-105 group-active:scale-105 md:w-full"
             />
 
-            <p className="text-center md:text-start transition-colors group-hover:text-[#e50924]">
+            <p className="text-center md:text-start transition-colors group-hover:text-[#e50924] group-active:text-[#e50924]">
                 {actorName}
             </p>
 

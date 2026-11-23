@@ -16,7 +16,7 @@ const SeasonMedia = () => {
         <div className="w-[90%] md:w-[96%] mx-auto">
             <Link
                 to={`/series/${seriesID}/season/${seasonNumber}`}
-                className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]"
+                className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]"
             >
                 ← Back to {seasonDetails?.name}
             </Link>
