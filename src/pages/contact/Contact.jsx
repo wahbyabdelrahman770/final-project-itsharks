@@ -21,14 +21,14 @@ const Contact = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="max-w-[680px] font-serif text-[clamp(60px,7vw,108px)] font-bold leading-[0.94] tracking-[-4px]">
+          <h1 className="max-w-170 font-serif text-[clamp(60px,7vw,108px)] font-bold leading-[0.94] tracking-[-4px]">
             Let’s talk
             <br />
             about <span className="italic text-[#ed092b]">stories.</span>
           </h1>
 
           {/* Description */}
-          <p className="mt-9 max-w-[580px] text-[14px] leading-[2]  md:text-[15px]">
+          <p className="mt-9 max-w-145 text-[14px] leading-loose  md:text-[15px]">
             Have a question, suggestion, or title we should know about? Our
             small team of movie obsessives would love to hear from you.
           </p>
@@ -36,7 +36,7 @@ const Contact = () => {
           {/* Email */}
           <Link
             to="mailto:hello@cinema4you.com"
-            className="mt-8 inline-block font-serif text-[24px] font-bold text-[#ed092b] underline decoration-1 underline-offset-[9px] transition-colors hover:text-[#ff3855]"
+            className="mt-8 inline-block font-serif text-[24px] font-bold text-[#ed092b] underline decoration-1 underline-offset-[9px] transition-colors hover:text-[#ff3855] active:text-[#ff3855]"
           >
             hello@cinema4you.com
           </Link>
@@ -62,7 +62,7 @@ const Contact = () => {
                 type="text"
                 placeholder="Jane Smith"
                 required
-                className="w-full border-0 border-b border-[#30333d] bg-transparent pb-[14px] text-[14px] font-semibold  outline-none transition-colors  focus:border-[#ed092b]"
+                className="w-full border-0 border-b border-[#30333d] bg-transparent pb-3.5 text-[14px] font-semibold  outline-none transition-colors  focus:border-[#ed092b]"
               />
             </div>
 
@@ -81,7 +81,7 @@ const Contact = () => {
                 type="email"
                 placeholder="jane@example.com"
                 required
-                className="w-full border-0 border-b border-[#30333d] bg-transparent pb-[14px] text-[14px] font-semibold  outline-none transition-colors  focus:border-[#ed092b]"
+                className="w-full border-0 border-b border-[#30333d] bg-transparent pb-3.5 text-[14px] font-semibold  outline-none transition-colors  focus:border-[#ed092b]"
               />
             </div>
 
@@ -94,7 +94,7 @@ const Contact = () => {
                 SUBJECT
               </label>
 
-              <div className="relative flex w-full items-center border-b border-[#30333d] pb-[14px]">
+              <div className="relative flex w-full items-center border-b border-[#30333d] pb-3.5">
                 <select
                   id="subject"
                   name="subject"
@@ -132,7 +132,7 @@ const Contact = () => {
                 rows={4}
                 placeholder="Tell us what's on your mind..."
                 required
-                className="w-full resize-none border-0 border-b border-[#30333d] bg-transparent pb-[14px] text-[14px] font-semibold leading-7  outline-none transition-colors  focus:border-[#ed092b]"
+                className="w-full resize-none border-0 border-b border-[#30333d] bg-transparent pb-3.5 text-[14px] font-semibold leading-7  outline-none transition-colors  focus:border-[#ed092b]"
               />
             </div>
 
@@ -140,7 +140,7 @@ const Contact = () => {
             <div className="mt-6 flex w-full border-t border-[#30333d] pt-6">
               <Button
                 type="submit"
-                className="flex h-[55px] min-w-[186px] items-center justify-center gap-5 rounded-[3px] bg-[#ed092b] px-6 text-[11px] font-extrabold tracking-[1px]  transition-colors hover:bg-[#c90021]"
+                className="flex h-13.75 min-w-46.5 items-center justify-center gap-5 rounded-md bg-[#ed092b] px-6 text-[11px] font-extrabold tracking-[1px]  transition-colors hover:bg-[#c90021] active:bg-[#c90021]"
               >
                 SEND MESSAGE
                 <FiArrowRight size={19} />

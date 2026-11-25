@@ -1,17 +1,16 @@
-import MoviesCard from "./MoviesCard";
 import { useMovie } from "../../contexts/Movie/MovieContext";
 import Loading from "../../components/Loading";
 import ErrorState from "../../components/ErrorState";
-import { useState } from "react";
 import NotFound from "../../components/NotFound";
 import { useTheme } from "../../contexts/ThemeProvider";
+import MovieCard from "../../components/MovieCard";
 
 export default function Movies() {
   const {
     movies,
-    filterMovies,
     movieLength,
     page,
+    setPage,
     nextPage,
     previousPage,
     getMovies,
@@ -31,8 +30,8 @@ export default function Movies() {
       <main className="max-w-400 mx-auto px-6 md:px-12">
         {/* Hero */}
         <section className="relative flex flex-col justify-center gap-7 py-24 border-b border-white/10">
-          <span className="text-xs font-bold tracking-[4px] ">
-            <span className="zzztext-red-600">━━</span> THE COMPLETE COLLECTION
+          <span className="text-xs font-bold tracking-[4px] flex flex-row items-center gap-2">
+            <span className="inline-block w-6 h-[2.05px] bg-[#e50924]"></span> THE COMPLETE COLLECTION
           </span>
 
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
@@ -91,19 +90,29 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("ALL");
-              getMovies();
+              setPage(1);
             }}
-            className={`${active === "ALL" ? "bg-red-600  shadow-lg shadow-red-600/30" : "  border border-gray-900 "} ${theme === "dark" ? "bor der-white" : "border-black"} hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "ALL" ? "bg-red-600  shadow-lg shadow-red-600/30" : "  border border-gray-900 "} ${theme === "dark" ? "bor der-white" : "border-black"} hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ALL
           </button>
 
           <button
             onClick={() => {
-              setActive("Action");
-              filterMovies("Action");
+              setActive("Animation");
+              setPage(1);
             }}
-            className={`${active === "Action" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Animation" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+          >
+            ANIMATION
+          </button>
+
+          <button
+            onClick={() => {
+              setActive("Action");
+              setPage(1);
+            }}
+            className={`${active === "Action" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ACTION
           </button>
@@ -111,9 +120,9 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Drama");
-              filterMovies("Drama");
+              setPage(1);
             }}
-            className={`${active === "Drama" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Drama" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             DRAMA
           </button>
@@ -121,9 +130,9 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Science Fiction");
-              filterMovies("Science Fiction");
+              setPage(1);
             }}
-            className={`${active === "Science Fiction" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Science Fiction" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             Science Fiction
           </button>
@@ -131,9 +140,9 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Comedy");
-              filterMovies("Comedy");
+              setPage(1);
             }}
-            className={`${active === "Comedy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Comedy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             COMEDY
           </button>
@@ -141,9 +150,9 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Crime");
-              filterMovies("Crime");
+              setPage(1);
             }}
-            className={`${active === "Crime" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Crime" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             CRIME
           </button>
@@ -151,9 +160,9 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Fantasy");
-              filterMovies("Fantasy");
+              setPage(1);
             }}
-            className={`${active === "Fantasy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Fantasy" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             FANTASY
           </button>
@@ -161,9 +170,9 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Mystery");
-              filterMovies("Mystery");
+              setPage(1);
             }}
-            className={`${active === "Mystery" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Mystery" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             MYSTERY
           </button>
@@ -171,43 +180,24 @@ export default function Movies() {
           <button
             onClick={() => {
               setActive("Romance");
-              filterMovies("Romance");
+              setPage(1);
             }}
-            className={`${active === "Romance" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
+            className={`${active === "Romance" ? "bg-red-600 " : "  border border-gray-900 "} ${theme === "dark" ? "border-white" : "border-black"}  hover:bg-red-600 hover:text-white active:bg-red-600 active:text-white rounded-full px-6 py-2.5 text-[9px] font-bold tracking-wider transition-all cursor-pointer`}
           >
             ROMANCE
           </button>
         </section>
 
-        {/* Results */}
-        <section className="flex justify-between items-center border-b border-white/10 pb-5 mb-7">
-          <p className="text-[11px] tracking-wider text-gray-500">
-            SHOWING{" "}
-            <span
-              className={`${theme === "dark" ? "text-white font-bold" : "text-black font-bold"}`}
-            >
-              20
-            </span>{" "}
-            OF 40 RESULTS
-          </p>
-
-          <span className="text-[11px] tracking-wider text-gray-400">
-            20 PER PAGE
-          </span>
-        </section>
-
         {/* Movies */}
-        <section className="flex flex-wrap items-start gap-x-5 gap-y-12">
-          {loading ? (
-            <Loading />
-          ) : (
+        {loading ? <Loading /> : <section className="grid grid-cols-2 md:grid-cols-5 gap-x-5 gap-y-12">
+          {(
             movies.map((movie) => {
-              return <MoviesCard key={movie.id} movie={movie} />;
+              return <MovieCard key={movie.id} movie={movie} />;
             })
           )}
           {error == true && <ErrorState />}
           {movieLength == 0 && <NotFound />}
-        </section>
+        </section>}
 
         {/* Pagination */}
         <section className="flex justify-center items-center gap-2 py-24">

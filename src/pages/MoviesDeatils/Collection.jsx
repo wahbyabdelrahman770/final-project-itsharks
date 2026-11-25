@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
-import Card from "./Card";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Scrollbar } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import MovieCard from "../../components/MovieCard";
 
 const Collection = () => {
   const { collectionID } = useMovieDetails();
@@ -92,7 +92,7 @@ const Collection = () => {
         >
           {parts?.map((part) => (
             <SwiperSlide>
-              <Card key={Math.random()} movie={part} />
+              <MovieCard key={Math.random()} movie={part} />
             </SwiperSlide>
           ))}
         </Swiper>

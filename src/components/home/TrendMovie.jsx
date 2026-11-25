@@ -2,15 +2,14 @@ import { Link } from "react-router-dom";
 import { FaStar, FaArrowRight } from "react-icons/fa";
 
 import { useHome } from "../../contexts/Home/HomeContext";
-import { useMovie } from "../../contexts/Movie/MovieContext";
 import Loading from "../Loading";
 import ErrorState from "../ErrorState";
+import { getMovieGenre } from "../../utils/genres";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/";
 
 function TrendMovie() {
   const { popularMovies, loading, error, retry } = useHome();
-  const { moviesGenres } = useMovie();
 
   if (loading) {
     return <Loading />;
@@ -31,9 +30,7 @@ function TrendMovie() {
     : "N/A";
 
   // Movie Genre
-  const genreName =
-    moviesGenres.find((genre) => movie.genre_ids?.includes(genre.id))?.name ||
-    "Movie";
+  const genreName = getMovieGenre(movie?.genre_ids[0]);
 
   // Rating
   const rating = movie.vote_average ? movie.vote_average.toFixed(1) : "N/A";
@@ -53,7 +50,7 @@ function TrendMovie() {
             }
             alt={movie.title || "Movie"}
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 group-active:scale-105"
           />
 
           {/* Image Overlay */}
@@ -108,10 +105,10 @@ function TrendMovie() {
           {/* Discover Button */}
           <Link
             to={`/movies/${movie.id}`}
-            className="group flex w-fit items-center gap-4 border-b border-white/20 pb-3 text-[11px] font-bold uppercase tracking-wider transition hover:border-red-600"
+            className="group flex w-fit items-center gap-4 border-b border-white/20 pb-3 text-[11px] font-bold uppercase tracking-wider transition hover:border-red-600 hover:active-red-600"
           >
             Discover {movie.title}
-            <FaArrowRight className="transition duration-300 group-hover:translate-x-2" />
+            <FaArrowRight className="transition duration-300 group-hover:translate-x-2 group-active:translate-x-2" />
           </Link>
 
           {/* Decorative Number Desktop */}

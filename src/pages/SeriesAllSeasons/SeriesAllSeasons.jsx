@@ -9,7 +9,7 @@ const SeriesAllSeasons = () => {
     if (loading) { return <Loading />; }
     return (
         <div className="w-[93%] mx-auto my-8">
-            <Link to={-1} className="inline-block mt-4 ml-4 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">← Back to {name}</Link>
+            <Link to={-1} className="inline-block mt-4 ml-4 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">← Back to {name}</Link>
 
             <h1 className="text-4xl text-white font-semibold text-center mb-8">All Seasons Of {`"${name}"`}</h1>
 

@@ -5,13 +5,11 @@ export const seriesStore = createContext({});
 
 const SeriesContext = ({ children }) => {
   const [series, setSeries] = useState([]);
-  const [seriesGenres, setSeriesGenres] = useState([]);
   const [page, setPage] = useState(1);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [notFound, setNotFound] = useState(false);
-  const [allSeries, setAllSeries] = useState([]);
+  const [active, setActive] = useState("ALL");
 
   const token = import.meta.env.VITE_TOKEN;
 
@@ -23,51 +21,31 @@ const SeriesContext = ({ children }) => {
     },
   };
 
-  const seriesLength = series.length;
+  const nextPage = () => {
+    setPage(page + 1);
+  };
+
+  const previousPage = () => {
+    setPage(page - 1);
+  };
 
   const getSeries = async () => {
     setLoading(true);
     setError(false);
     try {
-      const apiLink = `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=popularity.desc`;
+      const apiLink = active === "ALL" ? `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc` : `https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&with_genres=${getTvGenreID(active)}&page=${page}&sort_by=popularity.desc`;
       const req = await fetch(apiLink, options);
       const res = await req.json();
 
-      setLoading(false);
-      setError(false);
       setSeries(res.results);
-      setAllSeries(res.results);
-    } catch (err) {
-      console.log(err.message);
-      setLoading(false);
-      setError(true);
-    }
-  };
-
-  const getGenres = async () => {
-    setLoading(true);
-    setError(false);
-    try {
-      const apiLink = "https://api.themoviedb.org/3/genre/tv/list?language=en";
-      const req = await fetch(apiLink, options);
-      const res = await req.json();
 
       setLoading(false);
       setError(false);
-      setSeriesGenres(res.genres);
     } catch (err) {
       console.log(err.message);
       setLoading(false);
       setError(true);
     }
-  };
-
-  const nextSeries = () => {
-    setPage(page + 1);
-  };
-
-  const prevSeries = () => {
-    setPage(page - 1);
   };
 
   const getRatingSeries = async () => {
@@ -79,7 +57,6 @@ const SeriesContext = ({ children }) => {
       const res = await req.json();
 
       setSeries(res.results);
-      setAllSeries(res.results);
 
       setLoading(false);
       setError(false);
@@ -99,7 +76,6 @@ const SeriesContext = ({ children }) => {
       const res = await req.json();
 
       setSeries(res.results);
-      setAllSeries(res.results);
 
       setLoading(false);
       setError(false);
@@ -110,41 +86,10 @@ const SeriesContext = ({ children }) => {
     }
   };
 
-  const seriesDetails = async (seriesID) => {
-    setLoading(true);
-    setError(false);
-    try {
-      const apiLink = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc/${seriesID}`;
-      const req = await fetch(apiLink, options);
-      const res = await req.json();
+  const seriesLength = series.length;
 
-      setLoading(false);
-      setError(false);
-    } catch (err) {
-      console.log(err.message);
-      setLoading(false);
-      setError(true);
-    }
-  };
-
-  const filterSeries = async (name) => {
-    setLoading(true);
-    setError(false);
-
-    try {
-      const genreID = getTvGenreID(name);
-
-      const filtered = allSeries.filter((movie) =>
-        movie.genre_ids.includes(genreID),
-      );
-
-      setLoading(false);
-      setError(false);
-      setSeries(filtered);
-    } catch (err) {
-      console.log(err.message);
-      setError(true);
-    }
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
@@ -155,28 +100,27 @@ const SeriesContext = ({ children }) => {
 
   useEffect(() => {
     getSeries();
-    getGenres();
-  }, [page]);
+    scrollToTop();
+  }, [page, active]);
 
   return (
     <seriesStore.Provider
       value={{
         series,
-        seriesGenres,
-        nextSeries,
-        prevSeries,
+        active,
+        setActive,
+        nextPage,
+        previousPage,
         page,
+        setPage,
         seriesLength,
         getNewestSeries,
         getRatingSeries,
         getSeries,
         setInput,
-        seriesDetails,
         loading,
         input,
-        error,
-        filterSeries,
-        notFound,
+        error
       }}
     >
       {children}

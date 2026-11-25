@@ -12,11 +12,12 @@ import ErrorState from "../ErrorState";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/scrollbar";
+import { getTvGenre } from "../../utils/genres";
 
 const IMAGE_URL = "https://image.tmdb.org/t/p/";
 
 function PopularSeries() {
-  const { series, seriesGenres, loading, getSeries } = useSeries();
+  const { series, loading, getSeries } = useSeries();
 
   if (loading) {
     return <Loading />;
@@ -92,9 +93,7 @@ function PopularSeries() {
             ? item.first_air_date.slice(0, 4)
             : "N/A";
 
-          const genreName =
-            seriesGenres.find((genre) => item.genre_ids?.includes(genre.id))
-              ?.name || "TV Series";
+          const genreName = getTvGenre(item?.genre_ids[0]);
 
           return (
             <SwiperSlide key={item.id} className="h-auto">

@@ -1,10 +1,14 @@
-import { useEffect, useState, useRef, useLayoutEffect, } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useRef, useLayoutEffect, } from "react";
+import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { useSeriesDetails } from "../../contexts/Series/SeriesDetailsProvider";
 import formatDate from "../../utils/dateFormatter";
-import { ActorCard } from "../MoviesDeatils/Credits";
 import { useSeriesSeasonDetails } from "../../contexts/Series/SeriesSeasonProvider";
+import ActorCard from './../../components/ActorCard';
+import { Button, Modal } from "@heroui/react";
+import { IframeWithLoading } from "../../components/Movie-And-Series-Media-Page-Components/MovieAndSeriesMediaComponents";
+import PlayIcon from "../../components/PlayIcon";
+import Media from "../../components/Movie-And-Series-Details/Media";
 
 export function ShowMoreText({ text, maxLines = 3, className = '' }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -47,7 +51,7 @@ export function ShowMoreText({ text, maxLines = 3, className = '' }) {
                     type="button"
                     onClick={() => setIsExpanded((prev) => !prev)}
                     aria-expanded={isExpanded}
-                    className="cursor-pointer text-red-500 hover:underline"
+                    className="cursor-pointer text-red-500 hover:underline active:underline"
                 >
                     {isExpanded ? 'Show less' : 'Show more'}
                 </button>
@@ -75,6 +79,9 @@ const Episode = ({ episode: { air_date, episode_number, name, overview, runtime,
 };
 
 const Credits = ({ firstThreeCast, firstThreeCrew }) => {
+    if (firstThreeCast.length == 0 && firstThreeCrew.length == 0) {
+        return;
+    }
     return (
         <div className="w-[93%] mx-auto mt-8 mb-4">
             <div className="mb-4 flex flex-col">
@@ -82,14 +89,14 @@ const Credits = ({ firstThreeCast, firstThreeCrew }) => {
 
                 <section className="flex flex-row justify-between items-end">
                     <p className="mt-2 font-serif text-[1.9rem] text-white font-medium">Cast & Crew</p>
-                    <Link to="credits" className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">View Full Cast and Crew →</Link>
+                    <Link to="credits" className="text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">View Full Cast and Crew →</Link>
                 </section>
             </div>
 
-            <div className="mt-4 space-y-4 md:space-y-0 md:grid md:grid-cols-6 md:gap-4">
-                {firstThreeCast?.map(person => person && <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.character} />)}
+            <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-6 gap-4 space-y-3">
+                {firstThreeCast?.map(person => person && <ActorCard key={Math.random()} actorID={person.id} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.character} />)}
 
-                {firstThreeCrew?.map(person => person && <ActorCard key={Math.random()} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.job} />)}
+                {firstThreeCrew?.map(person => person && <ActorCard key={Math.random()} actorID={person.id} imgSrc={person?.profile_path ? `https://media.themoviedb.org/t/p/original${person?.profile_path}` : "/placeholderImg.avif"} actorName={person?.name} actorRole={person?.job} />)}
             </div>
         </div>
     );
@@ -98,7 +105,7 @@ const Credits = ({ firstThreeCast, firstThreeCrew }) => {
 const VISIBLE_EPISODES = 3;
 
 const Season = () => {
-    const { seriesID, seasonDetails, loading, air_date, episodes, overview, poster, vote_average, cast, crew } = useSeriesSeasonDetails();
+    const { seriesID, seasonDetails, loading, air_date, episodes, overview, poster, vote_average, cast, crew, trailerLink, backdrops, posters, logos, videos } = useSeriesSeasonDetails();
     const { name } = useSeriesDetails();
 
     const listRef = useRef(null);
@@ -132,7 +139,7 @@ const Season = () => {
 
     return (
         <div>
-            <Link to={`/series/${seriesID}`} className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">← Back to {name}</Link>
+            <Link to={`/series/${seriesID}`} className="inline-block mt-8 ml-8 text-[#f7f7f5] uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">← Back to {name}</Link>
             <div className="w-4/5 md:w-[95%] mx-auto my-8 grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-2">
                 <section className="flex flex-col items-center gap-y-3">
                     <img src={poster} alt={seasonDetails?.name} className="w-full md:w-[80%]" />
@@ -140,6 +147,25 @@ const Season = () => {
                     <p className="text-white">Air Date: {formatDate(air_date)}</p>
                     <p className="text-yellow-300 font-bold">⭐{vote_average}</p>
                     {overview && <ShowMoreText className="text-white text-center p-2" text={overview} />}
+
+                    {trailerLink && (
+                        <Modal>
+                            <Button className="py-4 px-0 w-41.25 bg-[#e50924] text-white text-[12px] font-semibold uppercase rounded-md cursor-pointer flex justify-evenly items-center duration-150 hover:shadow-[0px_0px_17px_2px_#eb3c3c] hover:-translate-y-1 active:shadow-[0px_0px_17px_2px_#eb3c3c] active:-translate-y-1">
+                                <PlayIcon fill="white" className="w-6 h-6" /> Watch Trailer
+                            </Button>
+                            <Modal.Backdrop>
+                                <Modal.Container size="cover">
+                                    <Modal.Dialog className="bg-[#000000e6] flex justify-center items-center rounded-none">
+                                        <Modal.CloseTrigger />
+                                        <IframeWithLoading
+                                            src={trailerLink}
+                                            className="md:w-full h-62.5 md:h-full"
+                                        ></IframeWithLoading>
+                                    </Modal.Dialog>
+                                </Modal.Container>
+                            </Modal.Backdrop>
+                        </Modal>
+                    )}
                 </section>
 
                 <section>
@@ -155,6 +181,8 @@ const Season = () => {
             </div>
 
             <Credits firstThreeCast={cast.slice(0, 3)} firstThreeCrew={crew.slice(0, 3)} />
+
+            <Media backdrops={backdrops} posters={posters} logos={logos} videos={videos} />
         </div>
     );
 };

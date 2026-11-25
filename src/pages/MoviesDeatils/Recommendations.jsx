@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useMovieDetails } from "../../contexts/Movie/MovieDetailsProvider";
-import Card from "./Card";
+import MovieCard from "../../components/MovieCard";
 
 const Recommendations = () => {
   const { recommended } = useMovieDetails();
@@ -16,15 +16,15 @@ const Recommendations = () => {
           <p className="mt-2 font-serif text-[1.9rem] font-medium">
             You May Also Like
           </p>
-          <Link className=" uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924]">
+          {recommended?.length > 5 && <Link to="recommendations" className=" uppercase text-[9px] tracking-[1.2px] border-b border-b-[#ffffff1a] pb-1.5 font-bold duration-75 hover:text-[#e50924] hover:border-b-[#e50924] active:text-[#e50924] active:border-b-[#e50924]">
             View All Recommendations →
-          </Link>
+          </Link>}
         </section>
       </div>
 
-      <div className="mt-4 w-[80%] mx-auto md:w-full md:grid md:grid-cols-5 md:gap-4 space-y-3">
+      <div className="mt-4 w-[95%] mx-auto md:w-full grid grid-cols-2 md:grid-cols-5 gap-4 space-y-3">
         {recommendedMovies.map((movie) => (
-          <Card key={Math.random()} movie={movie} />
+          <MovieCard key={Math.random()} movie={movie} />
         ))}
       </div>
     </div>

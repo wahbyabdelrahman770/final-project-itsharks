@@ -133,7 +133,7 @@ function HeroCarousel() {
               to={`/movies/${movie.id}`}
               className="group flex items-center gap-4 text-xs font-bold tracking-wider"
             >
-              <span className="flex size-15 items-center justify-center rounded-full border border-white/40 transition duration-300 group-hover:border-red-600 group-hover:bg-red-600">
+              <span className="flex size-15 items-center justify-center rounded-full border border-white/40 transition duration-300 group-hover:border-red-600 group-hover:bg-red-600 group-active:border-red-600 group-active:bg-red-600">
                 <FaPlay className="text-xs" />
               </span>
               WATCH TRAILER
