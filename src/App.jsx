@@ -50,10 +50,11 @@ const App = () => {
         <MovieContext>
           <SeriesContext>
             <div
-              className={`min-h-screen transition-colors duration-300 ${theme === "light"
-                ? "bg-[#F4F5F7] text-[#171923]"
-                : "bg-black text-[#E2E8F0]"
-                }`}
+              className={`min-h-screen transition-colors duration-300 ${
+                theme === "light"
+                  ? "bg-[#F4F5F7] text-[#171923]"
+                  : "bg-[#08090d] text-[#E2E8F0]"
+              }`}
             >
               <Nav />
 
@@ -73,7 +74,10 @@ const App = () => {
                   <Route index element={<MoviesDeatails />} />
                   <Route path="credits" element={<MovieFullCast />} />
                   <Route path="media" element={<MovieMedia />} />
-                  <Route path="recommendations" element={<MovieRecommendations />} />
+                  <Route
+                    path="recommendations"
+                    element={<MovieRecommendations />}
+                  />
                 </Route>
 
                 <Route path="/series" element={<Series />} />
@@ -92,7 +96,10 @@ const App = () => {
                   <Route path="credits" element={<SeriesFullCast />} />
                   <Route path="seasons" element={<SeriesAllSeasons />} />
                   <Route path="media" element={<SeriesMedia />} />
-                  <Route path="recommendations" element={<SeriesRecommendations />} />
+                  <Route
+                    path="recommendations"
+                    element={<SeriesRecommendations />}
+                  />
                   <Route path="season/:seasonNumber" element={<Season />} />
                   <Route
                     path="season/:seasonNumber/credits"
